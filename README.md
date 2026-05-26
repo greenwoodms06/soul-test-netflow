@@ -22,6 +22,21 @@ No tuned solvers, no third-party domain libraries — each leg builds from
 primitives in its ecosystem's standard library. Apples-to-apples on the
 comparison axis we cared about: "from primitives in the standard library."
 
+## Where each paradigm's wall lives
+
+![three paradigms wall chart](three_paradigm_walls.png)
+
+The three paradigms measure different things — netflow is the pure sparse-LU
+Newton solve (no compile); Julia/MTK's wall is the per-component `mtkcompile`
+codegen (the simulator is much faster once it's built); Modelica/Dymola is the
+full translate → C codegen → gcc → dymosim end-to-end time. The chart isn't a
+fair time race — it's a *where does each paradigm hit a wall* map. All three
+paradigms could in principle handle the 17×17×30 anchor; only two of them
+actually did.
+
+Source: [`make_headline_figure.py`](make_headline_figure.py) — regenerate with
+`python make_headline_figure.py`.
+
 ## What was built
 
 - **`python/` (netflow)** — Scalar `Node`/`Edge` abstraction, hand-assembled

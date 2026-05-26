@@ -1,0 +1,479 @@
+Benchmark Calculations for BEAVRS and Watt Bar Unit 1 Using
+the SCALE-6.3.0/Polaris-PARCS v3.4.2 Code Package
+Kang Seog Kim*, Ugur Mertyurek*, Andrew M. Ward†, Matthew A. Jessee*, and William A. Wieselquist*
+*Oak Ridge National Laboratory,
+One Bethel Valley Road, PO Box 2008, MS-6172, Oak Ridge, TN 37831
+kimk1@ornl.gov, mertyureku@ornl.gov, jesseema@ornl.gov, wieselquiswa@ornl.gov
+†
+Nuclear Engineering and Radiological Sciences, University of Michigan
+2355 Bonisteel Boulevard, Ann Arbor, MI 48109
+wardam@umich.edu
+[leave space for DOI, which will be inserted by ANS]
+INTRODUCTION
+The SCALE [1]/Polaris lattice physics code [2] was
+developed to prepare few-group homogenized cross sections
+for whole-core nodal diffusion calculations using, for
+example, GenPMAX [3] and PARCS [4]. SCALE6.3.0/Polaris and PARCS v3.4.2 were recently developed,
+and the code package needs to be validated via benchmark
+calculations for operating pressurized water reactors (PWRs).
+Some SCALE/Polaris-PARCS calculations exist for PWRs to
+partly validate the code package with the AMPX [5]
+multigroup library [6]. However, the Polaris-PARCS code
+package has never been fully validated by obtaining
+uncertainties for key nuclear parameters. Therefore, the
+SCALE-6.3.0/Polaris-PARCS v3.4.2 code package with the
+ENDF/B-VII.1 AMPX 56-group library will be fully
+validated by evaluating uncertainties for reactivity, control
+rod worth, temperature coefficients, and pin and assembly
+peaking factors for PWRs.
+The investigation presented here was part of the
+validation and performed benchmark calculations for the
+PWRs, including Watt Bar Unit 1 (WBN1) cycles 1–3 [7] and
+Benchmark for Evaluation And Validation of Reactor
+Simulations (BEAVRS) cycles 1–2 [8]. Figure 1 provides a
+flowchart of the Polaris-GenPMAXS-PARCS code package
+to simulate PWRs. The benchmark calculations were
+performed using the Polaris-PARCS procedure, and then the
+calculated results were compared with the measured data.
+
+Fig. 1. Flowchart of the Polaris-PARCS procedure.
+
+Because the benchmark calculations for WBN1
+cycles 1–3 were performed using the whole-core
+multiphysics simulator Virtual Environment for Reactor
+Analysis (VERA) [10], the Polaris-PARCS results were also
+compared with the VERA results.
+INVESTIGATIONS
+Benchmark Problems
+WBN1 is a Westinghouse Electric Company four-loop
+PWR operated by the Tennessee Valley Authority (TVA) that
+began operation at 3,411 MWth power in 1996. The startup
+physics testing for WBN1 has provided valuable
+benchmarking data that TVA has made publicly available,
+contributing to the extensive validation basis developed for
+the Consortium for Advanced Simulation of Light Water
+Reactors (CASL) VERA core simulator. [7, 9]
+TABLE I. Specifications of the WBN1 Core
+Parameter
+Core power
+Operating pressure
+Core flow rate
+Inlet temperature
+Number of fuel assemblies
+Region 1 (cycle 1)
+Region 2 (cycle 1)
+Region 3 (cycle 1)
+Region 4 (cycle 2)
+Pin lattice configuration
+Active fuel length
+Number of fuel rods
+Number of grid spacers
+Assembly pitch
+Pin pitch
+Fuel pellet radius
+Cladding inner/outer radius
+Number of control banks
+Control rod material (upper)
+Control rod material (lower)
+Number of burnable poison rods
+Burnable poison material
+
+Design Data
+3,411 MWth
+2,250 psia (15.51 MPa)
+59.738 × 106 kg/h
+565 K (291.85°C)
+193
+2.11 wt % 235U
+2.619 wt % 235U
+3.10 wt % 235U
+3.709 wt % 235U
+17 × 17
+365.76 cm
+264
+8
+21.50 cm
+1.260 cm
+0.4096 cm
+0.4180/0.4750 cm
+57
+B4C
+AgInCd
+1,266
+Pyrex, 12.5 wt % B2O3
+IFBA and WABA
+
+Notice: This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of
+Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US
+government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript,
+or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in
+accordance with the DOE Public Access Plan (http://energy.gov/downloads/doe-public-access-plan).
+
+The reactor has 193 fuel assemblies of a Westinghouse
+17 × 17 lattice design contained in a cylindrical core. Each
+assembly includes 264 fuel rods and 25 guide and instrument
+tubes. Table I provides the general specification of the WBN1
+core, and detailed information is provided in Godfrey [7] and
+Horelik et al. [9].
+Benchmark for Evaluation and Validation of Reactor
+Simulations (BEAVRS) [8] is a multicycle full-core PWR
+depletion benchmark based on two operational cycles of a
+commercial nuclear power plant that describes in detail fuel
+assemblies, burnable absorbers, in-core fission detectors,
+core loading patterns, and numerous in-vessel components.
+The benchmark also provides measured reactor data for hot
+zero power (HZP) physics tests, boron letdown curves, and
+3D in-core flux maps from 58 instrumented assemblies.
+Table II provides the specifications of the BEAVRS core for
+cycles 1 and 2.
+TABLE II. Specifications of the BEAVRS Core
+Parameter
+Core power
+Operating pressure
+Core flow rate
+Inlet temperature
+Number of fuel assemblies
+Region 1 (cycle 1)
+Region 2 (cycle 1)
+Region 3 (cycle 1)
+Region 4A (cycle 2)
+Region 4B (cycle 2)
+Total heavy metal mass (cycle 1)
+Pin lattice configuration
+Active fuel length
+Number of fuel rods
+Number of grid spacers
+Assembly pitch
+Pin pitch
+Fuel pellet radius
+Cladding inner/outer radius
+Number of control banks
+Control rod material (upper)
+Control rod material (lower)
+Number of burnable poison rods
+Burnable poison material
+
+Design Data
+3,411 MWth
+2,250 psia (15.51 MPa)
+61.5 × 106 kg/h (5% bypass)
+292.89°C
+193
+1.60 wt % 235U
+2.40 wt % 235U
+3.10 wt % 235U
+3.20 wt % 235U
+3.40 wt % 235U
+81.8 Mt
+17 × 17
+365.76 cm
+264
+8 (6 Zircaloy, 2 Inconel718)
+21.50364 cm
+1.25984 cm
+0.39218 cm
+0.40005/0.45720 cm
+57
+B4C
+AgInCd
+1,266
+Pyrex, 12.5 wt % B2O3
+
+Benchmark Calculations
+SCALE-6.3.0/Polaris with the ENDF/B-VII.1 AMPX
+56-group library was used to generate 2-group assembly
+homogenized cross sections, power form factors, and axial
+and radial reflector cross sections. To consider all possible
+reactor states, various branch cases for boron concentrations,
+moderator, and fuel temperatures, moderator densities and
+control rod insertion were considered in the Polaris
+calculations. Then, GenPMAXS v6.3.1 was used to obtain
+functionalized cross section sets for each assembly type and
+reflector with the Polaris T16 files. The benchmark
+
+calculations were performed using PARCS v3.4.2 with the
+PMAX cross section sets for the WBN1 and BEAVRS HZP
+physics tests and hot full power (HFP) depletions. The
+PARCS output files with the extension of “parcs_det” and
+“parcs_dpl” provide detector responses and summary results.
+The Polaris-PARCS benchmark results were compared with
+the plant measured data.
+Benchmark Results
+Tables III and IV compare the control bank worth,
+critical boron concentrations, and isothermal temperature
+coefficients (ITCs) between the measured and calculated data
+in the HZP physics tests for WBN1 and BEAVRS. The
+calculated results were compared with only the measured
+data for cycle 1. There are very good agreements in the
+control bank worth, ITCs, and critical boron concentrations.
+When there is enough HZP measured data, uncertainties are
+estimated based on statistical analysis.
+TABLE III. WBN1 Cycle 1 HZP Physics Test
+Control Bank Worth
+(pcm)
+Meas. Calc.
+Diff.
+ARO*
+−
+−
+−
+A
+843
+977
+134
+B
+879
+840
+˗39
+C
+951
+1,031
+80
+D
+1,342 1,450
+108
+SA
+435
+421
+˗14
+SB
+1,056 1,077
+21
+SC
+480
+458
+˗22
+SD
+480
+458
+˗22
+All
+6,466 6,713
+247
+Case
+
+Meas.
+˗2.2
+−
+−
+−
+−
+−
+−
+−
+−
+−
+
+ITC
+(pcm/°F)
+Calc.
+Diff.
+˗3.39
+˗1.19
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+−
+
+*All rods out
+TABLE IV. BEAVRS Cycle 1 HZP Physics Test
+Critical Boron Control Bank Worth
+ITC
+(ppm)
+(pcm)
+(pcm/°F)
+Meas. Calc. Meas. Calc. Diff. Meas. Calc. Diff.
+ARO 975 958
+−
+−
+−
+˗1.75 ˗2.03 ˗0.28
+D
+902 896 788 794
+4
+˗4.65 ˗3.49 1.16
+C
+810 795 1,203 1,276 73 ˗8.01 ˗8.27 ˗0.26
+B
+−
+703 1,171 1,213 42
+−
+−
+−
+A
+686 655 548 615
+67
+−
+−
+−
+SE
+−
+613 461 5,266 65
+−
+−
+−
+SD
+−
+552 772 756
+-16
+−
+−
+−
+SC
+508 464 1,099 1,112 13
+−
+−
+−
+Case
+
+Figure 2 compares the HFP critical boron concentrations
+for WBN1, and Fig. 3 compares the HFP critical boron
+concentrations for BEAVRS. There are very good
+agreements between the calculated and measured critical
+boron concentrations within the maximum difference of
+30 ppm. The Polaris-PARCS results slightly underestimate
+the critical boron concentrations compared with the measured
+ones.
+
+Fig. 2. WBN1 HFP critical boron concentrations.
+
+Fig. 4. Flux map comparison for WBN1.
+
+Fig. 3. BEAVRS HFP critical boron concentrations.
+Figure 4 compares the in-core detector flux maps
+between the measured data and the calculated results for
+WBN1, and Fig. 5 compares the in-core detector flux maps
+between the measured data and the calculated results for
+BEAVRS. These figures include flux map comparisons for
+the 3D, axially integrated 2D radial, and radially integrated
+1D axial distributions. The total 3D root mean square (RMS)
+errors are 4.55% for WBN1 and 4.87% for BEAVRS, the
+total radial 2D RMS errors are 1.66% for WBN1 and 1.51%
+for BEAVRS, and the total axial 1D RMS errors are 3.35%
+for WBN1 and 3.85% for BEAVRS. Table V compares the
+total 3D, 2D, and 1D flux map RMS errors for WBN1
+between the VERA and the Polaris-PARCS results compared
+with the measured data. Although the 2D RMS errors of the
+Polaris-PARCS results are very comparable to the RMS
+errors of the VERA results, there are approximately 1.5%
+differences in the 1D and 3D RMS errors between the VERA
+and Polaris-PARCS results. This indicates that the axial
+reflector models for Polaris-PARCS must be improved.
+Figure 6 compares the 1D axial flux maps at two burnups for
+WBN1 cycle 1, and Fig. 7 compares the 1D axial flux maps
+at two burnups for BEAVRS cycle 1. The comparison
+indicates some axial power tilt, probably resulting from poor
+axial reflector cross sections or no consideration of control
+rod existence in the top reflector. Typically, it is much easier
+to resolve the axial reflector issue than the radial reflector
+issue.
+
+Fig. 5. Flux map comparison for BEAVRS.
+TABLE V. WBN1 Flux Map (VERA vs. Polaris-PARCS).
+Cycle
+1
+2
+3
+
+VERA RMS (%)
+3D
+2D
+1D
+3.0
+1.3
+1.8
+3.2
+1.9
+1.4
+3.3
+1.5
+2.4
+
+Polaris-PARCS RMS (%)
+3D
+2D
+1D
+4.0
+1.3
+2.9
+4.6
+2.1
+3.0
+4.9
+1.5
+3.9
+
+Fig. 6. Axial 1D flux map comparison for WBN cycle 1.
+
+Fig. 7. Axial 1D flux map comparison for BEAVRS cycle 1.
+CONCLUSION
+The SCALE-6.3.0/Polaris-PARCS v3.4.2 benchmark
+calculations with the ENDF/B-VII.1 AMPX 56-group library
+were performed for WBN1 cycles 1–3 and BEAVRS cycles
+1–2, and the benchmark results were compared with the
+measured data for control rod worth, ITC, critical boron
+concentrations, and flux maps. The benchmark results are
+very reasonable. However, the Polaris axial reflector models
+must be improved to achieve better agreement for the flux
+maps. More PWRs with more cycles must be added to
+complete the validation of the SCALE/Polaris-PARCS code
+package for PWR by estimating statistical uncertainties for
+key nuclear parameters through a comparison between
+measurements and simulations.
+ACKNOWLEDGMENTS
+This research was supported by the US Nuclear Regulatory
+Commission Office of Research.
+REFERENCES
+
+1. W. A. WIESELQUIST, R. A. LEFEBVRE, M. A.
+JESSEE, eds., SCALE Code System, ORNL/TM-2005/39,
+Version 6.2.4, Oak Ridge National Laboratory, Oak
+Ridge, TN (2020). https://www.ornl.gov/file/scale-62manual/display.
+2. M. A. JESSEE, W. A. WIESELQUIST, U.
+MERTYUREK, K. S. KIM, T. M. EVANS, S. P.
+HAMILTON, C. GENTRY, “Lattice Physics
+Calculations Using the Embedded Self-Shielding Method
+in Polaris, Part I: Methods and Implementation,” Ann.
+Nucl. Energ., 150, 107830 (2021).
+3. A. WARD, Y. XU, T. DOWNAR, “GenPMAXS – v6.3.1:
+Code for Generating the PARCS Cross Section Interface
+File PMAXS,” University of Michigan (2020).
+4. T. DOWNAR et al., “User Manual for the PARCS v3.0
+U.S. NRC Core Neutronics Simulator,” UM-NERS-090001, University of Michigan (2010).
+5. D. WIARDA, M. E. DUNN, N. M. GREEN, M. L.
+WILLIAMS, C. CELIK, L. M. PETRIE, AMPX-6: A
+Modular Code System for Processing ENDF/B,
+ORNL/TM-2016/43 (2016).
+6. M. A. JESSEE, A. M. WARD, A. T. GODFREY,”
+Applications of VERA for Improvement in NRC
+Methods,” CASL Virtual Meeting, ANS 2020 Winter
+meeting, Nov. 16–19 (2020).
+7. A. T. GODFREY, “VERA Core Physics Benchmark
+Progression Problem Specifications,” CASL-U-20120131-004 (2014).
+8. P. DARNOWSKI, M. PAWLUCZYK, K. TIEN,
+“Simulations of the BEAVRS PWR with SCALE and
+PARCS,” NUREG/IA-0529, International Agreement
+Report (2022).
+9. N. HORELIK et al., “Benchmark for Evaluation and
+Validation of Reactor Simulations (BEAVRS),” Proc. Int.
+Conf. Mathematics and Computational Methods Applied
+to Nuc. Sci. & Eng., Sun Valley, Idaho (2013).
+10. A. T. GODFREY et al., “VERA Benchmarking Results
+for Watts Bar Nuclear Plant Unit 1 Cycles 1–12,” Proc.
+PHYSOR 2016, Sun Valley, Idaho (2016).
+
+

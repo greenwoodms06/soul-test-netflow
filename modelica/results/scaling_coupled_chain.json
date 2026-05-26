@@ -1,0 +1,32 @@
+{
+  "scenario": "NetflowModelica.Tests.CoupledChain(n=N) end-to-end wall (translate+compile+simulate)",
+  "machine": "WSL2 Linux 6.6, Dymola 2026x, single-threaded dymosim",
+  "date": "2026-05-26",
+  "rows_first_sweep_complete": [
+    {"n": 10,   "unknowns": 608,    "wall_s": 4.34},
+    {"n": 25,   "unknowns": 1508,   "wall_s": 4.32},
+    {"n": 50,   "unknowns": 3008,   "wall_s": 4.96},
+    {"n": 100,  "unknowns": 6008,   "wall_s": 6.00},
+    {"n": 250,  "unknowns": 15008,  "wall_s": 9.91},
+    {"n": 500,  "unknowns": 30008,  "wall_s": 18.35},
+    {"n": 1000, "unknowns": 60008,  "wall_s": 40.72}
+  ],
+  "rows_second_sweep_higher": [
+    {"n": 10,   "unknowns": 608,    "wall_s": 4.07,   "ok": true},
+    {"n": 100,  "unknowns": 6008,   "wall_s": 6.35,   "ok": true},
+    {"n": 1000, "unknowns": 60008,  "wall_s": 40.70,  "ok": true},
+    {"n": 2500, "unknowns": 150008, "wall_s": 207.73, "ok": true},
+    {"n": 5000, "unknowns": 300008, "wall_s": null,   "ok": false,
+     "notes": "Codegen finished cleanly in ~4 min (dsmodel.c 98 MB; dymosim 1.3 GB). Killed after >10 min of dymosim CPU with no .mat written. Wall is the initialization solver at simulate-time, not codegen — algebraic loop with IAPWS-IF97 medium inverse calls per Newton step."}
+  ],
+  "local_exponents": {
+    "100_to_1000_wall": 0.83,
+    "1000_to_2500_wall": 1.76,
+    "comment": "Sub-linear in 100-1000 (overhead dominates); super-linear ~N^1.76 in 1000-2500 — algebraic-loop solve cost begins to dominate."
+  },
+  "comparison_julia_MTK_F4_F9": {
+    "anchor": "MTK mtkcompile alone: ~71 s @ 100 pins (≈2k unknowns), exponent ~N^1.6",
+    "julia_extrapolation_assembly": "25-40 minutes mtkcompile @ 17×17×30 = ~17k pin nodes",
+    "modelica_observation": "Compiled 60k unknowns (N=1000) end-to-end in 41 s. Codegen for 300k unknowns finished in ~4 min — well past the regime where MTK's per-component codegen wall lives. The wall MOVES to a different phase: Dymola's initialization solver under IAPWS-IF97 medium calls inside the algebraic loop."
+  }
+}

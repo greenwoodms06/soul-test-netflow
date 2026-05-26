@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "centerline": 1204.748811413952,
+    "pellet_surface": 834.8302802706268,
+    "clad_inner": 637.3277365994136,
+    "clad_outer": 611.7026992753523,
+    "coolant": 593.0
+  },
+  "solve_time_s": 0.009281178000037471,
+  "scenario": "netflow_quickstart_PWR_pin_18kW_per_m_593K_coolant_15p5MPa"
+}

@@ -1,0 +1,791 @@
+                                                           Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+
+                                                  Contents lists available at ScienceDirect
+
+
+                                   Nuclear Engineering and Technology
+                                      journal homepage: www.elsevier.com/locate/net
+
+
+Original Article
+
+MC21/CTF and VERA multiphysics solutions to VERA core physics
+benchmark progression problems 6 and 7*
+Daniel J. Kelly III a, *, Ann E. Kelly a, Brian N. Aviles a, Andrew T. Godfrey b, Robert K. Salko b,
+Benjamin S. Collins b
+a
+    Bechtel Marine Propulsion Corporation, P.O. Box 1072, Schenectady, NY, 12301-1072, USA
+b
+    Oak Ridge National Laboratory, 1 Bethel Valley Road, Oak Ridge, Tennessee, 37830, USA
+
+
+
+
+a r t i c l e i n f o                                   a b s t r a c t
+
+Article history:                                        The continuous energy Monte Carlo neutron transport code, MC21, was coupled to the CTF subchannel
+Received 30 May 2017                                    thermal-hydraulics code using a combination of Consortium for Advanced Simulation of Light Water
+Accepted 11 July 2017                                   Reactors (CASL) tools and in-house Python scripts. An MC21/CTF solution for VERA Core Physics
+Available online 10 August 2017
+                                                        Benchmark Progression Problem 6 demonstrated good agreement with MC21/COBRA-IE and VERA so-
+                                                        lutions. The MC21/CTF solution for VERA Core Physics Benchmark Progression Problem 7, Watts Bar Unit
+Keywords:
+                                                        1 at beginning of cycle hot full power equilibrium xenon conditions, is the ﬁrst published coupled Monte
+CTF
+                                                        Carlo neutronics/subchannel T-H solution for this problem. MC21/CTF predicted a critical boron con-
+MC21
+MPACT
+                                                        centration of 854.5 ppm, yielding a critical eigenvalue of 0.99994 ± 6.8E-6 (95% conﬁdence interval).
+Multiphysics                                            Excellent agreement with a VERA solution of Problem 7 was also demonstrated for integral and local
+VERA                                                    power and temperature parameters.
+                                                        © 2017 Korean Nuclear Society, Published by Elsevier Korea LLC. This is an open access article under the
+                                                                                       CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+
+
+
+1. Introduction                                                                              2. MC21/CTF coupling
+
+   Monte Carlo reactor physics codes coupled with subchannel                                    Previous work reported the coupling of MC21 and COBRA-IE
+thermal-hydraulics (T-H) codes are becoming more common for                                  [20] for the analysis of a hot-full-power (HFP) pressurized water
+the solution of large-scale nuclear reactor problems [1e14]. These                           reactor assembly [1]. COBRA-IE and CTF share a common COBRA
+complement the growing number of coupled deterministic trans-                                ancestor but have been developed separately. Because CTF is the
+port reactor physics/subchannel T-H codes applied to similar                                 subchannel T-H code in VERA, it is desirable to couple MC21 and
+systems-level reactor problems. This paper describes the coupling                            CTF to fully separate differences between neutronics and T-H ef-
+of the continuous energy Monte Carlo code, MC21 [15], to the                                 fects. In this work, MC21 is coupled to CTF using a combination of
+subchannel T-H code, CTF [16], which is part of the Consortium for                           modules from VERA and in-house Python scripts, as shown in
+Advanced Simulation of Light Water Reactors (CASL) Virtual Envi-                             Figs. 1e3 and described below.
+ronment for Reactor Applications (VERA) code system [17,18].                                    Input processing for VERA is performed using the VERAIn
+MC21/CTF solutions for CASL VERA Core Physics Benchmark Pro-                                 common input parser and VERA processing tools [21] (Fig. 1) to
+gression Problems 6 and 7 [19] are presented and compared to                                 generate CTF model input and geometry information needed to
+VERA solutions (MPACT coupled to CTF) of the same benchmark                                  map results between MC21 and CTF. CTF input is generated for the
+problems.                                                                                    complete model using that VERA input ﬁle. Although this section
+                                                                                             describes the Problem 7 benchmark, a ¼-core model of Watts Bar
+                                                                                             Unit 1, the Problem 6 benchmark model with a single assembly
+                                                                                             (and single CTF input/output ﬁle) was also run using the same
+ *
+    The submittal manuscript has been authored by a contractor of the US                     process with different input arguments.
+Government under contract No. DE-NR-0000031. Accordingly, the US Government                     The MC21 model input ﬁle is processed with the Physics Uniﬁed
+retains a nonexclusive, royalty-free license to publish or reproduce the published           Modeling and Analysis (PUMA) system, which generates all
+form of this contribution, or allows others to do so, for US Government purposes.
+                                                                                             necessary input ﬁles for MC21 execution (Fig. 2). PUMA and MC21
+  * Corresponding author.
+    E-mail address: daniel.kelly@unnpp.gov (D.J. Kelly).                                     are part of the Common Monte Carlo Design Tool (CMCDT) project
+
+http://dx.doi.org/10.1016/j.net.2017.07.016
+1738-5733/© 2017 Korean Nuclear Society, Published by Elsevier Korea LLC. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/
+licenses/by-nc-nd/4.0/).
+                                               D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                                            1327
+
+
+
+
+                                                                                         Fig. 2. MC21 preprocessing and initial isothermal job (green ¼ CMCDT codes and ﬁles).
+
+
+
+
+    Fig. 1. VERAIn/CTF preprocessing ﬂowchart (blue ¼ VERA codes and ﬁles).
+                                                                                         Java input deck, which easily enables the user to build complicated
+                                                                                         geometries using built-in methods in addition to the many features
+                                                                                         of the Java programming language. Speciﬁcations of the VERA
+at the Naval Nuclear Laboratory [15,22]. MC21 is executed initially                      benchmark problems are taken from [19]. New to this work is the
+with isothermal T-H conditions.                                                          restructuring of the PUMA model to more easily facilitate the
+    With MC21 and CTF model initialization complete, a converged                         construction of MC21 models based on the VERA common input ﬁle
+mutually-consistent neutronics and T-H solution is performed via                         [21]. Building MC21 models with this format simpliﬁes model
+Picard iteration (Fig. 3). First, the in-house mc21_to_ctf.py script                     construction as well as enhances model quality assurance by
+combines geometry information from the CTF model with ﬁssion                             enabling direct model input comparisons between the corre-
+tallies and additional job information from MC21 to compute                              sponding VERA and PUMA/MC21 models. For PUMA to support this
+relative linear heat rate distributions for each assembly. The process                   type of format, a separate Java class (VERA-Util) was written to
+uses the CTF HDF5 pdeck.h5 ﬁle and the power distribution infor-                         handle model construction. At this stage of development, the
+mation is written to the “pin_powers” data set in that ﬁle in the                        various VERA input cards such as cell, lattice, axial, and assm_map
+correct assembly locations. Second, CTF is then executed using the                       (to name a few) are reformatted to work within the PUMA frame-
+multistate_cobra external driver program [23] and the newly                              work. Ideally, a PUMA translator would read these cards directly.
+generated pdeck.h5 ﬁle containing the MC21 power distributions,                          For both VERA Benchmark Problems 6 and 7, the 2D lattices were
+as well as the CTF model generated from the VERAIn ﬁle. Third,                           constructed using octant-symmetry. The corresponding VERA input
+subchannel temperatures and densities, and fuel rod volume-                              ﬁles are available from CASL.
+average temperatures are collected from the CTF HDF5 output by                               An example extracted from the PUMA input ﬁle to construct a
+the in-house ctf_to_mc21.py script and translated back to the                            pin cell and corresponding fuel lattice is shown below.
+proper MC21 regions. These temperatures and densities are saved
+in an MC21 HDF5 ﬁle that will be imported in the next execution of
+MC21. Fourth, MC21 is executed with updated T-H conditions. The                            Figure f1 = VERAUtil.makePinCell("F1", "0.4096 0.418 0.475 / u21 he zirc4");
+Picard iteration in Fig. 3 is repeated until convergence is achieved.
+
+3. Model description                                                                        This line describes the various concentric rings as well as the
+                                                                                         materials to be assigned to each region. The portion of code that
+  The MC21 model was generated using the PUMA model builder                              speciﬁes input required to construct a fuel lattice in PUMA using
+which is part of the CMCDT project [22]. PUMA input is based on a                        octant symmetry with the VERAUtil class is shown below.
+1328                                            D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+
+
+Fig. 3. MC21/CTF Picard iteration ﬂowchart (blue ¼ VERA codes and ﬁles, green ¼ CMCDT codes and ﬁles, magenta ¼ in-house scripts), dashed lines ¼ ﬁles generated in pre-
+processing steps.
+                                                D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                                       1329
+
+
+       Figure[] fig26 = {
+
+              g4,
+
+              f1, f1,
+
+              f1, f1, f1,
+
+              g4, f1, f1, g4,
+
+              f1, f1, f1, f1, f1,
+
+              f1, f1, f1, f1, f1, g4,
+
+              g4, f1, f1, g4, f1, f1, f1,
+                                                                                          Fig. 5. MC21 PUMA Description of thermal-hydraulic feedback subchannel geometry.
+
+              f1, f1, f1, f1, f1, f1, f1, f1,
+                                                                                          and PUMA allow MC21 to be coupled to external T-H codes such as
+              f1, f1, f1, f1, f1, f1, f1, f1, f1};
+                                                                                          CTF. In the current MC21/CTF coupling methodology, CTF returns
+       Overlay lat26 = VERAUtil.makeLattice("LAT26", fig26)                               volume-average fuel temperature within each pin for each axial
+                                                                                          segment to the corresponding MC21 region at that elevation. In-
+    In a standard MC21 PUMA model, each unit cell is constructed                          ternal CTF conduction models and properties [16] were used for
+from ﬁve regions consisting of two squares (the outer square is                           both MC21/CTF and VERA in this study.
+either spacer grid material or coolant and the inner square is
+subchannel coolant) and three concentric circles (clad, gap, and                          4. Results
+fuel). For a thermal-hydraulic feedback model, 11 regions are
+required since the grid and coolant regions are each subdivided                           4.1. VERA Core Physics Benchmark Problem 6
+into quadrants (Fig. 4). In addition, the thermal-hydraulic feed-
+back case requires that the respective quadrant from one pin cell                            VERA Core Physics Benchmark Problem 6 is a pressurized water
+share a common “attribute” with the adjoining quadrants in the                            reactor fuel assembly at HFP conditions [19]. Problem 6 was
+neighboring pin cell so that a compatible subchannel is deﬁned                            simulated without guide tube heating using MC21/CTF to demon-
+to interface with the CTF model (Fig. 5). Fuel pins are speciﬁed as                       strate that coupling of MC21 and CTF using the process described in
+a complete pin and a separate attribute is assigned to these                              Section II was working properly. MC21/CTF results are compared
+regions.                                                                                  with updated MC21/COBRA-IE and VERA solutions from [1]. The
+    The “attribute” mentioned above is a powerful feature of PUMA                         MC21 and CTF assembly geometry is described in [1,19]. MC21 uses
+where speciﬁc properties, called attributes, can be assigned to                           cross sections from ENDF/B-VII.1, with nonwater material cross
+geometric ﬁgures during model creation such that a speciﬁc set of                         sections ranging from 500 K to 1,600 K in 50 K increments up to
+ﬁgures can be grouped together for the purpose of edits and/or                            900 K and 100 K increments thereafter, and water cross sections
+material assignments. As part of the internal temperature feedback                        ranging from 500 K to 650 K at 10 K intervals. MPACT employs a 51
+capabilities of MC21 [15], speciﬁc attributes called “source” and                         energy group cross-section library based on ENDF/B-VII.1 data with
+“sink” are used to specify power generating regions (sources) and                         subgroup parameters to capture self-shielding effects. Methods for
+coolant regions (sinks). In the MC21 input ﬁles, speciﬁc input is                         treating resonance upscatter were not employed in either MC21 or
+given for these two attributes in addition to the standard “region                        MPACT in this analysis. All MC21 uncertainties and relative un-
+id” and “material id”. In addition, the temperature feedback capa-                        certainties are based on 95% conﬁdence intervals.
+bility of MC21 speciﬁes a unique ﬁle format whereby the user can                             Nine coupled iterations were simulated to converge MC21 and
+specify the temperature of the sources (i.e., fuel pins) and both the                     CTF. Fig. 6 presents the MC21 eigenvalue trajectory during the nine
+temperature and density of the sinks (i.e., coolant regions) to ach-                      data exchanges. The number of active neutron histories for each
+ieve the effects of temperature feedback on MC21 material number                          data exchange is shown on the right axis and increases from 200
+densities and cross sections. These input ﬁles and features of MC21                       million histories at the ﬁrst data exchange to 2 billion histories for
+                                                                                          data exchanges 5 through 9 (200 active generations of 10 million
+                                                                                          neutrons per generation preceded by 50 discarded generations).
+                                                                                          Two billion histories were adequate to reduce uncertainties in local
+                                                                                          pin power < 0.7% [1]. The MC21 eigenvalue is converged at data
+                                                                                          exchange 5 when the two billion active neutron history value is
+                                                                                          reached.
+                                                                                             Local subchannel coolant temperature, average fuel rod tem-
+                                                                                          perature, and pin linear heat rate convergence metrics, as measured
+                                                                                          by the L2 and L∞ norms with respect to their respective ﬁnal (ex-
+                                                                                          change index 9) distributions, are presented in Figs. 7e9. As was
+                                                                                          done in [1], the L2 norm for coolant temperature was normalized by
+                                                                                          the square root of the number of subchannel regions (4,410), and
+                                                                                          the L2 norms for fuel temperature and pin linear heat rate were
+                                                                                          normalized by the square root of the number of fuel regions (3,528).
+                                                                                          Thus, the following norms are used to monitor convergence in the
+             Fig. 4. MC21 PUMA description of pin cell geometry.                          CTF solution (N ¼ 9 in Figures 6 and 7):
+1330                                            D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+
+
+                                     Fig. 6. MC21 eigenvalue and number of active neutron histories during MC21/CTF data exchanges.
+
+
+
+
+Fig. 7. CTF convergence metrics for subchannel coolant temperature during MC21/CTF        Fig. 9. CTF convergence metrics for pin linear heat rate during MC21/CTF data
+data exchanges.                                                                           exchanges.
+
+                                                                                               L∞ norm of fuel temperature:
+                                                                                                    
+                                                                                           n        
+                                                                                          T f  T N
+                                                                                                   f                 for n ¼ 1; N  1                             (1)
+                                                                                                              ∞
+
+                                                                                               L2 norm of fuel temperature:
+                                                                                                              
+                                                                                            n                 
+                                                                                           T f  T N       f 
+                                                                                                                  2 ﬃ
+                                                                                          pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ      for n ¼ 1; N  1                    (2)
+                                                                                           # Fuel regions
+                                                                                               L∞ norm of relative change in coolant density:
+                                                                                           n      
+                                                                                          rc  rN 
+                                                                                                c
+                                                                                                                     for n ¼ 1; N  1                              (3)
+                                                                                           rN 
+                                                                                                   c         ∞
+
+                                                                                               L2 norm of relative change in coolant density:
+
+                                                                                                    n N
+                                                                                                   rc rc 
+                                                                                                    rN 
+                                                                                                                  2
+                                                                                          pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                                          c
+                                                                                                                                    for n ¼ 1; N  1               (4)
+Fig. 8. CTF convergence metrics for fuel temperature during MC21/CTF data                  # Coolant regions
+exchanges.
+                                                 D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                              1331
+
+
+where,                                                                                         rnc ¼ vector of local subchannel coolant densities for data ex-
+                                                                                               change index n, and
+   T nf ¼ vector of local fuel temperatures for data exchange index n,                         rNc ¼ vector of local subchannel coolant densities at the ﬁnal
+                                                                                               data exchange N.
+   TN
+    f ¼ vector of local fuel temperatures at the ﬁnal data exchange N,
+
+                                                                                              These norms also indicate that the coupled MC21/CTF solution is
+                                                                                           converged at data exchange 5, as local coolant temperatures are
+Table 1
+                                                                                           within 0.02 C, local fuel temperatures are within 3 C, and local pin
+Calculated eigenvalues for CASL P6 ¼-assembly.
+                                                                                           linear heat rates are within 2 W/cm of their ﬁnal data exchange
+ Code System                  Eigenvalue (95% CI)               Difference (pcm)           values, respectively.
+ MC21/COBRA-IE                1.16424 (2.6Ee05)                 Reference                     Table 1 presents calculated eigenvalues for the three code sys-
+ MC21/CTF                     1.16424 (2.6Ee05)                 0                          tems. MC21/CTF and MC21/COBRA-IE produce statistically-
+ MPACT/CTF                    1.16361                           e63
+                                                                                           equivalent eigenvalues. Agreement within 100 pcm is considered
+CI, conﬁdence interval.                                                                    to be good agreement.
+
+
+                                      1.0373 1.0372        1.0354 1.0323        1.0122 0.9768 MC21/CTF
+                                      1.0373 1.0374        1.0356 1.0321        1.0116 0.9767 MC21/COBRA-IE
+                                      1.0354 1.0363        1.0344 1.0313        1.0110 0.9762 VERA
+                               1.0373 1.0098 1.0099 1.0372 1.0085 1.0056 1.0259 0.9880 0.9725
+                               1.0374 1.0097 1.0098 1.0372 1.0087 1.0056 1.0261 0.9880 0.9726
+                               1.0354 1.0099 1.0107 1.0366 1.0086 1.0061 1.0249 0.9889 0.9725       Color key
+                               1.0372 1.0100 1.0106 1.0387 1.0112 1.0086 1.0275 0.9880 0.9718          0.935
+                               1.0373 1.0096 1.0102 1.0389 1.0110 1.0086 1.0276 0.9880 0.9719          0.995
+                               1.0363 1.0107 1.0105 1.0373 1.0113 1.0096 1.0269 0.9892 0.9724          1.055
+                                      1.0373 1.0388        1.0448 1.0450        1.0114 0.9740
+                                      1.0372 1.0388        1.0448 1.0451        1.0115 0.9741
+                                      1.0366 1.0372        1.0438 1.0436        1.0116 0.9741
+                               1.0354 1.0085 1.0112 1.0450 1.0318 1.0512 1.0362 0.9832 0.9649
+                               1.0355 1.0086 1.0111 1.0449 1.0319 1.0513 1.0361 0.9830 0.9648
+                               1.0344 1.0085 1.0113 1.0438 1.0336 1.0517 1.0365 0.9834 0.9654
+                               1.0324 1.0056 1.0085 1.0451 1.0511        1.0173 0.9647 0.9553
+                               1.0322 1.0057 1.0086 1.0452 1.0513        1.0173 0.9647 0.9553
+                               1.0313 1.0060 1.0096 1.0436 1.0517        1.0170 0.9636 0.9556
+                                      1.0262 1.0275        1.0361 1.0174 0.9732 0.9479 0.9462
+                                      1.0264 1.0278        1.0361 1.0172 0.9734 0.9478 0.9462
+                                      1.0248 1.0269        1.0365 1.0170 0.9737 0.9487 0.9467
+                               1.0120 0.9880 0.9882 1.0116 0.9832 0.9645 0.9479 0.9385 0.9421
+                               1.0119 0.9882 0.9880 1.0116 0.9830 0.9646 0.9481 0.9388 0.9420
+                               1.0110 0.9889 0.9892 1.0116 0.9834 0.9636 0.9487 0.9400 0.9430
+                               0.9768 0.9725 0.9719 0.9741 0.9650 0.9555 0.9463 0.9423 0.9479
+                               0.9769 0.9726 0.9720 0.9742 0.9647 0.9554 0.9462 0.9422 0.9480
+                               0.9762 0.9725 0.9724 0.9741 0.9654 0.9556 0.9467 0.9430 0.9487
+
+                                     Fig. 10. Axially-integrated ¼-assembly normalized pin ﬁssion rate comparison, VERA Problem 6.
+
+
+                                 327.2    328.2      327.2    327.2     328.1    326.9     326.5     326.7    325.0 MC21/CTF (C)
+                                 326.7    329.4      326.8    326.8     329.2    326.6     326.3     327.8    324.7 MC21/COBRA-IE (C)
+                                 327.2    328.2      327.2    327.2     328.1    326.9     326.5     326.7    325.0 VERA (C)
+                                 328.2    328.5      328.2    328.2     328.4    328.0     327.5     326.9    325.0
+                                 329.4    329.2      329.3    329.4     329.2    329.1     328.7     327.8    324.7
+                                 328.2    328.5      328.2    328.2     328.4    328.0     327.5     326.9    325.0
+                                 327.2    328.2      327.2    327.3     328.3    327.0     326.5     326.7    324.9
+                                 326.8    329.3      326.9    327.0     329.4    326.9     326.4     327.7    324.8           321.0
+                                 327.2    328.2      327.2    327.3     328.3    327.1     326.5     326.7    325.0
+                                 327.2    328.2      327.3    327.4     328.3    326.9     326.4     326.6    324.8
+                                 326.8    329.4      327.0    327.2     329.8    327.1     326.5     327.6    324.7           325.5
+                                 327.2    328.2      327.3    327.4     328.3    327.0     326.4     326.6    324.8
+                                 328.1    328.4      328.3    328.3     327.3    326.7     327.2     326.5    324.6
+                                 329.2    329.2      329.4    329.8     327.3    326.9     328.3     327.4    324.4           330.0
+                                 328.1    328.4      328.3    328.3     327.4    326.7     327.2     326.5    324.6
+                                 326.9    328.0      327.0    326.9     326.7    326.3     326.9     326.2    324.3
+                                 326.6    329.1      326.9    327.1     326.9    326.3     327.8     327.0    324.1
+                                 326.9    328.0      327.1    327.0     326.7    326.4     326.9     326.2    324.3
+                                 326.5    327.5      326.5    326.4     327.2    326.9     326.6     325.8    323.9    Guide tube loca on
+                                 326.3    328.7      326.4    326.5     328.3    327.8     327.3     326.6    323.8
+                                 326.5    327.5      326.5    326.4     327.2    326.9     326.6     325.8    324.0
+                                 326.7    326.9      326.7    326.6     326.5    326.2     325.8     325.1    323.3
+                                 327.8    327.8      327.7    327.6     327.4    327.0     326.6     326.1    323.4
+                                 326.7    326.9      326.7    326.6     326.5    326.2     325.8     325.1    323.4
+                                 325.0    325.0      324.9    324.8     324.6    324.3     324.0     323.3    321.9
+                                 324.7    324.7      324.8    324.7     324.4    324.1     323.8     323.4    321.1
+                                 325.0    325.0      325.0    324.8     324.6    324.3     324.0     323.4    321.9
+
+                                                 Fig. 11. Subchannel exit coolant temperature comparison, VERA Problem 6.
+1332                                                      D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+                                                                                                          Fig. 10 presents axially-integrated ¼-assembly normalized pin
+                                                                                                      ﬁssion rates, and Fig. 11 presents subchannel exit coolant tem-
+                                                                                                      peratures for all three code systems. MC21/CTF produces results
+                                                                                                      nearly identical to MC21/COBRA-IE and consistent with VERA.
+                                                                                                      Focusing on MC21/CTF comparisons with VERA (the subject of this
+                                                                                                      study), the maximum differences in axially-integrated pin power
+                                                                                                      are e0.21% in pin (9,10) and þ0.17% in pin (13,13) with a root mean
+                                                                                                      square (RMS) difference of 0.09%. These differences are outside of
+                                                                                                      the uncertainties in MC21 axially-integrated relative pin power (<
+                                                                                                      0.03% at two billion active neutron histories), and thus are sta-
+                                                                                                      tistically signiﬁcant. Subchannel exit coolant temperatures provide
+                                                                                                      a measure of radial pin power sharing for VERA and MC21/CTF,
+                                                                                                      and they agree within ± 0.1 C with an RMS difference of 0.02 C.
+                                                                                                          A comparison of MC21/CTF and VERA local results for the 3D
+                                                                                                      ¼-assembly model yields an RMS difference of 0.1 C for all sub-
+                                                                                                      channel coolant temperature regions (9% of all subchannel coolant
+                                                                                                      temperatures agree within the 0.01 C coolant temperature
+                                                                                                      convergence criterion of CTF in this analysis), an RMS difference of
+                                                                                                      4.4 C for all fuel pin volume-average temperature regions (39% of
+                                                                                                      all volume-average fuel temperatures agree within the 3 C fuel
+                                                                                                      temperature convergence criterion of CTF in this analysis), and an
+       Fig. 12. PUMA visualization of ¼-core MC21 model for VERA Problem 7.
+                                                                                                      RMS difference of 0.053 in normalized ﬁssion rate for all fuel rod
+                                                                                                      power regions (ﬁssion rates are normalized such that the average
+                                                                                                      ﬁssion rate is 1.0).
+
+Table 2
+MC21/CTF running strategy.
+
+ Picard iterations              Actions                                                    Boron (ppm)                Active histories (generation size)     kcalc (95% CI)
+
+ 1                              Fixed boron, isothermal, eqXe                              900.0                       50 million (500,000)                  1.01133 (1.8Ee4)
+ 2                              Boron search, T/H feedback, eqXe                           859.7                      100 million (1 million)                0.99989 (1.2Ee4)
+ 3                              Boron search, T/H feedback, eqXe                           852.3                      100 million (1 million)                1.00003 (1.0Ee4)
+ 4                              Fixed boron, T/H feedback, eqXe                            852.3                      500 million (1 million)                1.00031 (4.8Ee5)
+ 5                              Fixed boron, T/H feedback, eqXe                            854.5                        30 billion (4 million)               0.99994 (6.8Ee6)
+
+CI, conﬁdence interval.
+
+
+
+
+                                            100%
+                                                                                                      99.9% 100.0%
+                                                                                  98.1% 99.4% 99.7%
+                                            90%                           94.4%
+
+
+                                            80%                   85.2%
+
+
+                                            70%
+
+                                            60%
+                                                                                                      % Regions in local uncertainty bin
+                                % Regions
+
+
+
+
+                                                          52.9%                                       % Regions (cumula ve)
+                                            50%
+
+                                            40%
+                                                                  32.3%
+                                            30%
+
+                                            20%
+
+                                                                          9.2%
+                                            10%
+                                                                                  3.7%
+                                                   0.0%                                  1.3% 0.4% 0.2% 0.1%                      << 0.1%
+                                             0%
+                                              from 0.00    0.25    0.50    0.75 1.00     1.25   1.50 1.75 2.00    2.25   2.50   2.75   3.00 3.25 3.50
+                                              to 0.25      0.50    0.75    1.00 1.25     1.50   1.75 2.00 2.25    2.50   2.75   3.00   3.25 3.50 3.75
+                                                                           % Uncertainty in local power (95% CI)
+
+                  Fig. 13. Distribution of MC21 relative uncertainty in relative power density for VERA Problem 7, 30 billion neutrons. CI, conﬁdence interval.
+                                                  D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                                           1333
+
+
+
+
+Fig. 14. Distribution of MC21 relative uncertainties in relative power density > 1%,        Fig. 15. Distribution of MC21 relative uncertainties in relative power density > 2%,
+VERA Problem 7, 30 billion neutrons.                                                        VERA Problem 7, 30 billion neutrons.
+
+
+
+                                                                                            critical boron concentration search range for MC21 was set from
+4.2. VERA Core Physics Benchmark Problem 7
+                                                                                            700 ppm to 900 ppm, and MC21 automatically performs partial
+                                                                                            spatial solutions until the eigenvalue is within a user-speciﬁed
+    VERA Core Physics Benchmark Problem 7 represents Watts Bar
+                                                                                            tolerance (± 10 pcm in this study), at which time MC21 performs a
+Nuclear Unit 1 at beginning of cycle, HFP, equilibrium xenon con-
+ditions [19], with different fuel enrichments of 2.11% (red), 2.619%
+(green), and 3.10% (blue), respectively, as shown in Fig. 12. The cross
+section libraries for MC21 and MPACT for Problem 7 are identical to
+Problem 6, as described in Section 4.1. In this analysis, all central
+instrument tubes were replaced with guide tubes to enable ¼-core
+symmetry. Instrument tubes will be reinstated when future com-
+parisons with ﬂux maps are performed. A reactivity sensitivity
+study of replacing instrument tubes with guide tubes was per-
+formed with VERA, indicating that guide tubes are worth ~4 ppm of
+boron (~40 pcm).
+    MPACT was executed using the 2D/1D technique with transport-
+corrected P0 2D method of characteristics (MOC) in the radial
+planes and SP3 in the axial direction. Temperature and density
+changes are monitored to determine if the subgroup calculation
+needs to be re-executed to obtain new shielding parameters for
+cross section generation.
+
+4.2.1. MC21/CTF running strategy
+    MC21 was executed using the critical boron search feature of
+MC21 at equilibrium xenon conditions with full T-H feedback using
+fuel and coolant temperatures and coolant densities from CTF.
+Table 2 describes the running strategy and results for MC21/CTF
+during the ﬁve Picard iterations. The goal was to compute critical
+boron such that MC21's eigenvalue was within ± 10 pcm of unity.                             Fig. 16. MC21 axially-integrated relative pin power distribution. Minimum ¼ 0.1684,
+Critical boron searches were performed in iterations 2 and 3. The                           maximum ¼ 1.3658.
+1334                                                                     D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+                                                                                                                   sensitivity from these earlier iterations (~10.3 pcm/ppm), boron
+                                                                                                                   concentration was re-adjusted prior to iteration 5. Iteration 5 was
+                                                                                                                   then executed as a restart from the iteration 4 solution with 30
+                                                                                                                   billion active neutron histories (7,500 active generations of 4 million
+                                                                                                                   neutrons/generation, 50 discarded generations) with the goal of
+                                                                                                                   driving the uncertainty on local pin power to ~2%, based on [22]. No
+                                                                                                                   variance reduction techniques were employed in this study. For the
+                                                                                                                   ﬁfth Picard iteration, MC21 required 164 wall clock hours (6.8 days)
+                                                                                                                   using 32 nodes containing two 16-core Intel Xeon E5-2683v4
+                                                                                                                   2.1 GHz (Broadwell) processors (1,024 total cores). VERA execution
+                                                                                                                   took 57 min using 464 cores on Idaho National Laboratory's Falcon
+                                                                                                                   computer (Intel Xeon E5-2680v3 2.5 GHz processors).
+
+                                                                                                                   4.2.2. Select MC21/CTF and VERA comparisons
+                                                                                                                       From Table 2, a ﬁnal critical boron concentration of 854.5 ppm
+                                                                                                                   resulted in an MC21 eigenvalue of 0.99994 ± 6.8Ee6 [95% conﬁ-
+                                                                                                                   dence interval (CI)]. VERA computes a critical boron concentration
+                                                                                                                   of 853.7 ppm for the target eigenvalue of 1.0. Agreement between
+                                                                                                                   the two codes is < 1 ppm, and excellent agreement is considered to
+                                                                                                                   be within 5 ppm (~50 pcm) for this parameter.
+                                                                                                                       Fig. 13 presents the relative uncertainty in MC21 relative power
+                                                                                                                   density after Iteration 5 for all 628,572 mesh tally regions in the
+                                                                                                                   ¼-core model in 0.25% resolution bins. At 30 billion active histories,
+                                                                                                                   the majority of local power regions (52.9%) have relative un-
+                                                                                                                   certainties < 0.5%, 94.4% of all regions have relative un-
+                                                                                                                   certainties < 1.0%, and 99.9% of all regions have relative uncertainties
+                                                                                                                   less than 2% (the target for this study). The average relative uncer-
+                                                                                                                   tainty is 0.56%. Considering only local power regions with a relative
+                                                                                                                   power > 1.0, the maximum relative uncertainty is 1.1%, and the
+         Fig. 17. MC21 3D relative pin power distribution, VERA Problem 7.                                         average uncertainty for these regions is 0.43%.
+                                                                                                                       As expected, the regions with the highest local power un-
+                                                                                                                   certainties occur in the top and bottom few axial planes, primarily
+full spatial solution. Equilibrium xenon was updated every ﬁve                                                     near the core periphery. This is demonstrated in Fig. 14 and Fig. 15,
+generations (user speciﬁed). Note that in iteration 4, as the number                                               which shows regions with relative uncertainties >1% and >2%,
+of active histories increased, the more tightly-converged power                                                    respectively, from a visual perspective at the bottom corner of the
+solution affected the temperature distributions and caused the                                                     core. The maximum relative uncertainty is 3.59% in the ﬁrst axial
+calculated eigenvalue to stray outside the ± 10 pcm target set by the                                              plane of pin (17,17) in Assembly B-13, and the minimum relative
+earlier critical boron searches. Based on MC21's estimate of boron                                                 uncertainty of 0.32% occurs at axial plane 18 (125.419e133.484 cm)
+
+
+                                                               2.0                                                                                           5.0
+                                                                                                                                                                    MC21 LHR Uncertainty (%) and VERA vs. MC21/CTF diﬀ. (%)
+
+
+
+
+                                                               1.8                                                                                           4.0
+
+                                                               1.6                                                                                           3.0
+                                Rela ve pin linear heat rate
+
+
+
+
+                                                               1.4                                                                                           2.0
+
+                                                               1.2                                                                                           1.0
+
+                                                               1.0                                                                                           0.0
+
+                                                               0.8                                                                                           –1.0
+
+                                                               0.6                                                                                           –2.0
+                                                                               MC21/CTF: Assembly D-12, pin (5,4)
+                                                               0.4                                                                                           –3.0
+                                                                               VERA: Assembly D-12, pin (5,4)
+                                                               0.2             % Diﬀ in rela ve pin LHR, VERA vs. MC21/CTF                                   –4.0
+                                                                               Uncertainty in MC21 rela ve pin LHR (%)
+                                                               0.0                                                                                           –5.0
+                                                                     0    50         100         150         200         250        300         350       400
+                                                                                                    Axial height (cm)
+
+Fig. 18. Axial relative LHR for pin (5,4) in assembly D-12 (y1-axis), and VERA versus MC21/CTF % difference shown with MC21 uncertainty in relative LHR (%) (y2-axis), VERA
+Problem 7. LHR, linear heat rate.
+                                                  D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                               1335
+
+
+                                                                                            Assembly D-12. VERA predicts the maximum power in the same
+                                                                                            pin with a value of 1.3670, a difference of 0.09%. MC21/CTF predicts
+                                                                                            the pin with the smallest relative power to be 0.1684 for pin (17,17)
+                                                                                            in Assembly C-14. VERA predicts a minimum pin relative power
+                                                                                            value of 0.1673 in the same pin, a e0.7% difference.
+                                                                                                Fig. 17 presents a 3D view of the relative pin power distribution
+                                                                                            from MC21/CTF. Maximum local power peaking on this tally
+                                                                                            mesh (pin resolved, 49 axial elevations) is 1.9198 with a
+                                                                                            relative uncertainty of 0.34%, occurring at axial plane 18
+                                                                                            (125.419e133.484 cm) in pin (5,4) in Assembly D-12. For VERA, the
+                                                                                            maximum local power peaking value of 1.9214 occurs in the same pin
+                                                                                            one axial elevation higher (133.484e141.55 cm), a difference of
+                                                                                            0.08%. This agreement is well within MC21's local relative pin power
+                                                                                            uncertainty at both axial elevations, as shown in the axial relative pin
+                                                                                            linear heat rate (LHR) comparison for this pin, presented in Fig. 18.
+                                                                                            Relative uncertainty (95% CI) error bars are shown on the MC21 curve
+                                                                                            and repeated on the y2-axis. The y2-axis demonstrates that 69% of
+                                                                                            VERA's relative LHR results fall within the relative uncertainty of the
+                                                                                            MC21 relative LHR for this pin. A majority of outliers are in low power
+                                                                                            regions at the top and bottom of the core, and at spacer grid locations.
+                                                                                                An octant view of CTF coolant temperatures from MC21/CTF is
+                                                                                            presented in Fig. 19 showing subchannel T-H ﬁdelity within the
+                                                                                            core region.
+                                                                                                Fig. 20 presents axially-integrated assembly relative power for
+                                                                                            MC21/CTF and VERA. Assembly powers agree within e0.47%/
+                                                                                            þ0.37%, with an RMS difference of 0.22%. Agreement within ±0.5%
+                                                                                            is considered excellent agreement. Uncertainties in MC21 axially-
+                                                                                            integrated assembly relative power for MC21 range from a mini-
+Fig. 19. Three-dimensional octant view of CTF subchannel temperature distribution for
+                                                                                            mum of 0.01% in Assembly E-11 to a maximum of 0.022% for the
+MC21/CTF, VERA Problem 7.
+                                                                                            ¼-assembly in the corner of the ¼-core model, Assembly H-8. Thus,
+                                                                                            all differences in MC21/CTF and VERA assembly relative power are
+                                                                                            statistically signiﬁcant except for Assembly H-8. Core-average axial
+in pin (6,6) in Assembly D-10. The very few regions with un-                                power shape comparisons are presented in Fig. 21. Relative uncer-
+certainties >2% are conﬁned to the outer few pins in the two top                            tainty (95% CI) error bars are shown on the MC21 curve (repeated
+and bottom axial planes (Fig. 15). Also note from Fig. 14 that the core                     on the y2-axis) and are < 0.02% for all axial elevations. The poorer
+periphery regions with smaller volumes in planes containing                                 MC21 statistics in the top axial plane affects the difference in this
+spacer grids also have slightly higher uncertainties than sur-                              low power core region (y2-axis). The RMS difference between VERA
+rounding regions.                                                                           and MC21/CTF for the axial relative power is 0.25%. Axial offsets for
+   Fig. 16 presents MC21 axially-integrated relative pin power. The                         MC21/CTF and VERA are e11.06% and e11.03%, respectively. Fig. 22
+MC21 maximum relative pin power of 1.3658 occurs in pin (4,5) in                            presents assembly-averaged exit temperatures estimated by mass
+
+
+                                       H      G      F      E      D      C      B      A
+                                    1.1179 1.0302 1.1156 1.0564 1.1571 1.0531 1.0487 0.7558 MC21/CTF
+                                  8 1.1177 1.0327 1.1160 1.0591 1.1574 1.0547 1.0454 0.7551 VERA
+                                    –0.02% 0.24% 0.04% 0.26% 0.02% 0.15% –0.32% –0.09% % diﬀ (VERA vs.
+                                    1.0299 1.1081 0.9828 1.1475 1.0795 1.1549 1.0119 0.8558       MC21/CTF)
+                                  9 1.0327 1.1091 0.9862 1.1490 1.0826 1.1547 1.0122 0.8548
+                                    0.27% 0.10% 0.34% 0.13% 0.29% –0.01% 0.02% –0.11%
+                                    1.1148 0.9825 1.1310 1.0740 1.1844 1.1210 1.0552 0.7646       Color key
+                                 10 1.1160 0.9862 1.1328 1.0778 1.1856 1.1225 1.0517 0.7633        0.600
+                                    0.10% 0.37% 0.15% 0.36% 0.10% 0.13% –0.33% –0.17%              0.900
+                                    1.0556 1.1471 1.0740 1.1798 1.0774 1.1184 0.9865 0.6335        1.250
+                                 11 1.0591 1.1490 1.0778 1.1809 1.0799 1.1164 0.9854 0.6322
+                                    0.33% 0.16% 0.35% 0.10% 0.23% –0.18% –0.11% –0.21%
+                                    1.1566 1.0793 1.1850 1.0777 1.2377 0.8650 0.8914
+                                 12 1.1574 1.0826 1.1856 1.0799 1.2377 0.8639 0.8895
+                                    0.07% 0.31% 0.05% 0.20% 0.00% –0.12% –0.21%
+                                    1.0537 1.1557 1.1219 1.1193 0.8654 0.8656 0.6073
+                                 13 1.0547 1.1547 1.1225 1.1164 0.8639 0.8629 0.6059
+                                    0.10% –0.08% 0.05% –0.26% –0.17% –0.31% –0.24%
+                                    1.0492 1.0128 1.0565 0.9876 0.8923 0.6077
+                                 14 1.0454 1.0122 1.0517 0.9854 0.8895 0.6059
+                                    –0.37% –0.06% –0.46% –0.22% –0.31% –0.29%
+                                    0.7563 0.8565 0.7653 0.6343
+                                 15 0.7551 0.8548 0.7633 0.6313
+                                    –0.16% –0.19% –0.27% –0.47%
+
+                                             Fig. 20. Axially-integrated assembly relative power, MC21/CTF and VERA, Problem 7.
+1336                                                      D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+
+                                             1.5                                                                                               3%
+                                                                                                             Axial oﬀset:
+                                                                                                               MC21/CTF = –11.06%
+                                             1.3
+                                                                                                               VERA       = –11.03%            2%
+
+
+
+
+                                                                                                                                                     % Diﬀerence: VERA vs. MC21/CTF
+                                             1.0                                                                                               1%
+                         Rela ve power (–)
+
+
+
+                                             0.8                                                                                               0%
+
+
+
+                                             0.5                                                                                              –1%
+
+                                                                       MC21/CTF
+                                             0.3                       VERA                                                                   –2%
+                                                                       % Diﬀerence: VERA vs. MC21/CTF
+                                                                       Uncertainty in MC21 rela ve power (%)
+                                             0.0                                                                                               –3%
+                                                   0        50         100           150      200        250         300         350        400
+                                                                                       Axial height (cm)
+
+                                                       Fig. 21. Core relative axial power and axial offset, MC21/CTF and VERA, Problem 7.
+
+
+
+ﬂow weighting the subchannel coolant temperatures in the top                                        pins) is the assembly in which VERA predicts the highest sub-
+axial plane. Assembly exit coolant temperatures agree within e0.2/                                  channel exit temperatures compared to MC21/CTF. There is a
+þ0.2 C with an RMS difference of 0.13 C. These comparisons indi-                                  checkerboard behavior in the differences between MC21/CTF and
+cate that MC21/CTF and VERA solutions agree for integral                                            VERA for the 2.11% enriched assemblies with no poison pins and
+assembly-averaged and radially-averaged quantities.                                                 the 2.619% enriched assemblies with Pyrex absorber pins. A
+   Investigating local thermal-hydraulics quantities also demon-                                    similar trend was seen in local power comparisons between VERA
+strates a high level of agreement between MC21/CTF and VERA.                                        and the KENO Monte Carlo code for VERA Problem 5 (Watts Bar
+Fig. 23 is a 2D ¼-core map showing differences (VERAeMC21/CTF)                                      Unit 1 at hot zero power conditions). At this top axial level, the
+in subchannel exit coolant temperatures. All subchannel exit                                        mean difference between VERA and MC21/CTF is 0.03 C with an
+temperatures agree within e0.25 C/þ0.27 C, and a majority (57%)                                   RMS difference of 0.13 C. The RMS difference between VERA and
+of subchannels agree within ±0.1 C. Assembly F-14 (2.11%                                           MC21/CTF for all subchannel coolant temperature regions in the
+enrichment without poison) is the assembly in which VERA                                            3D ¼-core model is 0.08 C, and 25% of all subchannel coolant
+computes consistently lower exit coolant temperatures, and As-                                      temperatures agree within the 0.01 C coolant temperature
+sembly G-10 (2.619% enrichment with 24 Pyrex burnable absorber                                      convergence criterion of CTF in this analysis.
+
+
+                                                H         G        F           E        D        C         B        A
+                                              330.9     327.4    330.8       328.2    332.1    328.2     328.9    318.5 MC21/CTF (C)
+                                8             331.0     327.6    330.9       328.4    332.2    328.3     328.8    318.4 VERA (C)
+                                               0.1       0.2      0.1         0.2      0.1      0.1       –0.1     –0.1 Diﬀerence (C): VERA -
+                                              327.4     330.5    325.9       331.8    329.0    332.2     326.6    321.9                MC21/CTF
+                                9             327.6     330.7    326.1       332.0    329.2    332.2     326.7    321.8
+                                               0.2       0.2      0.2         0.2      0.2      0.0       0.1      –0.1
+                                              330.8     325.9    331.3       328.8    333.0    330.3     329.2    318.7        Color key
+                           10                 330.9     326.1    331.4       329.0    333.1    330.4     329.1    318.7          313.00
+                                               0.2       0.2      0.2         0.2      0.1      0.1       –0.1     –0.1          324.00
+                                              328.2     331.8    328.8       332.9    329.1    331.0     326.0    314.5          335.00
+                           11                 328.4     332.0    329.0       333.0    329.2    331.0     325.9    314.4
+                                               0.2       0.2      0.2         0.1      0.1      0.0       –0.1     –0.1
+                                              332.1     329.0    333.0       329.1    334.2    322.5     323.0
+                           12                 332.2     329.2    333.1       329.2    334.2    322.5     322.9
+                                               0.1       0.2      0.1         0.1      0.0      0.0       –0.1
+                                              328.2     332.2    330.3       331.1    322.6    322.1     313.6
+                           13                 328.3     332.2    330.4       331.0    322.5    322.0     313.5
+                                               0.1       0.0      0.1         –0.1     –0.1     –0.1      –0.1
+                                              328.9     326.7    329.2       326.0    323.1    313.6
+                           14                 328.8     326.7    329.1       325.9    322.9    313.5
+                                               –0.1      0.0      –0.1        –0.1     –0.2     –0.1
+                                              318.5     321.9    318.8       314.5
+                           15                 318.4     321.8    318.6       314.4
+                                               –0.1      –0.1     –0.2        –0.1
+
+                                                   Fig. 22. Assembly-averaged exit coolant temperature ( C), MC21/CTF and VERA, Problem 7.
+                                                  D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338                                                  1337
+
+
+                                                                                            MPACT in the 2.11% and 2.6% enriched assemblies is present in the
+                                                                                            fuel temperatures because of the differences in power distributions.
+                                                                                            There is also an observable octant tilt resulting from the non-
+                                                                                            symmetric MC21 solution with only 30 billion neutron histories
+                                                                                            (also evident in Fig. 20). The RMS difference between VERA and
+                                                                                            MC21/CTF for all fuel pin volume-average temperature regions in
+                                                                                            the 3D ¼-core model is 1.9 C, and 88% of all volume-average fuel
+                                                                                            temperatures agree within the 3 C fuel temperature convergence
+                                                                                            criterion of CTF in this analysis.
+
+                                                                                            5. Conclusions
+
+                                                                                                The continuous energy Monte Carlo neutron transport code,
+                                                                                            MC21, was coupled to the CTF subchannel thermal-hydraulics code
+                                                                                            using a combination of CASL tools and in-house Python scripts.
+                                                                                            MC21/CTF solutions for VERA Core Physics Benchmark Progression
+                                                                                            Problem 6 demonstrated good agreement with MC21/COBRA-IE
+                                                                                            and VERA solutions to the same benchmark problem. The MC21/
+                                                                                            CTF solution for VERA Core Physics Benchmark Progression Prob-
+                                                                                            lem 7, Watts Bar Unit 1 at HFP equilibrium xenon conditions, rep-
+                                                                                            resents the ﬁrst published coupled Monte Carlo neutronics/
+                                                                                            subchannel T-H solution for this benchmark. MC21/CTF predicts a
+                                                                                            critical boron concentration of 854.5 ppm, yielding a critical
+Fig. 23. Difference in subchannel exit coolant temperature ( C), (VERAeMC21/CTF),
+                                                                                            eigenvalue of 0.99994 ± 6.8Ee6 (95% CI). Excellent agreement with
+VERA Problem 7.
+                                                                                            a VERA solution of Problem 7 was demonstrated for estimated
+                                                                                            critical boron, assembly-level powers, axial power distribution,
+   Fig. 24 presents a similar temperature difference plot, this time                        axial offset, and assembly exit temperatures. Comparisons of local
+showing differences in local volume-averaged fuel pin tempera-                              pin and subchannel quantities also showed excellent agreement.
+tures at the axial plane with the maximum fuel temperature (axial
+plane 19 between 133.484 cm and 141.549 cm). Agreement at this
+                                                                                            Conﬂicts of interest
+plane is 8.6 C/þ7.3 C, with 84% of pin fuel temperatures agreeing
+within ±3 C (the stopping criterion for fuel temperature conver-
+                                                                                                The authors have no conﬂicts of interest to declare.
+gence in CTF). The mean difference between VERA and MC21/CTF at
+this axial level is 0.20 C with an RMS difference of 2.1 C. Consistent
+                                                                                            Acknowledgments
+with the exit coolant temperature map, Assembly F-14 is the as-
+sembly with the largest VERA versus MC21/CTF differences.
+                                                                                                The Naval Nuclear Laboratory authors would like to thank the
+Maximum volume-averaged fuel pin temperature is predicted by
+                                                                                            MC21 and PUMA development teams for their support during this
+MC21/CTF to be 1,065.8 C at pin (5,6) in Assembly D-12. Again, the
+                                                                                            research. Work for the Oak Ridge National Laboratory authors was
+checkerboard pattern in fuel temperatures between MC21 and
+                                                                                            funded by the DOE-sponsored “Consortium for Advanced Simula-
+                                                                                            tion of Light Water Reactors” (CASL) project, and ORNL research
+                                                                                            used resources of the Oak Ridge Leadership Computing Facility at
+                                                                                            the Oak Ridge National Laboratory, which is supported by the Ofﬁce
+                                                                                            of Science of the U.S. Department of Energy under Contract No. DE-
+                                                                                            AC05-00OR22725. CASL research made use of the resources of the
+                                                                                            High Performance Computing Center at Idaho National Laboratory,
+                                                                                            which is supported by the Ofﬁce of Nuclear Energy of the US
+                                                                                            Department of Energy and the Nuclear Science User Facility under
+                                                                                            Contract No. DE-AC07-05ID14517.
+
+                                                                                            References
+
+                                                                                             [1] B.N. Aviles, D.J. Kelly III, D.L. Aumiller, D.F. Gill, B.W. Siebert, A.T. Godfrey,
+                                                                                                 B.S. Collins, R.K. Salko, MC21/COBRA-IE and VERA-CS multiphysics solutions to
+                                                                                                 VERA core physics benchmark problem #6, Progr. Nucl. Energy (2017), http://
+                                                                                                 dx.doi.org/10.1016/j.pnucene.2017.05.017.
+                                                                                             [2] D.J. Kelly III, B.N. Aviles, P.K. Romano, B.R. Herman, N.E. Horelik, B. Forget,
+                                                                                                 Analysis of select BEAVRS PWR Benchmark Cycle 1 Results using MC21 and
+                                                                                                 OpenMC, Proc. PHYSOR 2014, Kyoto, Japan, September 28eOctober 3, 2014,
+                                                                                                 American Nuclear Society (CD-ROM).
+                                                                                             [3] N. Guilliard, W. Bernnat, J. Lapins, I. Pasichnyk, Y. Perin, K. Velkov, W. Zwer-
+                                                                                                 mann, Analysis of large core neutronics by the Monte Carlo method coupled
+                                                                                                 with thermal hydraulics, Proc. PHYSOR 2016, Sun Valley, Idaho, May 1e5,
+                                                                                                 2016, American Nuclear Society (CD-ROM).
+                                                                                             [4] M. Daeubler, A. Ivanov, B.L. Sjenitzer, V. Sanchez, R. Stieglitz, R. Macian-Juan, High-
+                                                                                                 ﬁdelity coupled Monte Carlo neutron transport and thermal-hydraulic simula-
+                                                                                                 tions using Serpent 2/SUBCHANFLOW, Ann. Nucl. Energy 83 (2015) 352e375.
+                                                                                             [5] A. Ivanov, V. Sanchez, R. Stieglitz, K. Ivanov, Large-scale Monte Carlo neutron
+Fig. 24. Difference in volume-averaged fuel pin temperature ( C) at axial plane 19,             transport calculations with thermal-hydraulic feedback, Ann. Nucl. Energy 84
+(VERAeMC21/CTF), VERA Problem 7.                                                                 (2015) 204e219.
+1338                                                 D.J. Kelly III et al. / Nuclear Engineering and Technology 49 (2017) 1326e1338
+
+ [6] D.F. Gill, D.P. Griesheimer, D.L. Aumiller, Numerical methods in coupled Monte                 Proc. M&C 2017, Jeju, Republic of Korea, April 16eApril 20, 2017, American
+     Carlo and thermal-hydraulic calculations, Nucl. Sci. Eng. 185 (2017) 194e205.                  Nuclear Society (CD-ROM).
+ [7] J. Lepp€anen, V. Hovi, T. Ikonen, J. Kurki, M. Pusa, V. Valtavirta, T. Viitanen, The      [15] D.P. Griesheimer, D.F. Gill, B.R. Nease, T.M. Sutton, M.H. Stedry, P.S. Dobreff,
+     numerical multi-physics project (NUMPS) at VTT technical research centre of                    D.C. Carpenter, T.H. Trumbull, E. Caro, H. Joo, D.L. Millman, MC21 v.6.0eA
+     Finland, Ann. Nucl. Energy 84 (2015) 55e62.                                                    continuous-energy Monte Carlo particle transport code with integrated
+ [8] A. Bennett, M. Avramova, K. Ivanov, Coupled MCNP/CTF code: development,                        reactor feedback capabilities, Ann. Nucl. Energy 82 (2015) 29e40.
+     testing, and application, Ann. Nucl. Energy 96 (2016) 1e11.                               [16] R. Salko, M. Avramova, CTF Theory Manual, Reactor Dynamics and Fuel
+ [9] M. Pecchia, C. Parisi, F. D'Auria, O. Mazzantini, Application of MCNP for pre-                 Management Group, Pennsylvania State University, 2014.
+     dicting power excursion during LOCA in Atucha-2 PHWR, Ann. Nucl. Energy                   [17] M. Sieger, VERA 3.3 Release Notes, CASL Technical Report: CASL-U-2015-
+     85 (2015) 271e278.                                                                             0042-000, 2015.
+[10] M. Ellis, D. Gaston, B. Forget, K. Smith, Preliminary coupling of the Monte Carlo         [18] B. Kochunas, D. Jabaay, S. Stimpson, A. Graham, T. Downar, B. Collins, K.S. Kim,
+     Code OpenMC and the multiphysics object-oriented simulation environment                        W. Wieselquist, K. Clarno, J. Gehin, VERA Core Simulator Methodology for
+     for analyzing Doppler feedback in Monte Carlo simulations, Nucl. Sci. Eng. 185                 PWR Cycle Depletion, CASL Technical Report: CASL-U-2015-0155-000, 2015.
+     (2017), 194e193.                                                                          [19] A. Godfrey, VERA Core Physics Benchmark Progression Problem Speciﬁcations,
+[11] D. Kotlyar, E. Shwageraus, Sub-step methodology for coupled Monte Carlo                        Revision 4, CASL Technical Report: CASL-U-2012-0131-004, 2014.
+     depletion and thermal hydraulic codes, Ann. Nucl. Energy 96 (2016)                        [20] D.L. Aumiller, G.W. Swartele, M.J. Meholic, L.J. Lloyd, F.X. Buschman, COBRA-
+     61e75.                                                                                         IE: A New Sub-channel Analysis Code, Proc. NURETH-16, Chicago, Illinois,
+[12] H. Lee, W. Kim, P. Zhang, A. Khassenov, J. Park, J. Yu, S. Choi, H.S. Lee, D. Lee,             August 30eSeptember 4, 2015, American Nuclear Society (2015) (CD-ROM).
+     Preliminary Simulation Results of BEAVRS Three-Dimensional Cycle 1                        [21] S. Palmtag, A. Godfrey, VERA Common Input User Manual, CASL Technical
+     Wholecore Depletion by UNIST Monte Carlo Code MCS, Proc. M&C 2017, Jeju,                       Report: CASL-U-2014-0014-002, 2014.
+     Republic of Korea, April 16eApril 20, 2017, American Nuclear Society (CD-                 [22] D.J. Kelly III, T.M. Sutton, T.H. Trumbull, P.S. Dobreff, MC21 Monte Carlo
+     ROM).                                                                                          analysis of the Hoogenboom-Martin Full-Core PWR Benchmark Problem, Proc.
+[13] M. Lemaire, H. Lee, N. Tak, H.-C. Lee, D. Lee, Monte Carlo/thermal-ﬂuids coupled               PHYSOR 2010, Pittsburgh, Pennsylvania, May 9eMay 14, 2010, American
+     calculations for MHTGR-350MW Benchmark, Proc. M&C 2017, Jeju, Republic of                      Nuclear Society (2010) (CD-ROM).
+     Korea, April 16eApril 20, 2017, American Nuclear Society (CD-ROM).                        [23] R. Salko, Development of CTF Capability for Modeling Reactor Operating Cycles
+[14] S. Liu, G. Wang, J. Liang, F. Yang, Z. Chen, X. Guo, Q. Wu, J. Guo, Y. Qiu, X. Tang,           with Crud Growth, CASL Technical Report: CASL-U-2014-0188-000, 2014. J.
+     Z. Li, K. Wang, RMC capability of multi-cycle HFP full core burnup simulation,                 GLEASON, Format for a Report, ANS-2008, American Nuclear Society, 2008.
+

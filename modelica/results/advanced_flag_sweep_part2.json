@@ -1,0 +1,140 @@
+[
+  {
+    "kind": "chain",
+    "label": "default",
+    "flags": [],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n": 2500,
+    "ok": true,
+    "wall_s": 196.66883140300342,
+    "physics_ok": true
+  },
+  {
+    "kind": "chain",
+    "label": "sparse",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n": 2500,
+    "ok": true,
+    "wall_s": 89.60123071099952,
+    "physics_ok": true
+  },
+  {
+    "kind": "chain",
+    "label": "sparse+cvode",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Cvode",
+    "tolerance": 1e-06,
+    "n": 2500,
+    "ok": true,
+    "wall_s": 91.09748724699966,
+    "physics_ok": true
+  },
+  {
+    "kind": "chain",
+    "label": "sparse+esdirk23a",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Esdirk23a",
+    "tolerance": 1e-06,
+    "n": 2500,
+    "ok": true,
+    "wall_s": 90.37408082100228,
+    "physics_ok": true
+  },
+  {
+    "kind": "chain",
+    "label": "sparse",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n": 5000,
+    "ok": true,
+    "wall_s": 227.5747066699987,
+    "physics_ok": true
+  },
+  {
+    "kind": "chain",
+    "label": "sparse+esdirk23a",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Esdirk23a",
+    "tolerance": 1e-06,
+    "n": 5000,
+    "ok": true,
+    "wall_s": 232.5509033160015,
+    "physics_ok": true
+  },
+  {
+    "kind": "assembly",
+    "label": "default",
+    "flags": [],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 30,
+    "ok": true,
+    "wall_s": 384.54069027100195,
+    "Q_total": 19039320.0,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "kind": "assembly",
+    "label": "sparse",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 30,
+    "ok": true,
+    "wall_s": 395.2961302340009,
+    "Q_total": 19039320.0,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "kind": "assembly",
+    "label": "sparse+cvode",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Cvode",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 30,
+    "ok": true,
+    "wall_s": 386.5140623540028,
+    "Q_total": 19039320.0,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "kind": "assembly",
+    "label": "sparse+esdirk23a",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Esdirk23a",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 30,
+    "ok": true,
+    "wall_s": 385.6241375040008,
+    "Q_total": 19039320.0,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  }
+]

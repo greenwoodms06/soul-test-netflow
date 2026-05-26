@@ -1,0 +1,943 @@
+Annals of Nuclear Energy 145 (2020) 107602
+
+Contents lists available at ScienceDirect
+
+Annals of Nuclear Energy
+journal homepage: www.elsevier.com/locate/anucene
+
+Simulation of the BEAVRS benchmark using VERA q
+Benjamin Collins a,⇑, Andrew Godfrey a, Shane Stimpson a, Scott Palmtag b
+a
+b
+
+Oak Ridge National Laboratory, One Bethel Valley Rd., Oak Ridge, TN 37831, United States
+North Carolina State University, Raleigh, NC 27607, United States
+
+a r t i c l e
+
+i n f o
+
+Article history:
+Received 20 March 2019
+Received in revised form 6 May 2020
+Accepted 14 May 2020
+Available online 5 June 2020
+Keywords:
+CASL
+VERA
+BEAVRS benchmark
+
+a b s t r a c t
+The Virtual Environment for Reactor Applications (VERA) is being developed by the Consortium for the
+Advanced Simulation of Light Water Reactors (CASL). VERA is used to perform the Benchmark for
+Evaluation and Validation of Reactor Simulations (BEAVRS), which provides two cycles’ worth of operating power history, along with a full, detailed description of the geometry, and measured data. Cycle 1 and
+2 are simulated with VERA and the results are compared to the measured zero power physics tests, critical boron concentration, and flux maps.
+Ó 2020 Elsevier Ltd. All rights reserved.
+
+1. Introduction
+Development of a core simulator capability in VERA (Turner
+et al., 2016) is crucial to achieving the goals of CASL (CASL,
+2019). VERA must be capable of accurately predicting the detailed
+power, temperature, and isotopic distribution in the reactor
+throughout the lifetime of the fuel. This information becomes the
+basis for understanding the underlying challenge problems that
+CASL is tasked to address. This work focuses on using VERA to analyze the Benchmark for Evaluation and Validation of Reactor Simulations (BEAVRS) (Horelik et al., 2013) for comparisons with
+measured plant data.
+The BEAVRS Benchmark was released by MIT in 2013 to provide
+data from an operating nuclear reactor to the public to allow for
+validation of methods developments. This benchmark is similar
+to the data provided in the VERA Progression Benchmark
+(Godfrey, 2014). The BEAVRS benchmark provides two cycles’
+worth of operational history, including power levels and boron
+
+q
+This manuscript has been authored by UT-Battelle, LLC under Contract No.
+DE-AC05-00OR22725 with the U.S. Department of Energy. The United States
+Government retains and the publisher, by accepting the article for publication,
+acknowledges that the United States Government retains a non-exclusive, paid-up,
+irrevocable, world-wide license to publish or reproduce the published form of this
+manuscript, or allow others to do so, for United States Government purposes. The
+Department of Energy will provide public access to these results of federally
+sponsored research in accordance with the DOE Public Access Plan (http://
+energy.gov/downloads/doe-public-access-plan).
+⇑ Corresponding author.
+E-mail addresses: collinsbs@ornl.gov (B. Collins), godfreyat@ornl.gov (A. Godfrey),
+stimpsonsg@ornl.gov (S. Stimpson), sppalmta@ncsu.edu (S. Palmtag).
+
+https://doi.org/10.1016/j.anucene.2020.107602
+0306-4549/Ó 2020 Elsevier Ltd. All rights reserved.
+
+concentrations. In addition, flux maps are provided at several
+points during each operating cycle.
+2. Modeling methodology
+The state-of-the-art capabilities within VERA provide unprecedented resolution for reactor analysis through high-fidelity
+multi-physics couplings. The simulator components for steadystate reactor core simulation have been selected to eliminate the
+barriers facing modern industrial methods for improved accuracy
+on smaller spatial scales. VERA provides direct, fully coupled solutions at the fuel rod level for neutronics and thermal-hydraulics
+without any spatial homogenization. Isotopic depletion and transmutations occur locally within the once-through 3-D calculation,
+avoiding the need for macroscopic spectral corrections to simplified history models. The user interface is designed for ease of use
+and provides a single common geometry model to each of the
+underlying physics codes. VERA also manages the calculation flow,
+data transfer, and convergence between methods automatically,
+and it is capable of computational scaling from leadership class
+supercomputers to engineering-grade compute clusters, enabling
+access for scientists and engineers across many industrial application areas. The individual physics methods employed by this application of VERA are described in the following sections.
+2.1. MPACT transport solver
+The 3D pin-resolved reactor transport code MPACT (MPACT,
+2015) has been under development by Oak Ridge National Laboratory (ORNL) and the University of Michigan. The methods in
+
+2
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+MPACT have been documented in several sources (Collins et al.,
+2016; Kochunas et al., 2016); a brief outline is presented here that
+discusses the 3D solution mechanism using the 2D/1D method and
+detector models. The 2D/1D method is used to solve the neutron
+flux distribution throughout the core. This is accomplished by
+using the 2D method of characteristics (MOC) in the radial planes
+to capture the heterogeneity in the radial direction with high accuracy. Each pin cell is explicitly modeled, and even sub-pin detail
+can be captured. In the axial direction, a low-order transport solution is obtained through NEM-P3 on a pin-cell homogenized basis.
+The axial and radial solutions are linked through the use of transverse leakage terms which ensure neutron balance in every pin cell
+at convergence. More detail on the 2D/1D methodology used in
+MPACT can be found in Collins et al. (2016). MPACT uses a 51
+energy group cross section library (Kim et al., 2017) based on
+ENDF/B VII.1 data with subgroup parameters to capture selfshielding effects. MPACT can estimate the detector response during
+cycle operation for comparison with raw flux map data. This is
+accomplished by explicitly modeling the instrument tubes in the
+geometry. Instead of placing a trace amount of U-235 into
+the instrument tube during the simulation, MPACT calculates the
+detector response during a post processing step. Once the flux
+solution is obtained, the local flux in each instrument tube is folded
+together with the U-235 cross section from the cross section
+library at the local temperature. This signal is obtained in every
+instrument tube and at every axial level in the model. The data
+are normalized and written to a binary output file for postprocessing comparisons to the measured data.
+In addition to solving the transport equation, MPACT performs
+many other key capabilities in the simulation. These capabilities
+include:
+ Critical boron search
+ Equilibrium boron search
+ Predictor-corrector time stepping algorithm directly coupled to
+the Oak Ridge Isotopic Generation (ORIGEN) code (Gauld et al.,
+2011)
+ Special treatment for control rods to prevent decusping effect
+(Graham et al., 2018)
+ Ability to read and write an isotopic restart file
+ Ability to shuffle fuel between cycles and decay the isotopes
+during the outage.
+All of these capabilities are essential to performing practical
+core analysis using VERA.
+2.2. COBRA-TF thermal hydraulic solver
+COBRA-TF (CTF) is a modernized, improved, quality-controlled
+version of the COBRA-TF (Salko and Avramova, 2019) subchannel
+thermal-hydraulic code. The code is being developed and maintained by Oak Ridge National Laboratory and North Carolina State
+University as part of the CASL program. In VERA, CTF is directly
+coupled to MPACT and is executed in full for each neutronics-T/H
+iteration until convergence is reached between the two codes.
+CTF uses a transient two-fluid three-field (i.e. liquid film, liquid
+drops, and vapor) modeling approach. A wide range of flowregime-dependent closure models are available for capturing complex two-phase flow behavior, which includes rod-to-fluid heat
+transfer, interphase heat and mass transfer, wall and interphase
+drag, turbulent mixing and void drift, grid droplet breakup, and
+grid heat transfer enhancement effects. The rod-to-fluid heat transfer models were designed to handle the entire boiling curve,
+including single-phase flow, subcooled and bulk boiling, critical
+heat flux, and post-critical heat flux heat transfer. CTF has been
+used in many applications before and during the CASL program,
+
+including: modeling single-phase normal operating conditions,
+modeling two-phase flow in accident conditions, modeling of boiling water reactors (BWR), uncertainty quantification, and benchmarking activities. A higher-fidelity model of the core is achieved
+with CTF by individually modeling each rod-bundle coolant channel and pin in the core.
+2.3. Isotopic depletion
+The Oak Ridge Isotope Generation (ORIGEN) depletion/decay
+code was developed at ORNL in 1973. In 1980, the development
+diverged into two versions, ORIGEN2 and ORIGEN-S, with ORIGEN2
+intended for stand-alone depletion/decay calculations, and
+ORIGEN-S intended for coupled neutron transport/depletion/decay
+analysis within SCALE (SCALE, 2011). Since the divergence, many
+new versions have been created, most of which are modified versions of ORIGEN2 and are readily available from the Radiation
+Safety Information Computational Center (RSICC). In 1989, support
+for ORIGEN2 was cancelled. Since 1989, ORIGEN-S, recently
+rebranded simply as ‘‘ORIGEN”, is the only variant under active
+development and since the inception of the original ORIGEN in
+1973, it has been the only version supported by ORNL, with continuous updates to data and methodology as part of the SCALE code
+system.
+ORIGEN has been used to model nuclide transmutation for over
+40 years, with capabilities to generate source terms for accident
+analyses, characterize used fuel (including activity, decay heat,
+radiation emission rates, and radiotoxicity), activate structural
+materials, and perform fuel cycle analysis studies. This wide range
+of applications is possible because the guiding principle has been
+to explicitly simulate all decay and neutron reaction pathways
+using the best available data and to rigorously validate the result
+versus experiment. As an integral part of SCALE 6.1, ORIGEN has
+been subject to hundreds of validation cases using measured data
+from destructive isotopic assay of spent fuel, decay heat of spent
+fuel, gamma spectra resulting from burst fission, and neutron spectra resulting from spontaneous fission and (a,n) reactions.
+In 2013, the ORIGEN API required a runtime per solution of 1 s.
+For depletion time to be brief compared to transport runtime, a
+desired runtime of 0.1 s was proposed. To achieve this goal, the
+general-purpose burnup chain of ~2,200 nuclides and ~54,000
+transitions (valid for any time scale and any material), was simplified to include only isotopes important for LWR core physics. The
+current simplified burnup chain ‘‘CASL2.0” contains the 263
+nuclides and the total runtime is reduced by a factor of 10 while
+preserving quantities such as total energy production, activity,
+mass, and macroscopic cross sections.
+2.4. Thermal expansion methodology
+Although the geometric data is provided in the BEAVRS benchmark, it is all provided at room temperature conditions. The geometric changes that occur between room temperature and
+operating conditions in a pressurized water reactor (PWR) are significant and must be taken into account. This is achieved by thermally expanding the core plate, nozzles, grid spacers, and pin
+geometry to a user-specified temperature. A linear expansion
+model:
+
+DLðT Þ ¼ LðT 0 Þ
+
+Z T
+T0
+
+ 
+
+a T 0 dT 0 ;
+
+ð1Þ
+
+is used to describe the dimensional change for each component
+based on its material. The methodology used to thermally expand
+is explained in Palmtag et al. (2017). For this analysis, all temperatures are thermally expanded to 565 K. While this is not exact for
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+every condition simulated in this analysis, getting to hot conditions
+covers the majority of the effect.
+2.5. Fuel temperature tables
+The behavior of fuel temperature is expected to change with
+burnup and power. The BISON (Hales et al., 2013) fuel performance
+code is part of the VERA environment, but it is not computationally
+feasible to be run when tightly integrated with core follow analysis. Instead, BISON is used to generate fuel temperatures across a
+wide range of powers and burnups (Stimpson, 2016). The fuel temperatures are then fitted using a least-squares regression to obtain
+a quadratic relationship between the fuel temperature and the
+power at each burnup point:
+
+T fuel ðP; BuÞ ¼ T mod þ aðBuÞP þ bðBuÞP2 :
+
+ð2Þ
+
+MPACT linearly interpolates the coefficients of the quadratic fit
+to the exact burnup point and then applies the quadratic relationship to obtain the fuel temperature during the solve.
+3. Model development
+The core geometry for cycles 1 and 2 is described in great detail
+in the benchmark specification. The model attempts to stay as
+faithful to the benchmark geometry as possible. The model is built
+to the benchmark specification, and it captures the detail of the
+fuel, gap, and clad in every fuel pin; explicit modeling of the PYREX
+burnable inserts (including detailed axial and radial description);
+explicit modeling of the control rods (including end caps, plenums,
+
+3
+
+and hybrid rod geometry); and explicit modeling of the radial
+reflector (including baffle, barrel, and neutron pads). Fig. 1 shows
+the 2D slice of the MPACT geometry used for cycle 1.
+The radial reflector is modeled by adding the barrel and neutron
+pads and then truncating the model so that the reflector region
+accounts for a single assembly pitch. The effect of this approximation was recently studied (Stimpson et al., 2017) and the effect of
+using the truncated model on core eigenvalue as <1 pcm and the
+maximum difference in pin power was < 0:1%.
+
+4. Cycle 1 results
+The cycle 1 zero power physics tests include five critical measurements with several different control rod configurations. Table 1
+shows the calculated boron concentration for all of the critical
+configurations.
+All five of the measured critical configurations show good
+agreement with the calculated critical configurations, and they also
+agree well with previously published solutions (Kelly et al., 2014;
+Ryu et al., 2014). When more control rod banks are inserted into
+the core, the solutions show larger differences than when only a
+few banks are inserted. Although the agreement with previously
+published solutions is comparable, significant modifications to
+the control rod description in the updated benchmark specification
+(v. 2.0.1) make direct comparisons to other calculated results
+difficult.
+In addition to the five critical conditions, the control rod reactivity worth is measured for all banks. This was done by modeling
+the control rod in and out with constant boron. For control rods for
+
+Fig. 1. BEAVRS core geometry.
+
+4
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+Table 1
+Cycle 1 zero power critical boron comparisons.
+
+ARO
+D In
+C/D In
+A/B/C/D In
+A/B/C/D/SE/SD/SC In
+
+Measured
+[ppm]
+
+Calculated
+[ppm]
+
+Difference
+[ppm]
+
+975.0
+902.0
+810.0
+686.0
+508.0
+
+975.9
+914.8
+817.1
+680.7
+491.9
+
+0.9
+12.8
+7.1
+5.3
+16.1
+
+which critical boron concentrations were not given, the boron is
+interpolated based on the measured control rod worth. Table 2
+shows the measured and predicted control rod worths. The predicted rod worth is less than 6% different for all banks.
+The other measurement that can be compared is the calculation
+of the isothermal temperature coefficient (ITC). The calculation of
+ITC was performed by executing a 4-degree Fahrenheit perturbation to all of the temperatures above and below nominal conditions. The ITC is calculated by using the eigenvalue of both of
+these points and is displayed in Table 3. The ITC calculations all
+compare very well to the measured values, even for different control rod configurations.
+Table 2
+Cycle 1 zero power control rod worth.
+Measured
+[pcm]
+
+Calculated
+[pcm]
+
+Difference
+[%]
+
+D In
+C with D In
+B with C/D In
+A with B/C/D In
+SE with A/B/C/D In
+SD with SE/A/B/C/D In
+SC with SD/SE/A/B/C/D In
+
+788.0
+1203.0
+1171.0
+548.0
+461.0
+772.0
+1099.0
+
+779.3
+1252.9
+1195.7
+578.8
+487.7
+779.4
+1097.9
+
+1.11%
+4.15%
+2.11%
+5.61%
+5.80%
+0.96%
+0.10%
+
+Total
+
+6042.0
+
+6171.8
+
+2.15%
+
+Table 3
+Cycle 2 zero power isothermal temperature coefficient comparisons.
+
+ARO
+D In
+C/D In
+
+Measured
+[pcm/F]
+
+Calculated
+[pcm/F]
+
+Difference
+[pcm/F]
+
+1.75
+2.75
+8.01
+
+2.56
+4.01
+8.80
+
+0.85
+1.26
+0.79
+
+In addition to the zero power measurements, VERA is used to
+simulate the plant operation in cycle 1. During the first cycle, the
+cycle capacity factor was only 57%, and there were three long
+outages and several shorter outages. Even though day-by-day
+power histories are provided, the runtime for VERA would be relatively prohibitive to simulate the reactor at this level of detail.
+Instead, times and power levels were chosen that align with the
+times when flux maps were obtained during plant operation. Additionally, points were added to capture the 3 large outages during
+the cycle. Fig. 2 shows the power history for cycle 1 and the model
+power which was used in this simulation. Additionally, the black
+dots represent all flux map measurements that are available, and
+the green triangles represent each point where measured boron
+concentration is available.
+The calculated boron concentration throughout the cycle is
+shown in Fig. 3.
+Two different boron concentrations are reported in the specification. The first is the boron concentration corrected to 100%
+power with all rods out at regular intervals throughout the cycle.
+The second set is the instantaneous boron concentration at each
+flux map. Since the VERA model depletes with all rods out, the
+results are more consistent with the corrected boron concentration, although the boron concentrations at lower power levels
+should be expected to vary. The boron concentration agrees at
+the beginning of the cycle, but the difference grows as the cycle
+progresses. Fig. 3 shows the difference from measured boron when
+the reactor is close to full power.
+In addition to the critical boron concentration, 24 flux maps
+are provided at various points throughout cycle 1 and 16 are
+chosen for comparison. The other 8 are excluded because they
+are all from the initial power ramp to full power, and sufficient
+data is not provided in the benchmark to accurately model
+Xenon during this time frame. A few other flux maps show larger discrepancies that are not at equilibrium conditions during
+startup or shortly after a power maneuver, but the data is
+included in the analysis.
+The detector responses are extracted using the detector model
+described above, and they are normalized so they are consistent
+with the measured data. Since the mesh in the model is different
+than the 61 level measured data, the predicted detector signal is
+fit with a cubic spline and integrated onto 61 evenly spaced
+regions. Each detector string is then compared against the detector
+data.
+
+Fig. 2. Cycle 1 operating history.
+
+5
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+Fig. 3. Cycle 1 boron letdown comparison.
+
+Three metrics are used to determine the quality of the simulation for the flux maps. The first is the 3D root mean square
+(RMS) comparison. This is simply the RMS of the difference in
+detector responses for all detector locations (det) and every axial
+level (z):
+
+0P P 
+2 112
+meas
+calc
+c
+
+c
+det
+N
+det;z
+det;z
+z
+B
+C
+RMS3D ¼ @
+A
+Ndet Nz
+
+ð3Þ
+
+The second is the 2D, or radial, RMS which, is the difference of
+the axially integrated detector response:
+1
+0P  P
+P calc 2 12
+meas
+c
+
+c
+N z det;z
+N z det;z
+B det
+C
+RMS2D ¼ @
+A
+N det Nz
+
+ð4Þ
+
+The final metric is the difference in axial offset as calculated by
+the incore detectors:
+
+P
+det
+
+DAO ¼
+
+PN z
+
+P
+
+N z =2 meas
+cmeas  z¼1
+cdet;z
+z¼N z =2þ1 det;z
+Nz meas
+c
+z¼1 det;z
+
+P
+
+PN z
+
+
+Ndet
+
+P
+
+N z =2 calc
+ccalc  z¼1
+cdet;z
+z¼N z =2þ1 det;z
+N z calc
+c
+z¼1 det;z
+
+!
+
+P
+
+ð5Þ
+
+Flux maps throughout the cycle are compared and analyzed
+using a python post processing script. The BEAVRS core has 58
+locations where U-235 fission chambers measure the axial fission rate at 61 equidistant axial levels. During operation it is
+not uncommon to have inoperable detector locations which
+are excluded from data processing. To increase the number of
+detectors that can be compared, the VERA solution is unfolded
+from quarter core to the full core geometry using rotational
+symmetry and detector traces are compared at every available
+detector location. In order to display results, the comparisons
+are mapped back to the southeast quadrant using the same
+symmetry. In the case where multiple traces are present for
+symmetric locations, all detector signals are shown. Fig. 4
+shows the output of this python script, along with the statistics
+discussed above.
+
+Fig. 4. Cycle 1 flux map at 1.507 GWD/MT.
+
+6
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+Table 4
+Cycle 1 flux map comparisons.
+Exposure
+[GWD/ MT]
+
+Power
+[%]
+
+2D RMS
+[%]
+
+3D RMS
+[%]
+
+DAO
+[%]
+
+1.023
+1.296
+1.507
+2.163
+3.297
+4.614
+6.012
+6.490
+7.508
+8.701
+9.803
+11.084
+12.343
+12.915
+
+98.70
+62.80
+99.80
+100.00
+93.80
+99.60
+63.60
+99.70
+99.30
+99.90
+99.50
+99.90
+99.80
+84.50
+
+1.67
+3.42
+0.84
+1.18
+0.82
+0.90
+1.18
+1.23
+0.88
+0.99
+3.24
+1.12
+1.21
+1.48
+
+4.55
+5.16
+3.02
+3.11
+3.76
+3.40
+4.53
+5.28
+4.17
+4.11
+5.19
+4.26
+4.10
+4.90
+
+0.46
+1.68
+0.42
+0.80
+2.26
+0.50
+2.31
+3.03
+2.16
+1.73
+0.60
+0.32
+0.91
+2.12
+
+1.44
+
+4.25
+
+0.56
+
+Cycle Average
+
+The script is used to extract the 2D RMS, 3D RMS, and difference in axial offset for all available flux maps. Table 4 summarizes the comparisons for all of the flux maps. Of the
+remaining flux maps, the radial RMS is between 1 and 2%, and
+the 3D RMS is between 3 and 5%. In most cases, the comparison
+of axial offset is also less than 2.0%. There are several flux maps
+shown that exhibit higher-than-normal statistics. Specifically,
+two flux maps at around 60% power shows data during a power
+ascension and are potentially not at equilibrium Xenon conditions. Another data point which is slightly elevated is at 9:803
+GWD/MT. This data point occurs very soon after a small outage
+that was not modeled and equilibrium conditions may not have
+been reached.
+At the end of cycle, the flux maps also demonstrate excellent
+agreement which can be seen in Fig. 5. Fig. 5 shows that VERA predicts the axial and radial power throughout the reactor well. While
+there are some large discrepancies, the cycle 1 benchmark results
+
+are acceptable considering the assumptions made in the power
+history for this cycle.
+5. Cycle 2 results
+The detailed isotopic distributions obtained in the simulation of
+cycle 1 are shuffled throughout the core to obtain the initial model
+for cycle 2. Fig. 6 shows the pin exposure for the core after the
+shuffle. The dark blue locations represent fresh fuel loaded into
+the core for cycle 2. Significant gradients in exposure on the fuel
+can be observed; current design tools cannot accurately predict
+these gradients. In addition to being shuffled the fuel was decayed
+for three months. This value is not prescribed by the benchmark, so
+three months was assumed.
+The zero power physics tests for cycle 2 are simulated with the
+two provided critical boron concentrations and are compared in
+Table 5.
+
+Fig. 5. Cycle 1 flux map at 12.343 GWD/MT.
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+7
+
+Fig. 6. Cycle 2 beginning of cycle (BOC) pin exposures [GWD/MT].
+
+Table 5
+Cycle 2 zero power critical boron comparisons.
+
+ARO
+C In
+
+Measured
+[ppm]
+
+Calculated
+[ppm]
+
+Difference
+[ppm]
+
+1405.0
+1273.0
+
+1396.4
+1294.4
+
+8.6
+21.4
+
+The cycle 2 power history is much smoother than the power
+history for cycle 1. The model is simulated using a burnupaverage power for each time step. Fig. 7 shows the day-by-day
+power history and the model power used. As in cycle 1, the flux
+map points were chosen to allow for direct comparisons with the
+measured data.
+
+Fig. 7. Cycle 2 operating history.
+
+8
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+Fig. 8. Cycle 2 boron letdown comparison.
+
+Fig. 9. Cycle 2 flux map at 0.225 GWD/MT.
+
+Fig. 8 shows the boron letdown curve for the simulation of cycle
+2. The boron predictions are consistently 16 ppm low, which is a
+considerably better than cycle 1.
+The flux map comparisons are also made for cycle 2. The first
+flux map at 100% is shown in Fig. 9. For this case, the power is significantly peaked toward the top of the core, but VERA predicts the
+axial power shape very well. Standard operating practice for similar reactors to leave Bank D inserted 10–20 steps during operation
+to provide sufficient control rod worth to account for depletion
+effects on reactivity between critical boron updates. Since the
+BEAVRS specification does not provide the location of Bank D, it
+is not inserted in this model. Location D12 shows signs of an
+over-prediction in detector signal likely due to Bank D not being
+present.
+The detector comparisons for cycle 2 also show good comparisons throughout the cycle, as seen in Table 6. With the exception
+of the first two flux maps which are taken during the initial
+
+Table 6
+Cycle 2 flux map comparisons.
+Exposure
+[GWD/MT]
+
+Power
+[%]
+
+2D RMS
+[%]
+
+3D RMS
+[%]
+
+DAO
+[%]
+
+0.013
+0.126
+0.225
+1.128
+2.095
+3.175
+4.013
+5.187
+6.475
+7.658
+8.665
+9.287
+10.356
+
+29.10
+80.50
+100.00
+99.70
+100.00
+99.90
+100.00
+99.80
+99.90
+100.00
+99.50
+99.90
+99.90
+
+3.11
+3.22
+1.57
+1.11
+1.04
+1.15
+1.14
+1.12
+1.18
+1.38
+0.95
+1.16
+1.11
+
+5.57
+7.58
+4.10
+3.52
+3.54
+4.39
+3.76
+4.18
+3.97
+3.83
+4.49
+4.15
+3.49
+
+2.09
+3.91
+0.24
+0.29
+0.48
+2.13
+1.56
+1.83
+1.90
+1.49
+2.13
+1.68
+0.82
+
+1.43
+
+4.15
+
+0.68
+
+Cycle Average
+
+B. Collins et al. / Annals of Nuclear Energy 145 (2020) 107602
+
+escalation of power, the flux map comparisons are as good as they
+were in cycle 1, and there are no discernible trends in the behavior
+throughout the operation of cycle 2.
+The simulation of cycle 1 and 2 were perform on 880 Intel Xeon
+2.3 GHz processors with 4 GB of RAM per processor. The depletion
+of cycle 1 included 28 state points and took 24 h and 50 min of
+total wall-time. Cycle 2 only has 16 states due to its simpler power
+history and used 13 h and 26 min of wall time. Overall, VERA averaged about 50 min (760 CPU-hrs) per state point for these
+calculations.
+6. Conclusions
+The BEAVRS benchmark has been successfully completed with
+the VERA code suite. State-of-the-art computer codes have been
+tightly coupled and integrated into a core simulation capability
+providing many of the features needed to simulate PWRs. Models
+were developed that stayed faithful to the benchmark geometry.
+A power history is approximated for cycles 1 and 2 which captures
+the major components of the power history defined by the benchmark. Zero power physics tests showed very small biases in the
+results. Cycle 1 core follow simulations showed a 30 ppm underprediction of boron concentration throughout the cycle. It is
+expected that the complicated power history in cycle 1 led to the
+difficulty in predicting the results. However, even though there
+were issues with core reactivity, the flux map comparisons
+throughout cycle 1 were very good. The cycle 2 core follow results
+demonstrated a 16 ppm under prediction of boron concentration
+throughout the cycle, which is much improved from cycle 1. The
+flux map comparisons for cycle 2 also demonstrate very good comparisons with measured data.
+CRediT authorship contribution statement
+Benjamin Collins: Methodology, Software, Visualization, Formal analysis, Writing - original draft. Andrew Godfrey: Formal
+analysis, Resources. Shane Stimpson: Software. Scott Palmtag:
+Software, Supervision.
+Declaration of Competing Interest
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared
+to influence the work reported in this paper.
+Acknowledgments
+The authors wish to acknowledge the individual members of
+the MPACT Development Team for their many contributions to
+the code.
+This research was supported by the Consortium for Advanced
+Simulation of Light Water Reactors (www.casl.gov), an Energy
+Innovation Hub (http://www.energy.gov/hubs) for Modeling and
+
+9
+
+Simulation of Nuclear Reactors under U.S. Department of Energy
+Contract No. DE-AC05-00OR22725.
+This work has used resources of the Compute and Data Environment for Science (CADES) at the Oak Ridge National Laboratory
+which is managed by UT-Battelle, LLC, for the U.S. Department of
+Energy under Contract No. DE-AC05-00OR22725.
+Appendix A. Supplementary data
+Supplementary data associated with this article can be found, in
+the online version, athttps://doi.org/10.1016/j.anucene.2020.
+107602.
+References
+Collins, B., Stimpson, S., Kelley, B.W., Young, M.T.H., Kochunas, B., Larsen, E.W.,
+Downar, T., Godfrey, A., 2016. Three-dimensional nuclear reactor core
+simulations of the boltzmann transport equations with the 2D/1D method
+using MPACT. J. Comput. Phys. 326, 612–628.
+Gauld, I.C., Radulescu, G., Ilas, G., Murphy, B.D., Williams, M.L., Wiarda, D., 2011.
+Isotopic depletion and decay methods and analysis capabilities in scale. Nucl.
+Technol. 174 (2), 169–195. https://doi.org/10.13182/NT11-3.
+Godfrey, A.T., 2014. VERA core physics benchmark progression problem
+specifications,
+Tech.
+Rep.
+CASL-U-2012-0131-004,
+CASL.http://
+www.casl.gov/docs/CASL-U-2012-0131-004.pdf.
+Graham, A., Collins, B., Stimpson, S., Downar, T., 2018. Subplane collision
+probabilities method applied to control rod cusping in 2D/1D. Ann. Nucl.
+Energy 118, 1–14.
+Hales, J.D., Williamson, R.L., Novascone, S.R., Pastore, G., Spencer, B.W., Stafford, D.S.,
+Gamble, K.A., Perez, D.M., Liu, W., 2013. BISON Theory Manual: The Equations
+behind Nuclear Fuel Analysis. Idaho National Laboratory.
+Horelik, N., Herman, B., Forget, B., Smith, K., 2013. Benchmark for evaluation and
+validation of reactor simulations (BEAVRS), v1.0.1. In: Proc. Int. Conf.
+Mathematics and Computational Methods Applied to Nuc. Sci. & Eng., Sun
+Valley, Idaho.
+Kelly, D.J., Aviles, B.N., Romano, P.K., Herman, B.R., Horelik, N.E., Forget, B., 2014.
+Analysis of select BEAVRS PWR benchmark cycle 1 results using MC21 and
+OpenMC. In: PHYSOR 2014 The Role of Reactor Physics toward a Sustainable
+Future, Kyoto, Japan.
+Kim, K.S., Williams, M.K., Wiarda, D., Clarno, K.T., 2017. Development of the CASLVERA v4.2m5 MPACT 51-group libraries with ENDF/B-VII.0. In: M&C2017, Jeju,
+Korea.
+Kochunas, B., Collins, B., Jabaay, D., Stimpson, S., Graham, A., Kim, K., Wieselquist,
+W., Clarno, K., Palmtag, S., Downar, T., Gehin, J., 2016. core simulator
+methodology for pwr cycle depletion. Nucl. Sci. Eng. 185 (1), 217–231.
+MPACT Development Team. MPACT Theory Manual, Version 2.0.0, Oak Ridge
+National Laboratory and University of Michigan, CASL-U-2015-0078-000.
+Palmtag, S.P., Kochunas, B., Jabaay, D., Han, Z., Downar, T., 2017. Modeling thermal
+expansion in VERA-CS. In: M&C2017, Jeju, Korea.
+Ryu, M., Jung, Y.S., Cho, H.H., Joo, H.G., 2014. Solution of the beavrs benchmark using
+the ntracer direct whole core transport code. In: PHYSOR 2014 The Role of
+Reactor Physics toward a Sustainable Future, Kyoto, Japan.
+Salko, R.K., Avramova, M.N., 2019. CTF Theory Manual. The Pennsylvania State
+University, CASL-U-2019-1886-001.
+SCALE: a comprehensive modeling and simulation suite for nuclear safety analysis
+and design, Tech. Rep. ORNL/TM-2005/39, Version 6.1, Oak Ridge National
+Laboratory, available from Radiation Safety Information Computational Center
+at Oak Ridge National Laboratory as CCC-785 (June 2011).
+Stimpson, S., 2016. Standalone BISON Through VERA: User’s Manual.
+Stimpson, S.G., Collins, B., Godfrey, A., 2017. Extended radial reflector modelling
+capabilities in MPACT. In: M&C 2017, Jeju, Korea.
+The Consortium for Advanced Simulation of Light Water Reactors. URL: http://
+www.casl.gov (accessed 19.03.2019).
+Turner, J., Clarno, K., Sieger, M., Bartlett, R., Collins, B., Pawlowski, R., Schmidt, R.,
+Summers, R., 2016. The virtual environment for reactor applications (VERA):
+design and architecture. J. Comput. Phys. 326, 544–568.
+
+

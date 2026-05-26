@@ -1,0 +1,125 @@
+[
+  {
+    "label": "default",
+    "flags": [],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 103.09712471399689,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "sparse",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 103.81903882700135,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "sparse+cvode",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Cvode",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 102.68170890399779,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "sparse+esdirk23a",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Esdirk23a",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 102.96193179799957,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "sparse+radauiia",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "RadauIIa",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": false,
+    "wall_s": 103.49715893600296,
+    "physics_ok": false,
+    "error": "Translation of <a href=\"Modelica://NetflowModelica.Tests.Assembly17x17\">NetflowModelica.Tests.Assembly17x17</a>\nThe DAE has 169357 scalar unknowns and 169357 scalar equations.\n\nStatistics\n\nOriginal Model\n  Number of components: 32369\n  Variables: 250587\n  Parameters: 68514 (68514 scalars)\n  Unknowns: 182073 (169357 scalars)\n  Equations: 141325\n  Nontrivial: 82658\nTranslated Model\n  Constants: 1156"
+  },
+  {
+    "label": "sparse+parallel",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true",
+      "Advanced.ParallelizeCode = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 1e-06,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 104.20915747000254,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "looser_tol",
+    "flags": [],
+    "method": "Dassl",
+    "tolerance": 0.0001,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 103.91704507699978,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  },
+  {
+    "label": "sparse+looser",
+    "flags": [
+      "Advanced.Translation.SparseActivate = true"
+    ],
+    "method": "Dassl",
+    "tolerance": 0.0001,
+    "n_pin": 289,
+    "n_axial": 10,
+    "ok": true,
+    "wall_s": 106.14754687599998,
+    "Q_total": 19039320.0,
+    "T_cool_outlet_max": 602.6181141478504,
+    "T_centerline_hot": 1262.6069606635328,
+    "physics_ok": true
+  }
+]

@@ -1,0 +1,37 @@
+# Per-language build/runtime artifacts
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+env/
+.tox/
+node_modules/
+
+# Dymola build artifacts (regenerated per simulate)
+dsmodel.c
+dymosim
+dymosim.exe
+*.mat~
+dslog.txt
+dsfinal.txt
+
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+deps/build.log
+JuliaManifest-*.toml
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Soul-system runtime logs
+.soul/events.jsonl

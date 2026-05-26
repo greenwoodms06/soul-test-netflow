@@ -1,0 +1,195 @@
+[
+  {
+    "id": "godfrey-2014-vera-spec",
+    "type": "report",
+    "title": "VERA Core Physics Benchmark Progression Problem Specifications (Rev. 4)",
+    "author": [{"family": "Godfrey", "given": "A. T."}],
+    "issued": {"date-parts": [[2014]]},
+    "number": "CASL-U-2012-0131-004",
+    "publisher": "Oak Ridge National Laboratory / CASL",
+    "URL": "https://corephysics.com/docs/CASL-U-2012-0131-004.pdf"
+  },
+  {
+    "id": "kelly-2017-mc21-ctf-vera",
+    "type": "article-journal",
+    "title": "MC21/CTF and VERA multiphysics solutions to VERA core physics benchmark progression problems 6 and 7",
+    "author": [
+      {"family": "Kelly", "given": "Daniel J.", "suffix": "III"},
+      {"family": "Kelly", "given": "A. E."},
+      {"family": "Aviles", "given": "B. N."},
+      {"family": "Godfrey", "given": "A. T."},
+      {"family": "Salko", "given": "R. K."},
+      {"family": "Collins", "given": "B. S."}
+    ],
+    "container-title": "Nuclear Engineering and Technology",
+    "volume": "49",
+    "page": "1326-1338",
+    "issued": {"date-parts": [[2017]]},
+    "DOI": "10.1016/j.net.2017.07.016",
+    "URL": "https://www.osti.gov/servlets/purl/1408006"
+  },
+  {
+    "id": "aviles-2017-mc21-cobra-ie",
+    "type": "article-journal",
+    "title": "MC21/COBRA-IE and VERA-CS multiphysics solutions to VERA core physics benchmark problem #6",
+    "author": [
+      {"family": "Aviles", "given": "Brian N."},
+      {"family": "Kelly", "given": "Daniel J."},
+      {"family": "Aumiller", "given": "David L."},
+      {"family": "Gill", "given": "Daniel F."},
+      {"family": "Siebert", "given": "Brett W."},
+      {"family": "Godfrey", "given": "Andrew T."},
+      {"family": "Collins", "given": "Benjamin S."},
+      {"family": "Salko", "given": "Robert K."}
+    ],
+    "container-title": "Progress in Nuclear Energy",
+    "volume": "101",
+    "page": "338-351",
+    "issued": {"date-parts": [[2017]]},
+    "DOI": "10.1016/j.pnucene.2017.05.017"
+  },
+  {
+    "id": "kim-2023-wbn1-polaris-parcs",
+    "type": "paper-conference",
+    "title": "Benchmark Calculations for BEAVRS and Watts Bar Unit 1 Using the SCALE-6.3.0/Polaris-PARCS v3.4.2 Code Package",
+    "author": [
+      {"family": "Kim", "given": "Kang Seog"},
+      {"family": "Mertyurek", "given": "Ugur"},
+      {"family": "Ward", "given": "Andrew"},
+      {"family": "Jessee", "given": "Matthew"},
+      {"family": "Wieselquist", "given": "William"}
+    ],
+    "publisher": "Oak Ridge National Laboratory (ORNL)",
+    "issued": {"date-parts": [[2023, 7]]},
+    "number": "OSTI ID 1991715",
+    "URL": "https://www.osti.gov/biblio/1991715"
+  },
+  {
+    "id": "palmtag-2013-vera-p6-coupled",
+    "type": "report",
+    "title": "Coupled Single Assembly Solution with VERA (Problem 6), Revision 1",
+    "author": [{"family": "Palmtag", "given": "S."}],
+    "issued": {"date-parts": [[2013, 7, 25]]},
+    "number": "CASL-U-2013-0150-001",
+    "publisher": "Oak Ridge National Laboratory / CASL",
+    "URL": "https://vera.ornl.gov/technical-reports/"
+  },
+  {
+    "id": "gehin-2013-wbn1-zppt",
+    "type": "report",
+    "title": "Operational Reactor Model Demonstration with VERA: Watts Bar Unit 1 Cycle 1 Zero Power Physics Tests, Revision 1",
+    "author": [
+      {"family": "Gehin", "given": "Jess C."},
+      {"family": "Godfrey", "given": "Andrew T."},
+      {"family": "Franceschini", "given": "Fausto"},
+      {"family": "Evans", "given": "Thomas M."},
+      {"family": "Collins", "given": "Benjamin S."},
+      {"family": "Hamilton", "given": "Steven P."}
+    ],
+    "issued": {"date-parts": [[2013, 8, 23]]},
+    "number": "CASL-U-2013-0105-001",
+    "publisher": "Oak Ridge National Laboratory / CASL",
+    "URL": "https://www.osti.gov/servlets/purl/3014270"
+  },
+  {
+    "id": "casl-2015-wbn1-cycles-1-12",
+    "type": "report",
+    "title": "VERA Benchmarking Results for Watts Bar Nuclear Plant Unit 1 Cycles 1-12",
+    "issued": {"date-parts": [[2015]]},
+    "number": "CASL-U-2015-0206-000",
+    "publisher": "Oak Ridge National Laboratory / CASL",
+    "URL": "https://www.osti.gov/biblio/3009418"
+  },
+  {
+    "id": "casl-2016-bison-fuel-temp",
+    "type": "report",
+    "title": "Integrating BISON into VERA-CS and Fuel Temperature Calculations",
+    "issued": {"date-parts": [[2016]]},
+    "number": "CASL-U-2016-1059-000",
+    "publisher": "Oak Ridge National Laboratory / CASL",
+    "URL": "https://resolution.ornl.gov/pub/preview/248364"
+  },
+  {
+    "id": "kim-2024-wbn1-cycles-1-3",
+    "type": "report",
+    "title": "Benchmark Calculation for the Watts Bar Unit 1 Cycles 1-3 Using the SCALE 6.3/Polaris-PARCS v3.4.2 Code Package",
+    "author": [
+      {"family": "Kim", "given": "Kang Seog"},
+      {"family": "Mertyurek", "given": "Ugur"},
+      {"family": "Wieselquist", "given": "William A."}
+    ],
+    "issued": {"date-parts": [[2024, 12]]},
+    "number": "ORNL/TM-2023/2981 (NRC ADAMS ML25113A083)",
+    "publisher": "Oak Ridge National Laboratory",
+    "URL": "https://www.nrc.gov/docs/ML2511/ML25113A083.pdf"
+  },
+  {
+    "id": "collins-2020-beavrs-vera",
+    "type": "article-journal",
+    "title": "Simulation of the BEAVRS benchmark using VERA",
+    "author": [
+      {"family": "Collins", "given": "Benjamin"},
+      {"family": "Godfrey", "given": "Andrew"},
+      {"family": "Stimpson", "given": "Shane"},
+      {"family": "Palmtag", "given": "Scott"}
+    ],
+    "container-title": "Annals of Nuclear Energy",
+    "volume": "145",
+    "page": "107602",
+    "issued": {"date-parts": [[2020]]},
+    "DOI": "10.1016/j.anucene.2020.107602"
+  },
+  {
+    "id": "frapcon-ifa432-ornl-tm-2012-195",
+    "type": "report",
+    "title": "Analysis of the IFA-432, IFA-597, and IFA-597mox Fuel Performance Experiments by FRAPCON-3.4",
+    "author": [
+      {"family": "Phillippe", "given": "Aaron M."},
+      {"family": "Ott", "given": "Larry"},
+      {"family": "Clarno", "given": "Kevin"},
+      {"family": "Banfield", "given": "Jim"}
+    ],
+    "issued": {"date-parts": [[2012, 7]]},
+    "number": "ORNL/TM-2012/195",
+    "publisher": "Oak Ridge National Laboratory",
+    "URL": "https://info.ornl.gov/sites/publications/files/Pub36515.pdf"
+  },
+  {
+    "id": "ifa432-final-data-report",
+    "type": "report",
+    "title": "Final Data Report for the Instrumented Fuel Assembly (IFA)-432",
+    "number": "OSTI 5293733 (PNL / US NRC)",
+    "publisher": "Pacific Northwest Laboratory / US NRC",
+    "URL": "https://www.osti.gov/biblio/5293733"
+  },
+  {
+    "id": "pnnl-19418-frapcon-integral-assessment",
+    "type": "report",
+    "title": "FRAPCON-3.4 Integral Assessment (Vol. 2, Rev. 2)",
+    "author": [
+      {"family": "Geelhood", "given": "K. J."},
+      {"family": "Luscher", "given": "W. G."}
+    ],
+    "issued": {"date-parts": [[2015]]},
+    "number": "PNNL-19418 Vol.2 Rev.2 (NRC ADAMS ML16118A434)",
+    "publisher": "Pacific Northwest National Laboratory",
+    "URL": "https://www.nrc.gov/docs/ML1611/ML16118A434.pdf"
+  },
+  {
+    "id": "iaea-tecdoc-1697-fuel-behaviour",
+    "type": "report",
+    "title": "Improvement of Computer Codes Used for Fuel Behaviour Simulation (FUMEX-III)",
+    "issued": {"date-parts": [[2013]]},
+    "number": "IAEA-TECDOC-1697",
+    "publisher": "International Atomic Energy Agency",
+    "URL": "https://www-pub.iaea.org/mtcd/publications/pdf/te-1697_cd/pdf/iaea-tecdoc-1697.pdf"
+  },
+  {
+    "id": "ifpe-ifa432-nea1488",
+    "type": "dataset",
+    "title": "IFPE/IFA-432: Fission Gas Release and Mechanical Interaction in BWR Fuel Rods (Halden) - includes measured fuel centerline temperatures",
+    "number": "NEA-1488 (IFPE database)",
+    "publisher": "OECD-NEA Data Bank",
+    "URL": "https://www.oecd-nea.org/tools/abstract/detail/nea-1488"
+  }
+]

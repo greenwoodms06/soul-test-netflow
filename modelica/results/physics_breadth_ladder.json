@@ -1,0 +1,141 @@
+[
+  {
+    "variant": "AssemblyVeraP6",
+    "kwargs": {
+      "n_pin": 64,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 23.873763775001862,
+    "Q_total_assembly": 4175633.2032,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090954
+  },
+  {
+    "variant": "AssemblyVeraP6",
+    "kwargs": {
+      "n_pin": 289,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 108.0146415570016,
+    "Q_total_assembly": 18855593.683199998,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090954
+  },
+  {
+    "variant": "AssemblyVeraP6",
+    "kwargs": {
+      "n_pin": 289,
+      "n_axial": 30
+    },
+    "ok": true,
+    "wall_s": 433.1650494409987,
+    "Q_total_assembly": 18855593.683199998,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090954
+  },
+  {
+    "variant": "AssemblyVeraP6CrossPin",
+    "kwargs": {
+      "n_pin": 64,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 34.609829567001725,
+    "Q_total_assembly": 4175633.2032,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090955
+  },
+  {
+    "variant": "AssemblyVeraP6CrossPin",
+    "kwargs": {
+      "n_pin": 289,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 137.97536687400134,
+    "Q_total_assembly": 18855593.683199998,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090955
+  },
+  {
+    "variant": "AssemblyVeraP6CrossPin",
+    "kwargs": {
+      "n_pin": 289,
+      "n_axial": 30
+    },
+    "ok": true,
+    "wall_s": 543.0833479129979,
+    "Q_total_assembly": 18855593.683199998,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838,
+    "T_fuel_volavg_peak": 971.3152563090957
+  },
+  {
+    "variant": "AssemblyVeraP6Neutronics",
+    "kwargs": {
+      "n_pin": 64,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 37.34397989200079,
+    "T_centerline_hot": 1269.7731761085618,
+    "P_total": 4580307.097522922
+  },
+  {
+    "variant": "AssemblyVeraP6Neutronics",
+    "kwargs": {
+      "n_pin": 289,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 134.82972924299975,
+    "T_centerline_hot": 1269.7731761085618,
+    "P_total": 20682949.23725197
+  },
+  {
+    "variant": "AssemblyVeraP6Subchannel",
+    "kwargs": {
+      "n_side": 8,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 34.992342803998326,
+    "Q_total_assembly": 4175633.2032,
+    "T_centerline_hot": 1207.8990792151978,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838
+  },
+  {
+    "variant": "AssemblyVeraP6Subchannel",
+    "kwargs": {
+      "n_side": 17,
+      "n_axial": 10
+    },
+    "ok": true,
+    "wall_s": 151.49526036600219,
+    "Q_total_assembly": 18855593.683199998,
+    "T_centerline_hot": 1207.8990792151978,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838
+  },
+  {
+    "variant": "AssemblyVeraP6Subchannel",
+    "kwargs": {
+      "n_side": 17,
+      "n_axial": 30
+    },
+    "ok": true,
+    "wall_s": 621.0980990909993,
+    "Q_total_assembly": 18855593.683199998,
+    "T_centerline_hot": 1207.8990792151978,
+    "T_cool_exit_spread": 0.0,
+    "T_cool_exit_max": 599.7105485404838
+  }
+]

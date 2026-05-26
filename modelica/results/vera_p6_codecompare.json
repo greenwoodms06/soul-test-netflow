@@ -1,0 +1,20 @@
+{
+  "n_side": 17,
+  "n_axial": 30,
+  "Q_total_W": 18855593.683102135,
+  "Q_expected_W": 18855593.683199998,
+  "T_cool_exit_min_K": 598.8335857672976,
+  "T_cool_exit_max_K": 600.328704827768,
+  "T_cool_exit_spread_K": 1.4951190604704152,
+  "T_fuel_volavg_peak_K": 979.4305123436516,
+  "T_fuel_volavg_peak_C": 706.2805123436516,
+  "wall_s": 450.1143896649992,
+  "peaking_range": [
+    0.9715951734750171,
+    1.020174932148768
+  ],
+  "kelly_2017_p6_spread_K_CTF_VERA": 6.6,
+  "kelly_2017_p6_spread_K_COBRA_IE": 8.7,
+  "kelly_2017_p7_peak_volavg_C": 1066.0,
+  "structural_caveat": "this leg has no guide tubes (all 289 positions fuel); Kelly's 6.6 K spread is geometry-driven by guide-tube bypass. this measured spread is power-driven only."
+}

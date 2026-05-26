@@ -1,0 +1,91 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Scope of this document}{1}{section.1}\protected@file@percent }
+\citation{scipy}
+\citation{scipy}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Mathematical formulation}{2}{section.2}\protected@file@percent }
+\newlabel{sec:form}{{2}{2}{Mathematical formulation}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Nodes, edges, and the nodal residual}{2}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:residual}{{1}{2}{Nodes, edges, and the nodal residual}{equation.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Solution by damped Newton}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Picard fallback}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}The outer-loop meta-abstraction}{2}{subsection.2.4}\protected@file@percent }
+\newlabel{sec:outer}{{2.4}{2}{The outer-loop meta-abstraction}{subsection.2.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Governing residuals by domain}{3}{section.3}\protected@file@percent }
+\newlabel{sec:dom}{{3}{3}{Governing residuals by domain}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Thermal}{3}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:pellet}{{5}{3}{Thermal}{equation.3.5}{}}
+\newlabel{eq:adv}{{7}{3}{Thermal}{equation.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Hydraulic}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:darcy}{{9}{3}{Hydraulic}{equation.3.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Neutronic}{3}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:neut}{{3.3}{3}{Neutronic}{subsection.3.3}{}}
+\citation{fink}
+\citation{matpro}
+\citation{petersen}
+\citation{todreas}
+\citation{dittus}
+\citation{gnielinski}
+\citation{coolprop}
+\citation{kelly}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Boundary conditions}{4}{section.4}\protected@file@percent }
+\newlabel{sec:bc}{{4}{4}{Boundary conditions}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Closure models}{4}{section.5}\protected@file@percent }
+\newlabel{sec:closure}{{5}{4}{Closure models}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Solid conductivity $k(T)$.}{4}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fuel pellet.}{4}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Fuel--clad gap.}{4}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Single-phase convection.}{4}{section*.4}\protected@file@percent }
+\citation{todreas}
+\citation{vera}
+\citation{kelly}
+\citation{vera}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Neutron-eigenvalue spatial convergence to the analytic bare-slab $k_\infty $. Error is second order in cell count.}}{5}{table.caption.6}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:keff}{{1}{5}{Neutron-eigenvalue spatial convergence to the analytic bare-slab $k_\infty $. Error is second order in cell count}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Lateral coolant transport and cross-flow.}{5}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Verification}{5}{section.6}\protected@file@percent }
+\newlabel{sec:ver}{{6}{5}{Verification}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Code-to-code comparison against VERA}{5}{section.7}\protected@file@percent }
+\newlabel{sec:val}{{7}{5}{Code-to-code comparison against VERA}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{What VERA P6/P7 are.}{5}{section*.7}\protected@file@percent }
+\citation{kelly}
+\citation{kelly}
+\citation{kelly}
+\citation{aviles}
+\citation{kelly}
+\citation{aviles}
+\citation{aviles}
+\citation{kelly}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Code-to-code comparison against published VERA P6/P7 solutions. VERA P6/P7 have \emph  {no} reference solution; the third column is another code's result, cited. Reproducible via \texttt  {netflow.bench.vera\_codecompare}.}}{6}{table.caption.10}\protected@file@percent }
+\newlabel{tab:val}{{2}{6}{Code-to-code comparison against published VERA P6/P7 solutions. VERA P6/P7 have \emph {no} reference solution; the third column is another code's result, cited. Reproducible via \texttt {netflow.bench.vera\_codecompare}}{table.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Code-to-code comparison, visualized. \emph  {Left:} predicted scalars as the netflow/published ratio (shaded $\pm $10\%) --- peak volume-average fuel temperature and coolant mean rise both within ${\sim }7\%$ of the MC21/CTF solution~\cite  {kelly}. \emph  {Right:} the calibrated coolant exit spread vs.\ the lateral-mixing fraction, bracketing the published CTF/VERA (\SI {6.6}{K}) and COBRA-IE (\SI {8.7}{K})~\cite  {aviles} values --- the spread is calibration-controlled, not predicted.}}{6}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:compare}{{1}{6}{Code-to-code comparison, visualized. \emph {Left:} predicted scalars as the netflow/published ratio (shaded $\pm $10\%) --- peak volume-average fuel temperature and coolant mean rise both within ${\sim }7\%$ of the MC21/CTF solution~\cite {kelly}. \emph {Right:} the calibrated coolant exit spread vs.\ the lateral-mixing fraction, bracketing the published CTF/VERA (\SI {6.6}{K}) and COBRA-IE (\SI {8.7}{K})~\cite {aviles} values --- the spread is calibration-controlled, not predicted}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Statepoint.}{6}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quantities at their published definition.}{6}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reading the table honestly.}{6}{section*.12}\protected@file@percent }
+\citation{vera}
+\citation{modelica}
+\citation{mtk}
+\citation{bondgraph}
+\bibcite{vera}{1}
+\bibcite{kelly}{2}
+\@writefile{toc}{\contentsline {paragraph}{Self-consistent multiphysics (mechanism).}{7}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Scope and limitations}{7}{section.8}\protected@file@percent }
+\newlabel{sec:scope}{{8}{7}{Scope and limitations}{section.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{Relationship to established acausal tools.}{7}{section*.14}\protected@file@percent }
+\bibcite{aviles}{3}
+\bibcite{fink}{4}
+\bibcite{matpro}{5}
+\bibcite{petersen}{6}
+\bibcite{dittus}{7}
+\bibcite{gnielinski}{8}
+\bibcite{todreas}{9}
+\bibcite{scipy}{10}
+\bibcite{coolprop}{11}
+\bibcite{modelica}{12}
+\bibcite{mtk}{13}
+\bibcite{bondgraph}{14}
+\gdef \@abspage@last{8}

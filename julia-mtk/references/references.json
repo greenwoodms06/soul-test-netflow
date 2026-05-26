@@ -1,0 +1,61 @@
+[
+  {
+    "id": "mtkstdlib-docs",
+    "type": "webpage",
+    "title": "ModelingToolkitStandardLibrary.jl documentation (Thermal, Hydraulic, Blocks, connectors)",
+    "author": [{"literal": "SciML"}],
+    "issued": {"date-parts": [[2026]]},
+    "URL": "https://docs.sciml.ai/ModelingToolkitStandardLibrary/stable/"
+  },
+  {
+    "id": "mtk-jl",
+    "type": "software",
+    "title": "ModelingToolkit.jl",
+    "author": [{"literal": "SciML / JuliaHub"}],
+    "URL": "https://github.com/SciML/ModelingToolkit.jl"
+  },
+  {
+    "id": "ai4e-componentlib",
+    "type": "software",
+    "title": "Ai4EComponentLib.jl — component-based modeling library (ThermodynamicCycle: Rankine, Brayton)",
+    "author": [{"literal": "ai4energy group"}],
+    "issued": {"date-parts": [[2024]]},
+    "URL": "https://github.com/ai4energy/Ai4EComponentLib.jl"
+  },
+  {
+    "id": "dyad-faq",
+    "type": "webpage",
+    "title": "Dyad documentation — FAQ, licensing, standard libraries",
+    "author": [{"literal": "JuliaHub"}],
+    "issued": {"date-parts": [[2026]]},
+    "URL": "https://help.juliahub.com/dyad/dev/manual/faq.html"
+  },
+  {
+    "id": "thermopower",
+    "type": "software",
+    "title": "ThermoPower — Modelica library for power-plant thermal-hydraulic modelling (component-contract design reference)",
+    "author": [{"family": "Casella", "given": "Francesco"}],
+    "URL": "https://github.com/casella/ThermoPower"
+  },
+  {
+    "id": "clapeyron-jl",
+    "type": "software",
+    "title": "Clapeyron.jl — thermodynamic equation-of-state framework (incl. IAPWS-95)",
+    "author": [{"literal": "ClapeyronThermo"}],
+    "URL": "https://github.com/ClapeyronThermo/Clapeyron.jl"
+  },
+  {
+    "id": "coolprop-jl",
+    "type": "software",
+    "title": "CoolProp.jl — Julia wrapper for CoolProp (IF97 water/steam + many fluids)",
+    "author": [{"literal": "CoolProp"}],
+    "URL": "https://github.com/CoolProp/CoolProp.jl"
+  },
+  {
+    "id": "steamtables-jl",
+    "type": "software",
+    "title": "SteamTables.jl — pure-Julia IAPWS-IF97 water/steam properties",
+    "author": [{"family": "van Dyk", "given": "Braam"}],
+    "URL": "https://github.com/braamvandyk/SteamTables.jl"
+  }
+]

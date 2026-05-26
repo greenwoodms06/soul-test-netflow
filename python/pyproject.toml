@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netflow"
+version = "0.1.0.dev0"
+description = "Generic sparse nonlinear network solver, with thermal as the first plugin."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "greenwoodms06" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+thermal = ["CoolProp>=6.4"]
+viz = ["networkx>=3.0", "matplotlib>=3.7"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+]
+
+[tool.setuptools.packages.find]
+include = ["netflow*"]
+exclude = ["tests*", "docs*", "bench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

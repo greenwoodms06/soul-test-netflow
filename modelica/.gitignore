@@ -1,0 +1,25 @@
+# Python venv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Dymola scratch (leaked when Dymola is invoked from test/ as cwd)
+*.bak-mo
+*.dymola_scratch/
+test/dymosim
+test/dsmodel*
+test/dsin.txt
+test/dsfinal.txt
+test/dslog.txt
+test/dsres.mat
+test/buildlog.txt
+test/request.*
+test/status.*
+test/dsmodel_*.c
+test/dsmodel.mof
+test/dymosim_temp_dir/
+
+# OS
+.DS_Store
+Thumbs.db

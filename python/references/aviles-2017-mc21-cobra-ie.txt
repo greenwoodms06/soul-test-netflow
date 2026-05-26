@@ -1,0 +1,765 @@
+Progress in Nuclear Energy 101 (2017) 338e351
+
+Contents lists available at ScienceDirect
+
+Progress in Nuclear Energy
+journal homepage: www.elsevier.com/locate/pnucene
+
+MC21/COBRA-IE and VERA-CS multiphysics solutions to VERA core
+physics benchmark problem #6
+Brian N. Aviles a, *, Daniel J. Kelly a, David L. Aumiller b, Daniel F. Gill b, Brett W. Siebert a,
+Andrew T. Godfrey c, Benjamin S. Collins c, Robert K. Salko c
+a
+b
+c
+
+Naval Nuclear Laboratory, Knolls Atomic Power Laboratory, Schenectady, NY, USA
+Naval Nuclear Laboratory, Bettis Atomic Power Laboratory, West Mifﬂin, PA, USA
+Oak Ridge National Laboratory, 1 Bethel Valley Road, Oak Ridge, TN, USA
+
+a r t i c l e i n f o
+
+a b s t r a c t
+
+Article history:
+Received 12 September 2016
+Received in revised form
+8 January 2017
+Accepted 19 May 2017
+Available online 1 June 2017
+
+The Virtual Environment for Reactor Applications (VERA) core physics benchmark problem #6, 3D Hot
+Full Power (HFP) assembly, from the Consortium for Advanced Simulation of Light Water Reactors (CASL)
+was simulated using the MC21 continuous energy Monte Carlo code coupled with the COBRA-IE subchannel thermal-hydraulics code using the R5EXEC coupling framework. The converged MC21/COBRA-IE
+solution was compared to results from CASL's VERA-CS code system, MPACT coupled to COBRA-TF (CTF).
+MPACT is a three-dimensional (3D) whole core transport code, executed in a 2D/1D approach employing
+planar method of characteristics (MOC) solutions with SP3 in the axial direction, and CTF is a subchannel
+thermal-hydraulics code designed for Light Water Reactor analysis. Eigenvalues agreed within 63 pcm,
+axially-integrated normalized radial ﬁssion distributions agreed within ±0.2% (root mean square (RMS)
+difference of 0.1%), local volume-averaged fuel pin temperatures agreed within þ8.8/-4.3 C (RMS difference of 3.9 C), and local subchannel coolant temperatures agreed within þ0.8/-1.5 C (RMS difference
+of 0.5 C). A sensitivity study to guide tube heat transfer indicated that a statistically-signiﬁcant increase
+in reactivity and shift in radial pin power distribution occurred within the assembly when guide tube
+heating was enabled.
+© 2017 The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY-NC-ND
+license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+Keywords:
+Multiphysics
+MC21
+COBRA-IE
+VERA
+MPACT
+CTF
+
+1. Introduction
+CASL (CASL, 2014) VERA Core Physics Benchmark Progression
+Problems (Godfrey, 2014) are designed to aid multiphysics researchers with a set of single reactor physics and coupled reactor
+physics/thermal-hydraulics problems of increasing complexity.
+Problem #6 is a single Westinghouse 17  17-type fuel assembly at
+beginning-of-cycle (BOC) and hot full power (HFP) conditions
+based on Watts Bar Nuclear 1 (WBN1) initial core loading. The
+purpose of Problem #6 is to demonstrate that coupled reactor
+physics and thermal-hydraulics can be iterated to mutuallyconsistent solutions. To date, coupled solutions for VERA Problem
+#6 based on deterministic neutron transport and thermalhydraulics subchannel codes have been published (Palmtag,
+2013), but a coupled Monte Carlo/thermal-hydraulics subchannel
+code solution has not yet been published for this benchmark.
+
+* Corresponding author.
+E-mail address: brian.aviles@unnpp.gov (B.N. Aviles).
+
+High-ﬁdelity reactor simulations that include Monte Carlo for
+pin-resolved neutron transport coupled with thermal-hydraulics
+codes solving for ﬂow and temperature distributions at the subchannel level have been reported in the literature (see text and
+references in Daeubler et al., 2015; Ivanov et al., 2015; Gill et al.,
+2017; Lepp€
+anen et al., 2015; Bennett et al., 2016; Pecchia et al.,
+2015; Ellis et al., 2017; Kotlyar and Shwageraus, 2016). At the Naval Nuclear Laboratory, MC21 (Griesheimer et al., 2015) and COBRAIE (Aumiller et al., 2015) coupling via R5EXEC (Aumiller et al., 2016)
+has been described previously (Gill et al., 2014) as have running
+strategies for performing coupled Monte Carlo/thermal-hydraulics
+analyses (Gill et al., 2015). This research utilizes these tactics and
+submits a high-ﬁdelity MC21/COBRA-IE solution for Benchmark
+Problem #6. These results are compared with results from the core
+simulator being developed by CASL, VERA-CS (Sieger, 2015;
+Kochunas et al., 2015), which includes the deterministic neutron
+transport code, MPACT (Collins and Godfrey, 2015; MPACT Team,
+2015), coupled to the subchannel thermal-hydraulics code, CTF
+(Salko and Avramova, 2014). COBRA-IE and CTF share a common
+
+http://dx.doi.org/10.1016/j.pnucene.2017.05.017
+0149-1970/© 2017 The Authors. Published by Elsevier Ltd. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+COBRA code ancestor but have undergone different development
+paths over the past 15 years; COBRA-IE improvements are geared
+towards analyzing Loss-of-Coolant accidents, and CTF improvements are geared towards nominal PWR and BWR operating
+conditions.
+2. VERA problem #6 reactor physics and thermal hydraulics
+model description
+Speciﬁcations for Problem #6 are provided by Godfrey (2014)
+and describe a Westinghouse 17  17-type fuel assembly at BOC
+and HFP steady-state conditions with boron concentration at
+1300 ppm. There are no burnable poison or control rod clusters in
+Problem #6. Because of symmetry in the assembly, a ¼-assembly
+radial model is employed. Figs. 1 and 2 present the radial and axial
+assembly geometry, respectively. There are 72 fuel rods, 81 coolant
+subchannels, and 9 guide tubes. All fuel pins and water subchannels
+are modeled explicitly in all analysis codes, and each guide tube is
+modeled as an unheated cylinder with water ﬂowing inside. From
+the speciﬁcation, 9% of the total ﬂow accounts for bypass ﬂow. Of
+this, one third is assumed to ﬂow through the guide tubes, resulting
+in 0.7085 kg/s (1.5620 lbm/s) ﬂowing through all guide tube
+channels in this ¼-assembly model. The instrument tube in the
+center of the assembly in the speciﬁcation is modeled as a guide
+tube in MC21/COBRA-IE to be consistent with VERA-CS. Because the
+guide tube inner radius and thickness (0.561 cm and 0.041 cm,
+respectively) are similar to the instrument tube inner radius and
+thickness (0.559 cm and 0.046 cm, respectively), this assumption is
+deemed valid. In both models, heat transfer through guide tube
+walls is turned off such that the water ﬂowing in the guide tubes
+remains unheated. A sensitivity to this assumption is performed
+with MC21/COBRA-IE in which conduction through the guide tube
+walls is allowed and the water within the guide tubes is heated.
+The left plot in Fig. 1 shows the MC21 geometry at an axial
+elevation with a spacer grid (75.0 cm). In order to model spacer
+grids correctly and to preserve ﬂexibility in assigning subchannels,
+multiple intra-channel regions were required in the MC21 model
+and appropriate axially-varying materials are assigned using the
+axial material capability in MC21. Thicknesses of these intrachannel regions were determined to preserve masses of the Zircaloy (intermediate) and Inconel (top and bottom) spacer grids. In
+
+Fig. 2. Problem #6 axial geometry (from Godfrey, 2014).
+
+Fig. 1. ¼-assembly radial geometry showing fuel rod, guide tube, and subchannel numbering scheme.
+
+339
+
+340
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+the MC21 ﬁgure, lines through the subchannels denote MC21
+subchannel subdivisions. The COBRA-IE and CTF fuel rod/channel
+model is shown on the right in Fig. 1 at an axial elevation with no
+spacer grid.
+There are 49 axial mesh in the 365.76 cm active core region,
+which is the domain of the COBRA-IE and CTF models. The axial
+mesh deﬁnition from VERA Problem #3 (Godfrey, 2014) is used in
+both MC21/COBRA-IE and VERA-CS. The lower and upper core
+plates and bottom and top nozzles are modeled in both reactor
+physics codes to ensure proper axial neutronic treatment.
+Cross section treatment for MC21 and MPACT is as follows:
+ ENDF/B-VII.1 is used for the MC21 cross section library and
+contains 55 BOC nuclides. Non-water materials have cross sections ranging from 500 K to 1600 K in 50 K increments up to
+900 K and 100 K increments thereafter. Water cross sections
+range from 500 K to 650 K at 10 K intervals.
+ MPACT employs a 47 energy group cross section library based on
+ENDF/B VII.0 data with subgroup parameters to capture selfshielding effects.
+
+3. Coupled code execution strategy
+3.1. MC21/COBRA-IE
+The procedure developed by Gill et al (Gill et al., 2014 and Gill
+et al., 2015) in which R5EXEC (formerly known as PVMEXEC) is
+used to couple MC21 and COBRA-IE is employed in this research.
+R5EXEC was created to couple and control transient codes
+(Aumiller et al., 2016), but it can also be used to couple a transient
+thermal-hydraulics subchannel code like COBRA-IE to a steadystate reactor physics code like MC21. The kinetics coupling option
+in R5EXEC is used to transfer data on common deﬁned regions via a
+well-deﬁned API at user-speciﬁed synchronization points. R5EXEC
+allows many reactor physics and thermal-hydraulics parameters to
+be passed via the API, but Problem #6 only requires region-wise
+powers to be transmitted from MC21 to COBRA-IE, and regionwise solid and liquid temperatures and liquid densities to be
+transferred from COBRA-IE to MC21. An R5EXEC session is launched
+in which a transient COBRA-IE simulation is initiated. At each userspeciﬁed synchronization point, COBRA-IE sends local densities and
+temperatures as input for MC21 material properties and cross
+section interpolation, and COBRA-IE is paused while an MC21 keigenvalue solution is performed. When the MC21 calculation is
+complete, it returns region-wise powers to COBRA-IE and R5EXEC
+continues the COBRA-IE transient simulation.
+Stability of the coupled MC21/COBRA-IE solution is achieved by
+exchanging data between the reactor physics and thermalhydraulics codes at an interval smaller than the time needed for
+transient COBRA-IE to achieve a steady-state solution. This is
+analogous to a physics-based under-relaxation scheme in which
+the change in thermal-hydraulic parameters is controlled by
+timestep size rather than by an under-relaxation factor. In this
+coupled analysis, parameters are exchanged between MC21 and
+COBRA-IE 14 times during the COBRA-IE transient, as shown in
+Table 1. The COBRA-IE transient encompassed a 55 s transient to
+ensure full ﬂow conditions were achieved (the residence time for
+water in the coolant subchannels is less than 1 s). The data exchanges occur at a higher frequency during the earlier portion of
+the transient as the thermal-hydraulic solution is developing. The
+following metrics are inspected to assess convergence of MC21/
+COBRA-IE:
+ MC21 eigenvalue trajectory,
+
+Table 1
+MC21/COBRA-IE data exchange intervals during COBRA-IE transient.
+Data exchange index
+
+COBRA-IE transient simulation time point (s)
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+
+0.01
+0.50
+2.50
+5.00
+10.00
+15.00
+20.00
+25.00
+30.00
+35.00
+40.00
+45.00
+50.00
+55.00
+
+ MC21 Shannon entropy, and
+ COBRA-IE L2 and L∞ norms of local fuel temperature and coolant
+density.
+As will be shown in the Results section, additional parameter
+exchanges between MC21 and COBRA-IE beyond the eighth exchange do not improve convergence for Problem #6.
+At each reactor physics calculation, MC21 utilizes 200 active
+generations (50 discarded generations) and 10 million neutrons per
+generation for a total of 2 billion active neutrons per MC21
+execution. These are enough neutron histories to drive local pin
+power uncertainties below 0.7% as will be demonstrated in the
+Results section.
+3.2. VERA-CS
+As described in Sieger (2015), MPACT calls CTF at every outer
+iteration, at which time MPACT passes CTF region-wise powers. The
+CTF solution is run as a transient; however, it is run until the
+thermal-hydraulics solution is considered steady before passing
+temperatures and densities back to MPACT. All data is passed between the two codes using an API that was developed in CTF for
+driving solutions from other code systems (Salko et al., 2015). Thus,
+the coupling of MPACT and CTF is a direct coupling, with MPACT
+directly calling procedures in CTF to initialize the code, execute the
+solution, pass powers to CTF, and receive temperatures and densities from CTF. The coupled iteration strategy is done using Picard
+iteration with an under-relaxation of parameters passed between
+MPACT and CTF. Convergence is achieved when MPACT satisﬁes
+eigenvalue and ﬁssion source convergence criteria. Temperature
+and density changes are monitored to determine if the subgroup
+calculation needs to be re-executed to obtain new shielding parameters for cross section generation. MPACT was executed using
+the 2D/1D technique with transport-corrected P0 2D MOC in the
+radial planes and SP3 in the axial direction.
+4. Results
+4.1. MC21/COBRA-IE convergence metrics
+Fig. 3 presents the MC21 eigenvalue trajectory and COBRA-IE
+transient progression during the 14 MC21/COBRA-IE data exchanges. The 95% conﬁdence interval is shown with each eigenvalue, and all are less than ±3.0E-5. The eigenvalue at the ﬁrst
+exchange is an outlier because MC21 is being fed temperatures and
+densities from an under-developed COBRA-IE transient solution.
+COBRA-IE transient progression described in Table 1 is shown on
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+341
+
+Fig. 3. MC21 eigenvalue convergence and COBRA-IE transient progression during MC21/COBRA-IE data exchanges.
+
+the y2-axis, indicating that data exchanges are more frequent
+during the initial stages of the developing COBRA-IE solution. Four
+data exchanges occur before the COBRA-IE transient is 10% complete at 5 s of simulated time, followed by more widely-spaced data
+exchanges as further physical under-relaxation is no longer needed
+to achieve the mutually-consistent solution between MC21 and
+COBRA-IE. Based on the MC21 eigenvalue trajectory, the reactor
+physics solution is converged by the eighth data exchange. Further
+data exchanges result in statistically-equivalent eigenvalues.
+Batch-wise eigenvalues and Shannon entropy for MC21 during
+the ﬁrst and eighth data exchanges are presented in Fig. 4. Although
+50 discarded batches are not sufﬁcient to converge the ﬁssion
+source in the ﬁrst MC21/COBRA-IE data exchange as indicated by
+Shannon entropy (also true of the second data exchange, not
+shown), all subsequent data exchanges exhibit a converged source
+prior to 50 discarded batches. This is because the previous ﬁssion
+source, which is used as the initial source guess at the next data
+exchange, approaches the converged MC21/COBRA-IE solution.
+Thus, 50 discarded batches are not sufﬁcient to converge the source
+in the ﬁrst two MC21 executions, but early data exchanges are used
+only to start the coupled analysis on the path to convergence. After
+the ﬁrst few data exchanges, the ﬁssion source is converged after 50
+discarded batches, at which time tallies can be accumulated.
+Two billion active neutron histories are sufﬁcient for this 3D
+¼-assembly model to drive all local uncertainties in ﬁssion rate to a
+target of <1%. Fig. 5 presents relative uncertainty in relative power
+density (RPD) for all 3528 mesh tally regions (72 fuel pins x 49 axial
+levels) in 0.1% resolution bins. At two billion active histories, all
+regions have a relative uncertainty (based on a 95% conﬁdence
+interval) less than 0.7%, a majority of regions have relative uncertainties between 0.1% and 0.2%, and more than 99.5% of all regions have a relative uncertainty  0.5%. The minimum relative
+uncertainty is 0.097%, and the maximum relative uncertainty is
+0.695%. All 16 regions with a relative uncertainty >0.5% occur in the
+
+bottom plane, as shown in the uncertainty distribution map on the
+right in Fig. 5. MC21 requires ~6000 wall clock seconds per
+execution (tracking and tallies) for 2.5 billion tracked neutrons
+(active plus inactive batches) using 50 nodes containing two 12core Intel Xeon E5-2680v3 2.5 GHz (Haswell) processors (1200 total
+cores). COBRA-IE execution time is a small fraction of the total
+simulation time.
+Figs. 6 and 7 present COBRA-IE convergence metrics for local
+fuel temperature and relative change in coolant density, respectively, as measured by the L2 and L∞ norms with respect to the ﬁnal
+(exchange index 14) fuel temperature and coolant density distributions. The L2 norms for both the fuel temperature and relative
+change in coolant density were normalized by the square root of
+the number of regions (3528 fuel temperature regions and 4410
+coolant density regions including guide tube water, respectively).
+Thus, the following norms are used to monitor convergence in the
+COBRA-IE solution (N ¼ 14 in Figs. 6 and 7):
+L∞ norm of fuel temperature:
+
+
+
+ n
+
+T f  T N
+f 
+
+∞
+
+for n ¼ 1; N  1
+
+(1)
+
+L2 norm of fuel temperature:
+
+
+
+ n
+
+T f  T N
+f 
+2 ﬃ
+pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+# Fuel Regions
+
+for n ¼ 1; N  1
+
+(2)
+
+L∞ norm of relative change in coolant density:
+
+ n
+
+rc  rN
+
+c
+
+ rN 
+c
+
+∞
+
+for n ¼ 1; N  1
+
+L2 norm of relative change in coolant density:
+
+(3)
+
+342
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+Fig. 4. MC21 batch-wise shannon entropy and eigenvalue convergence during initial and eighth data exchanges.
+
+Fig. 5. Distribution of MC21 relative uncertainty in relative power density (RPD) for CASL problem #6 3D ¼-Assembly, 2 billion neutrons.
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+343
+
+Fig. 6. COBRA-IE convergence metrics for fuel temperature.
+
+Fig. 7. COBRA-IE convergence metrics for coolant density.
+
+
+
+rn rN 
+ c N c
+ rc 
+2
+pﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+# Coolant Regions
+where,
+
+for n ¼ 1; N  1
+
+(4)
+
+T nf ¼ vector of local fuel temperatures for data exchange index n,
+TN
+f ¼ vector of local fuel temperatures at the ﬁnal data exchange
+N,
+rnc ¼ vector of local subchannel coolant densities for data exchange index n, and
+
+344
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+Table 2
+Calculated eigenvalue for CASL P6 ¼-Assembly.
+Code
+
+Eigenvalue (95% CI)
+
+MC21/COBRA-IE
+VERA-CS
+
+1.16424 (2.6E-05)
+1.16361
+
+rNc ¼ vector of local subchannel coolant densities at the ﬁnal
+data exchange N.
+From Figs. 6 and 7, both L2 and L∞ norms decrease as the COBRAIE transient solution develops and data is exchanged with MC21
+until data exchange eight, at which time convergence metrics do
+not improve given the chosen data exchange and MC21 neutron
+history schemes (a simulation was run with 20 data exchanges, and
+the COBRA-IE norms decreased no further). Final COBRA-IE
+convergence metrics indicate that fuel temperature is converged
+to <1 K, and the relative change in coolant density is converged to
+<0.01%.
+4.2. MC21/COBRA-IE and VERA-CS results comparison
+Table 2 compares the eigenvalue for MC21/COBRA-IE and VERACS. The difference between MC21/COBRA-IE and VERA-CS is
+63 pcm.
+Fig. 8 presents axially-integrated normalized radial ﬁssion rate
+distributions for MC21/COBRA-IE and VERA-CS. The relative 95%
+conﬁdence interval on MC21 axially-integrated normalized pin
+ﬁssion rates is between 0.018% and 0.032%, depending on pin
+location. Axially-integrated normalized pin powers agree within
+±0.2% between MC21/COBRA-IE and VERA-CS with an RMS difference of 0.10%. Slight 1/8-core asymmetries in MC21/COBRA-IE values
+are the result of Monte Carlo uncertainties.
+Comparisons of normalized ﬁssion power axial proﬁles for fuel
+
+rods traversing the diagonal symmetry line in the ¼-assembly (fuel
+rods 11, 21, 41, 61, 71 and 81 as identiﬁed in Fig. 1) are presented in
+Figs. 9 and 10. There is a slight axial bias between MC21/COBRA-IE
+and VERA-CS; MC21/COBRA-IE predicts higher power from the
+bottom through the elevation of peak power, and VERA-CS predicts
+slightly higher power in the upper third of the core. Differences
+between the different fuel rods have similar axial shapes and are
+within ±3%. The RMS difference in normalized ﬁssion rate for all
+3528 fuel rod power regions is 0.053 (ﬁssion rates are normalized
+such that the average ﬁssion rate is 1.0).
+Fig. 11 compares MC21/COBRA-IE and VERA-CS volume-averaged fuel pin temperatures at axial level 25 (the axial plane between 177.619 cm and 185.684 cm) containing the maximum fuel
+pin temperature for both code suites. MC21/COBRA-IE predicts
+higher maximum fuel temperatures by up to 3.2 C compared to
+VERA-CS at this axial elevation. The primary reason for the difference is MC21 computes consistently higher pin powers at this axial
+elevation (see Figs. 9 and 10) resulting in higher fuel pin temperatures. Axial plots of volume-averaged fuel pin temperatures
+shown in Figs. 12 and 13 for the same fuel rods identiﬁed in Figs. 9
+and 10 indicate that both code suites predict similar axial temperature distributions, including the temperature reductions at the
+spacer grid elevations. As was seen in the power proﬁle plots,
+MC21/COBRA-IE predicts higher temperature in the bottom twothirds of the core, and VERA-CS predicts higher fuel temperatures
+in the upper one-third of the core. Again, slight 1/8-core asymmetries in COBRA-IE fuel temperatures are caused by MC21 power
+asymmetries. In all 3528 fuel pin regions, MC21/COBRA-IE and
+VERA-CS volume-averaged fuel temperatures agree within þ8.8/4.3 C, with an RMS difference of 3.9 C.
+Fig. 14 compares MC21/COBRA-IE and VERA-CS exit coolant
+temperatures for all 81 coolant subchannels. MC21/COBRA-IE and
+VERA-CS exit coolant temperatures agree within þ0.8/-1.5 C.
+Figs. 15e17 present axial coolant temperature proﬁles for the subchannels along the diagonal of the ¼-assembly model (1, 11, 21, 31,
+
+Fig. 8. Axially-integrated ¼-Assembly normalized pin ﬁssion rates, MC21/COBRA-IE and VERA-CS.
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+345
+
+Fig. 9. Axial normalized pin ﬁssion rate proﬁles for fuel rods 11, 41, and 71: MC21/COBRA-IE and VERA-CS.
+
+41, 51, 61, 71, and 81 as identiﬁed in Fig. 1). Differences in subchannel coolant temperature rise are <1.0 C in the selected subchannels. For all 3969 subchannel regions in the core, coolant
+temperatures agree within þ0.8/-1.5 C (the maximum differences
+are at the core exit), with an RMS difference of 0.5 C.
+
+4.3. Guide tube heating sensitivity study
+To determine the effect of heat transfer through the guide tube
+walls to the water ﬂowing inside, MC21/COBRA-IE was executed
+with heat transfer through the guide tube walls enabled. The MC21
+
+Fig. 10. Axial normalized pin ﬁssion rate proﬁles for fuel rods 21, 61, and 81: MC21/COBRA-IE and VERA-CS.
+
+346
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+Fig. 11. Volume-averaged fuel pin temperatures at axial level 25, MC21/COBRA-IE and VERA-CS.
+
+eigenvalue of this case is 1.16431 ± 2.9E-05, a gain of 7 pcm from
+the base case without guide tube heating. Fig. 18 presents MC21/
+COBRA-IE exit coolant temperature results for the cases with and
+without guide tube heating. Exit temperatures for MC21/COBRA-IE
+in subchannels neighboring guide tubes are lower when guide tube
+heating is allowed, as expected due to heat transfer through the
+guide tube walls. Exit coolant temperatures are now 1.4e1.6 C
+cooler in subchannels neighboring guide tubes. Axial coolant
+
+temperature proﬁles for subchannels 1, 41, and guide tube 7 are
+presented in Fig. 19. When heat transfer through guide tube walls is
+enabled, the temperature rise within the guide tube water is ~17 C,
+which is approximately 50% of the temperature rise experienced in
+the subchannels.
+Guide tube heating also affects pin power distributions within
+the assembly. Fig. 20 presents axially-integrated normalized radial
+ﬁssion rate distributions for MC21/COBRA-IE for cases with and
+
+Fig. 12. Axial volume-averaged fuel pin temperature proﬁle for fuel rods 11, 41, and 71: MC21/COBRA-IE and VERA-CS.
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+347
+
+Fig. 13. Axial volume-averaged fuel pin temperature proﬁle for fuel rods 21, 61, and 81: MC21/COBRA-IE and VERA-CS.
+
+Fig. 14. Subchannel exit coolant temperature, MC21/COBRA-IE and VERA-CS.
+
+without guide tube heating. Differences in pin ﬁssion rates that are
+statistically signiﬁcant (i.e., larger than the relative uncertainty in
+each individual pin power, noting the relative 95% conﬁdence interval on MC21 axially-integrated normalized pin ﬁssion rates is
+between 0.018% and 0.032%) are denoted by color shading in
+Fig. 20. Blue shading indicates that pin powers in the case with
+guide tube heating are smaller than the case with no guide tube
+
+heating, and orange shading indicates that pin powers in the case
+with guide tube heating are larger than the case with no guide tube
+heating. Power in nearly all fuel pins adjacent to guide tubes have
+reduced power, and power shifts radially in the assembly to fuel
+pins that are further away from the guide tubes (with total assembly power kept constant). Although reactivity (7 pcm) and
+power differences (<0.1% in total pin power) are small between
+
+348
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+Fig. 15. Axial coolant temperature proﬁle for subchannels 1, 11, and 51: MC21/COBRA-IE and VERA-CS.
+
+Fig. 16. Axial coolant temperature proﬁle for subchannels 21, 41, and 71: MC21/COBRA-IE and VERA-CS.
+
+cases with and without guide tube heating, they are noticeable and
+could be important in full-core and depletion simulations. This
+suggests that guide tube heating should be enabled in future
+multiphysics PWR analyses.
+
+5. Conclusions
+A coupled MC21/COBRA-IE simulation of VERA core physics
+benchmark problem #6, 3D Hot Full Power (HFP) Assembly, was
+performed, providing the ﬁrst coupled Monte Carlo neutronics/
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+349
+
+Fig. 17. Axial coolant temperature proﬁle for subchannels 31, 61, and 81: MC21/COBRA-IE and VERA-CS.
+
+Fig. 18. Subchannel exit coolant temperature, MC21/COBRA-IE with and without guide tube heating.
+
+subchannel thermal-hydraulics solution to this problem. Convergence metrics for eigenvalue, Shannon entropy, fuel pin temperature, and subchannel ﬂuid density demonstrate that the R5EXEC
+physical under-relaxation methodology iterates steady-state MC21
+and transient COBRA-IE to convergence in a stable manner. MC21/
+COBRA-IE results were compared to VERA-CS (MPACT/CTF), and
+calculated eigenvalues agree within 63 pcm. Axially-integrated
+relative ﬁssion rates and peak fuel temperatures agree well
+
+between MC21/COBRA-IE and VERA-CS, as do axial ﬁssion rate, fuel
+temperature, and coolant temperature proﬁles. A sensitivity study
+in which guide tube heating was enabled in MC21/COBRA-IE was
+performed, and temperature rises in subchannels neighboring
+guide tubes decreased by ~1.5 C while coolant temperature in the
+guide tubes rose by ~17 C, approximately 50% of the temperature
+rise of the coolant subchannels. This resulted in a statisticallysigniﬁcant (a) increase in reactivity and (b) shift in radial pin
+
+350
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+
+Fig. 19. Axial coolant temperature proﬁle for subchannel 1, subchannel 41, and guide tube 7, MC21/COBRA-IE with and without guide tube heating.
+
+1.0373 1.0374
+1.0369 1.0370
+
+1.0356 1.0321
+1.0351 1.0320
+
+1.0116 0.9767 MC21/COBRA-IE no GT Hea ng
+1.0117 0.9769 MC21/COBRA-IE GT Hea ng
+-0.037% -0.042%
+-0.050% -0.015%
+0.004% 0.013% % diﬀ (GT Hea ng vs. no GT Hea ng)
+1.0374 1.0097 1.0098 1.0372 1.0087 1.0056 1.0261 0.9880 0.9726
+1.0370 1.0096 1.0099 1.0368 1.0086 1.0056 1.0258 0.9882 0.9728
+-0.042% -0.009% 0.011% -0.046% -0.013% 0.000% -0.025% 0.017% 0.024%
+Color Key
+1.0373 1.0096 1.0102 1.0389 1.0110 1.0086 1.0276 0.9880 0.9719
+GT Hea ng: Lower Power
+1.0371 1.0098 1.0102 1.0384 1.0110 1.0085 1.0272 0.9882 0.9722
+GT Hea ng = no GT Hea ng (w/in sta s cs)
+GT Hea ng: Higher Power
+-0.021% 0.015% 0.000% -0.045% 0.002% -0.005% -0.033% 0.022% 0.036%
+1.0372 1.0388
+1.0448 1.0451
+1.0115 0.9741
+1.0369 1.0384
+1.0443 1.0444
+1.0112 0.9744
+-0.038% -0.040%
+
+-0.047% -0.073%
+
+-0.027% 0.036%
+
+1.0355 1.0086 1.0111 1.0449 1.0319 1.0513 1.0361 0.9830 0.9648
+1.0350 1.0087 1.0110 1.0445 1.0317 1.0507 1.0357 0.9832 0.9654
+-0.045% 0.012% -0.010% -0.046% -0.024% -0.054% -0.044% 0.018%
+
+0.061%
+
+1.0322 1.0057 1.0086 1.0452 1.0513
+1.0319 1.0056 1.0087 1.0444 1.0508
+
+1.0173 0.9647 0.9553
+1.0170 0.9649 0.9557
+
+-0.029% -0.007% 0.015% -0.074% -0.046%
+
+-0.029% 0.022%
+
+0.041%
+
+1.0264 1.0278
+1.0259 1.0272
+
+1.0361 1.0172 0.9734 0.9478 0.9462
+1.0356 1.0172 0.9736 0.9485 0.9466
+
+-0.045% -0.055%
+
+-0.046% -0.003% 0.020%
+
+0.069%
+
+0.050%
+
+1.0119 0.9882 0.9880 1.0116 0.9830 0.9646 0.9481 0.9388 0.9420
+1.0118 0.9882 0.9881 1.0113 0.9832 0.9649 0.9484 0.9393 0.9430
+-0.007% 0.001%
+
+0.014% -0.029% 0.027%
+
+0.037%
+
+0.029%
+
+0.055%
+
+0.099%
+
+0.9769 0.9726 0.9720 0.9742 0.9647 0.9554 0.9462 0.9422 0.9480
+0.9771 0.9729 0.9723 0.9743 0.9653 0.9558 0.9466 0.9429 0.9488
+0.027%
+
+0.031%
+
+0.039%
+
+0.017%
+
+0.061%
+
+0.039%
+
+0.038%
+
+0.071%
+
+0.090%
+
+Fig. 20. Axially-integrated ¼-Assembly normalized pin ﬁssion rates, MC21/COBRA-IE with and without guide tube heating.
+
+power distribution within the assembly. This suggests that guide
+tube heat transfer should be included in multiphysics PWR
+analyses.
+
+Acknowledgements
+The Naval Nuclear Laboratory authors would like to thank the
+MC21, COBRA-IE, and R5EXEC development teams for their support
+during this research.
+Work for the Oak Ridge National Laboratory authors was funded
+by the DOE-sponsored “Consortium for Advanced Simulation of
+
+Light Water Reactors” (CASL) project, and ORNL research used resources of the Oak Ridge Leadership Computing Facility at the Oak
+Ridge National Laboratory, which is supported by the Ofﬁce of
+Science of the U.S. Department of Energy under Contract No. DEAC05-00OR22725.
+
+References
+Aumiller, D.L., Swartele, G.W., Meholic, M.J., Lloyd, L.J., Buschman, F.X., 2015. COBRAIE: a new sub-channel analysis code, NURETH-16eInternational Topical
+Meeting on Nuclear Reactor Thermal Hydraulics. American Nuclear Society,
+Chicago, Illinois.
+
+B.N. Aviles et al. / Progress in Nuclear Energy 101 (2017) 338e351
+Aumiller, D.L., Buschman, F., Tomlinson, E., Gill, D., 2016. Development of an integrated code system using R5EXEC and RELAP5-3D. Nucl. Technol. 193 (1),
+183e199. http://dx.doi.org/10.13182/NT15-5.
+Bennett, A., Avramova, M., Ivanov, K., 2016. Coupled MCNP/CTF code: development,
+testing, and application. Ann. Nucl. Energy 96, 1e11. http://dx.doi.org/10.1016/
+j.anucene.2016.05.008.
+CASL, 2014. Consortium for Advanced Simulation of Light water reactors (CASL).
+http://www.casl.gov.
+Collins, B.S., Godfrey, A.T., 2015. Analysis of the BEAVRS benchmark using VERA-CS,
+ANS MC2015eJoint International Conference Mathematics and Computation
+(M&C), Supercomputing in Nuclear Applications (SNA) and the Monte Carlo
+(MC) Method. American Nuclear Society, Nashville, Tennessee.
+Daeubler, M., Ivanov, A., Sjenitzer, B.L., Sanchez, V., Stieglitz, R., Macian-Juan, R.,
+2015. High-ﬁdelity coupled Monte Carlo neutron transport and thermalhydraulic simulations using Serpent 2/SUBCHANFLOW. Ann. Nucl. Energy 83,
+352e375. http://dx.doi.org/10.1016/j.anucene.2015.03.040.
+Ellis, M., Gaston, D., Forget, B., Smith, K., 2017. Preliminary coupling of the Monte
+Carlo code OpenMC and the multiphysics object-oriented simulation environment for analyzing doppler feedback in Monte Carlo simulations. Nucl. Sci. Eng.
+185 http://dx.doi.org/10.13182/NSE16-26.
+Gill, D.F., Aumiller, D.L., Griesheimer, D.P., 2014. Monte Carlo and thermal-hydraulic
+coupling via PVMEXEC, PHYSOR 2014ethe Role of Reactor Physics toward a
+Sustainable Future. American Nuclear Society, Kyoto, Japan.
+Gill, D.F., Griesheimer, D.P., Aumiller, D.L., 2015. Numerical methods in coupled
+Monte Carlo and thermal-hydraulic calculations, ANS MC2015eJoint International Conference Mathematics and Computation (M&C), Supercomputing in
+Nuclear Applications (SNA) and the Monte Carlo (MC) Method. American Nuclear Society, Nashville, Tennessee.
+Gill, D.F., Griesheimer, D.P., Aumiller, D.L., 2017. Numerical methods in coupled
+Monte Carlo and thermal-hydraulic calculations. Nucl. Sci. Eng. 185 http://
+dx.doi.org/10.13182/NSE16-3.
+Godfrey, A.T., 2014. VERA core physics benchmark progression problem
+
+351
+
+speciﬁcations. Revision 4, CASL Technical Report: CASL-U-2012-0131-004.
+Griesheimer, D.P., Gill, D.F., Nease, B.R., Sutton, T.M., Stedry, M.H., Dobreff, P.S.,
+Carpenter, D.C., Trumbull, T.H., Caro, E., Joo, H., Millman, D.L., 2015. MC21
+v.6.0ea continuous-energy Monte Carlo particle transport code with integrated
+reactor feedback capabilities. Ann. Nucl. Energy 82, 29e40. http://dx.doi.org/
+10.1016/j.anucene.2014.08.020.
+Ivanov, A., Sanchez, V., Stieglitz, R., Ivanov, K., 2015. Large-scale Monte Carlo
+neutron transport calculations with thermal-hydraulic feedback. Ann. Nucl.
+Energy 84, 204e219. http://dx.doi.org/10.1016/j.anucene.2014.12.030.
+Kochunas, B., Jabaay, D., Stimpson, S., Graham, A., Downar, T., Collins, B., Kim, K.S.,
+Wieselquist, W., Clarno, K., Gehin, J., 2015. VERA core simulator methodology
+for PWR cycle depletion. CASL Technical Report: CASL-U-2015-0155-000.
+Kotlyar, D., Shwageraus, E., 2016. Sub-step methodology for coupled Monte Carlo
+depletion and thermal hydraulic codes. Ann. Nucl. Energy 96, 61e75. http://
+dx.doi.org/10.1016/j.anucene.2016.05.032.
+Lepp€
+anen, J., Hovi, V., Ikonen, T., Kurki, J., Pusa, M., Valtavirta, V., Viitanen, T., 2015.
+The numerical multi-physics project (NUMPS) at VTT Technical Research Centre
+of Finland. Ann. Nucl. Energy 84, 55e62. http://dx.doi.org/10.1016/
+j.anucene.2014.10.014.
+MPACT Team, 2015. MPACT theory manual. Version 2.0.0, CASL Technical Report:
+CASL-U-2015-0078-000.
+Palmtag, S., 2013. Coupled single assembly solution with VERA (Problem 6). Revision 1, CASL Technical Report: CASL-U-2013-0150-001.
+Pecchia, M., Parisi, C., D'Auria, F., Mazzantini, O., 2015. Application of MCNP for
+predicting power excursion during LOCA in Atucha-2 PHWR. Ann. Nucl. Energy
+85, 271e278. http://dx.doi.org/10.1016/j.anucene.2015.05.023.
+Salko, R.K., Avramova, M.N., 2014. CTF theory manual, Reactor Dynamics and Fuel
+Management Group. Pennsylvania State University.
+Salko, R.K., Lange, T., Kucukboyaci, V., Sung, Y., Palmtag, S., Gehin, J., Avramova, M.,
+2015. Development of COBRA-TF for modeling full-core reactor operating cycles, ANFM 2015eAdvances in Nuclear Fuel Management V, Hilton Head, SC.
+Sieger, M., 2015. VERA 3.3 release notes. CASL-U-2015-0042-000.
+
+

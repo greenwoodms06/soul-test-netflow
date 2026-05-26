@@ -1,0 +1,4452 @@
+ORNL/TM-2012/195
+
+Analysis of the IFA-432, IFA-597, and
+IFA-597mox Fuel Performance
+Experiments by FRAPCON-3.4
+
+July 2012
+
+Prepared by
+Aaron M. Phillippe
+Larry Ott
+Kevin Clarno
+Jim Banfield
+
+DOCUMENT AVAILABILITY
+Reports produced after January 1, 1996, are generally available free via the U.S. Department of
+Energy (DOE) Information Bridge.
+Web site http://www.osti.gov/bridge
+Reports produced before January 1, 1996, may be purchased by members of the public from the
+following source.
+National Technical Information Service
+5285 Port Royal Road
+Springfield, VA 22161
+Telephone 703-605-6000 (1-800-553-6847)
+TDD 703-487-4639
+Fax 703-605-6900
+E-mail info@ntis.gov
+Web site http://www.ntis.gov/support/ordernowabout.htm
+Reports are available to DOE employees, DOE contractors, Energy Technology Data Exchange
+(ETDE) representatives, and International Nuclear Information System (INIS) representatives from
+the following source.
+Office of Scientific and Technical Information
+P.O. Box 62
+Oak Ridge, TN 37831
+Telephone 865-576-8401
+Fax 865-576-5728
+E-mail reports@osti.gov
+Web site http://www.osti.gov/contact.html
+
+This report was prepared as an account of work sponsored by an
+agency of the United States Government. Neither the United States
+Government nor any agency thereof, nor any of their employees,
+makes any warranty, express or implied, or assumes any legal
+liability or responsibility for the accuracy, completeness, or
+usefulness of any information, apparatus, product, or process
+disclosed, or represents that its use would not infringe privately
+owned rights. Reference herein to any specific commercial product,
+process, or service by trade name, trademark, manufacturer, or
+otherwise, does not necessarily constitute or imply its endorsement,
+recommendation, or favoring by the United States Government or
+any agency thereof. The views and opinions of authors expressed
+herein do not necessarily state or reflect those of the United States
+Government or any agency thereof.
+
+ORNL/TM-2012/195
+
+Reactor and Nuclear Systems Division
+
+ANALYSIS OF THE IFA-432, IFA-597, AND IFA-597mox FUEL
+PERFORMANCE EXPERIMENTS BY FRAPCON-3.4
+
+Aaron M. Phillippe∗
+Larry Ott
+Kevin Clarno
+Jim Banfield
+_______________
+Master’s degree student, Department of Nuclear Engineering, University of Tennessee–Knoxville
+
+∗
+
+Date Published: July 2012
+
+Prepared by
+OAK RIDGE NATIONAL LABORATORY
+P.O. Box 2008
+Oak Ridge, Tennessee 37831-6285
+managed by
+UT-BATTELLE, LLC
+for the
+U.S. DEPARTMENT OF ENERGY
+under contract DE-AC05-00OR22725
+
+CONTENTS
+Page
+LIST OF FIGURES ...................................................................................................................................... v
+LIST OF TABLES ...................................................................................................................................... vii
+ACKNOWLEDGMENTS ........................................................................................................................... ix
+ABSTRACT................................................................................................................................................. xi
+1. FRAPCON ANALYSIS ......................................................................................................................... 1
+1.1 INTRODUCTION ......................................................................................................................... 1
+1.2 BACKGROUND ........................................................................................................................... 1
+1.3 FRAPCON INPUT SPECIFICATION ......................................................................................... 2
+2. IFA-432 .................................................................................................................................................. 5
+2.1 EXPERIMENTAL BACKGROUND ........................................................................................... 5
+2.2 POWER SHAPE PROFILING ..................................................................................................... 5
+2.3 CLAD TEMPERATURE SHAPE PROFILING .......................................................................... 7
+2.4 FRAPCON CENTERLINE TEMPERATURE RESULTS........................................................... 8
+2.5 FRAPCON AXIAL CLAD ELONGATION ................................................................................ 9
+2.6 IFA-597 ....................................................................................................................................... 13
+2.6.1 Experimental Background............................................................................................... 13
+2.7 POWER SHAPE PROFILING ................................................................................................... 15
+2.8 CLAD TEMPERATURE SHAPE PROFILING ........................................................................ 19
+2.9 CENTERLINE TEMPERATURE CONSTRUCTION .............................................................. 22
+2.10 FRAPCON CENTERLINE RESULTS ...................................................................................... 23
+2.11 FRAPCON AXIAL CLAD ELONGATION .............................................................................. 25
+2.12 FRAPCON FISSION GAS RELEASE ...................................................................................... 26
+3. IFA-597mox ......................................................................................................................................... 29
+3.1 EXPERIMENTAL BACKGROUND ......................................................................................... 29
+3.2 POWER AND TEMPERATURE SHAPE PROFILING ............................................................ 29
+3.3 FRAPCON CENTERLINE TEMPERATURE RESULTS......................................................... 31
+4. CONCLUSIONS .................................................................................................................................. 35
+5. REFERENCES ..................................................................................................................................... 37
+APPENDIX A : FRAPCON INPUT PARAMETERS ............................................................................. A-1
+APPENDIX B : FRAPCON RESULTS FOR IFA-432 ............................................................................ B-1
+APPENDIX C : FRAPCON RESULTS FOR IFA-597mox ..................................................................... C-1
+
+iii
+
+LIST OF FIGURES
+Page
+Fig. 1.
+Upper and lower region power peaking factors for IFA-432 Rod 1. .......................................... 6
+Fig. 2.
+Sorted PPFs for fitting IFA-432 Rod 1 power profile. ............................................................... 7
+Fig. 3.
+Sorted temperature profile with fits. ........................................................................................... 8
+Fig. 4.
+Example fits of Legendre fit coefficients. ................................................................................ 16
+Fig. 5.
+IFA-597 Rod 8, lower region PPF fit. ...................................................................................... 17
+Fig. 6.
+IFA-597 Rod 8, middle region PPF fit. .................................................................................... 17
+Fig. 7.
+IFA-597 Rod 8, at thermocouple PPF fit. ................................................................................. 18
+Fig. 8.
+IFA-597 Rod 8, upper region PPF fit. ...................................................................................... 18
+Fig. 9.
+IFA-597 Rod 8 axial power peaking profiles. .......................................................................... 19
+Fig. 10. IFA-597 Rod 8, lower region surface temperature fit............................................................... 20
+Fig. 11. IFA-597 Rod 8, middle region surface temperature fit. ........................................................... 20
+Fig. 12. IFA-597 Rod 8, at thermocouple surface temperature fit. ........................................................ 21
+Fig. 13. IFA-597 Rod 8, upper region surface temperature fit............................................................... 21
+Fig. 14. IFA-597 Rod 8, axial surface temperature profiles. ................................................................. 22
+Fig. 15. IFA-597 Rod 8 centerline temperature as a function of LHGR and BU. ................................. 23
+Fig. 16. IFA-597 Rod 8 centerline temperature comparison with constant surface temperature........... 24
+Fig. 17. IFA-597 Rod 8 centerline temperature comparison with specified surface temperature.......... 24
+Fig. 18. IFA-597 Rod 8 elongation. ....................................................................................................... 25
+Fig. 19. IFA-597 Rod 8 elongation zeroed for Halden irradiation......................................................... 26
+Fig. 20. IFA-597 Rod 8 percent fission gas release. .............................................................................. 27
+Fig. 21. IFA-597mox Rod 1 sorted PPFs with fits................................................................................. 30
+Fig. 22. IFA-597mox sorted temperature profiles with fits. .................................................................. 31
+Fig. 23. IFA-597mox Rod 1 centerline temperature comparison (PowerOnly)..................................... 32
+Fig. 24. IFA-597mox Rod 2 centerline temperature comparison (PowerTemp). .................................. 32
+Fig. 25. IFA-597mox Rod 1 plenum pressure........................................................................................ 33
+Fig. 26. IFA-597mox Rod 2 plenum pressure........................................................................................ 34
+Fig. B.1. IFA-432 Rod 1 FRAPCON centerline temperature results. ................................................... B-1
+Fig. B.2. IFA-432 Rod 1 FRAPCON centerline temperature error. ...................................................... B-1
+Fig. B.3. IFA-432 Rod 2 FRAPCON centerline temperature results. ................................................... B-2
+Fig. B.4. IFA-432 Rod 2 FRAPCON centerline temperature error. ...................................................... B-2
+Fig. B.5. IFA-432 Rod 3 FRAPCON centerline temperature results. ................................................... B-3
+Fig. B.6. IFA-432 Rod 3 FRAPCON centerline temperature error. ...................................................... B-3
+Fig. B.7. IFA-432 Rod 5 FRAPCON centerline temperature results. ................................................... B-4
+Fig. B.8. IFA-432 Rod 5 FRAPCON centerline temperature error. ...................................................... B-4
+Fig. B.9. IFA-432 Rod 6 FRAPCON centerline temperature results. ................................................... B-5
+Fig. B.10. IFA-432 Rod 6 FRAPCON centerline temperature results..................................................... B-5
+Fig. C.1. IFA-597mox Rod 1 centerline temperature comparison using Halden
+correlation (PowerOnly). ........................................................................................................ C-1
+Fig. C.2. IFA-597mox Rod 2 centerline temperature comparison using Halden correlation
+(PowerTemp). ......................................................................................................................... C-1
+Fig. C.3. IFA-597mox Rod 1 plenum pressure comparison using Halden correlation.......................... C-2
+Fig. C.4. IFA-597mox Rod 2 plenum pressure comparison using Halden correlation.......................... C-2
+Fig. C.5. Differences between experimental and predicted centerline temperatures for IFA-597mox,
+Rods 1 and 2, given two different conductivity models. ........................................................ C-3
+
+v
+
+LIST OF TABLES
+Page
+Table 1.
+Table 2.
+
+IFA-432 experiment pellet specifications ................................................................................. 5
+Comparison of results when modeling annular and solid pellets, and specifying
+a temperature profile ................................................................................................................. 9
+Table 3.
+BU ranges for clad elongation data given in experimental database ....................................... 13
+Table 4.
+IFA-597 pellet and clad geometry specifications for Rod 8.................................................... 14
+Table 5.
+IFA-579MOX pellet and clad geometry specifications........................................................... 29
+Table A.1. FRAPCON input parameters for IFA-432 Rods 1 and 2....................................................... A-2
+Table A.2. FRAPCON input parameters for IFA-432 Rods 3 and 5....................................................... A-3
+Table A.3. FRAPCON input parameters for IFA-432 Rod 6 .................................................................. A-4
+Table A.4. FRAPCON input parameters for IFA-597 Rod 8 .................................................................. A-5
+Table A.5. FRAPCON input parameters for IFA-597mox Rods 1 and 2 ............................................... A-6
+
+vii
+
+ACKNOWLEDGMENTS
+The authors wish to acknowledge Ivan Maldonado for his support of this work. The careful reviews of
+Jeff Powers and Dean Wang are also gratefully acknowledged. This work was funded by the Nuclear
+Energy Advanced Modeling and Simulation (NEAMS) program of the US Department of Energy, Office
+of Nuclear Energy.
+
+ix
+
+ABSTRACT
+Validation of advanced nuclear fuel modeling tools requires careful comparison with reliable
+experimental benchmark data. A comparison to industry-accepted codes, that are well characterized, and
+regulatory codes is also a useful evaluation tool. In this report, an independent validation of the
+FRAPCON-3.4 fuel performance code is conducted with respect to three experimental benchmarks, IFA432, IFA-597, and IFA-597mox. FRAPCON was found to most accurately model the mox rods, to within
+2% of the experimental data, depending on the simulation parameters. The IFA-432 and IFA-597 rods
+were modeled with FRAPCON predicting centerline temperatures different, on average, by 21 percent.
+
+xi
+
+1. FRAPCON ANALYSIS
+1.1 INTRODUCTION
+This report was developed to document an independent validation of the FRAPCON fuel performance
+code for three leading experimental benchmarks as a baseline analysis for the future validation, and codeto-code comparison, of advanced nuclear fuel modeling and simulation tools. Analysis of the Halden
+irradiation experiments 1 IFA *-432, IFA-597, and IFA-597mox was conducted using FRAPCON-3.4 (here
+after referred to as FRAPCON). 2 Each experiment was chosen for a specific purpose:
+•
+•
+•
+
+IFA-432: nominal operating conditions with traditional uranium oxide (UO2) fuel and cladding
+with various gap thicknesses to measure gap heat transfer and pellet-clad interaction
+IFA-597: nominal operating conditions and power ramps with traditional fuel and cladding
+irradiated to a high burnup (BU), to measure effects of high-BU fuel
+IFA-597mox: nominal operating conditions and power ramps with mixed oxide (MOX) fuel and
+Zr-4 cladding to measure the performance of MOX fuel
+
+1.2 BACKGROUND
+FRAPCON is a nuclear fuel performance code developed for the US Nuclear Regulatory Commission by
+Pacific Northwest National Laboratory for calculating steady-state fuel behavior up to a high BU of
+62 GWd/MTU (gigawatt-days per metric tonne of initial uranium). The code uses a single-channel
+coolant enthalpy rise model, a one dimensional (1-D) finite-difference heat conduction model, and
+variable radial mesh spacing to accommodate the power peaking at the pellet edge at high BU. 3
+Analysis of the Halden irradiation experiments IFA-432, IFA-597, and IFA-597mox was conducted using
+FRAPCON. This version of FRAPCON has been validated for Boiling Water Reactors (BWRs),
+Pressurized Water Reactors (PWRs), and Heavy Water Boiling Reactors (HBWRs). The fuel types that
+have been validated with the code include UO2, MOX, urania–gadolinia (UO2 + Gd2O3), and UO2 with
+Integral Fuel Burnable Absorber (IFBA) coatings of zirconia–borate (ZrB2). The cladding types include
+Zircaloy-2, Zircaloy-4, M5©, and ZIRLO©. FRAPCON can predict axial and radial temperature
+distributions in the fuel and cladding, rod internal pressure, fission gas released from the fuel, cladding
+axial and hoop strain, and corrosion and hydriding of the cladding.3
+As a steady-state analysis code, FRAPCON is applicable to situations in which problem boundary
+conditions and source terms (power) change at a “sufficiently slow rate.” The following are the other
+major limitations of the code (acknowledged by the developers): 3
+“The current code is limited to modeling fuel consisting of UO2 pellets in zirconium alloy cladding
+with a gas gap under light and heavy water reactor conditions. Input parameters for other fuel forms
+(such as metal fuels) and other reactor coolants (such as liquid sodium) are not available, and model
+changes may be required to accommodate them. The code has been validated up to a rod-average
+burnup of 62 GWd/MTU, although the code should give reasonable predictions for burnup beyond
+this level. Also, the code is not validated beyond the fuel or cladding melting temperature. If melting
+of the fuel or the cladding occurs, the code will stop” (page 1.2).
+
+1.
+
+*
+
+Instrumented Fuel Assembly.
+
+1
+
+2.
+
+“The thermal models of the code are based on steady-state conditions and equations, and calculate
+only radial heat flow. This assumption is valid for modeling a typical fuel rod (i.e., with a large
+length-to-diameter ratio). Similarly, the gas release models are based on steady-state and slow power
+ramp data and do not reflect release rates expected for rapid power changes. Therefore, time steps
+should be no less than 0.1 day but no greater than 50 days” (page 1.2). Additionally, “changes in
+local LHGR of greater than 1.5 kW/ft per time step are not recommended” (page A.10).
+
+3.
+
+“Only small cladding deformations (<5 percent strain) are meaningfully calculated by FRAPCON-3.
+All of the thermal and mechanics modeling assumes an axisymmetric fuel rod with no axial
+constraints. These assumptions are reasonable for modeling an LWR fuel rod,” under normal
+operation, but cannot be used for rod or assembly bowing analysis (page 1.2).
+
+4.
+
+“The code’s ability to predict cladding strains resulting from pellet-cladding mechanical interaction
+has been assessed against power ramp data. FRAPCON-3 has been found to slightly over predict
+cladding strain up to a burnup of about 45 GWd/MTU. The limited high burnup data suggests that
+FRAPCON-3 may under predict the cladding strain during power ramps at high burnup (i.e.,
+>55 GWd/MTU) for hold times greater than 30 minutes” (page 1.2).
+
+Fuel pellet and cladding deformations in FRAPCON are modeled with the following assumptions:
+1.
+2.
+3.
+4.
+5.
+
+incremental theory of plasticity
+Prandtl-Reuss flow rule
+isotropic work-hardening
+thin-wall cladding
+no slippage between clad and fuel interface when fuel and clad are in
+contact
+6. bending strains and stresses are negligible
+7. axisymmetric loading and deformation of cladding
+8. thermal expansion, swelling, and densification are the only sources for
+fuel deformation
+9. no resistance to expansion of fuel
+10. no creep deformation of fuel
+11. isotropic fuel properties
+(Page 2.33) 3
+In general, when the pellets are in contact with the cladding, then the axial extension of the pellets is
+directly transferred to the clad, due to the assumption of no slippage. Otherwise, clad axial extension is
+dependent on temperature changes, creep, and irradiation-induced creep.
+1.3 FRAPCON INPUT SPECIFICATION
+The input parameters to model an experiment in FRAPCON include specifics on the rod design and
+fabrication, in-core operational characteristics, and modeling approximations. The specifics of the rod
+design and operational characteristics are unique for each experiment, but many of the inputs, such as
+modeling approximations, are identical for all simulations.
+A listing of the variables and an explanation of their values are presented as follows. Only the variables
+that were not defaults in the models of the experiments are described.
+
+2
+
+Rod and Reactor Design
+
+Dynamic Reactor Operating Conditions
+
+iplant
+pitch
+dco
+thkcld
+thkgap
+totl
+cpl
+dspg
+dspgw
+vs
+hplt
+rc
+hdish
+dishsd
+
+p2
+tw
+go
+flux
+
+reactor type index
+rod pitch (in.)
+cladding outer diameter (in.)
+clad thickness (in.)
+pellet-clad radial gap (in.)
+total active fuel length (ft.)
+cold plenum length (in.)
+plenum spring outer diameter (in.)
+spring wire diameter (in.)
+# of spring turns
+pellet height (in.)
+inner pellet radius (in.)
+depth of pellet dish (in.)
+pellet end-dish shoulder width
+pellet OR minus dish radius (in.)
+
+coolant pressure (psia)
+coolant inlet temp. (°F)
+mass flux of coolant (lb/hr-ft2)
+reactor flux
+(neutrons/m2-s-(W/g of fuel))
+im
+number of time steps
+Problem Time
+cumulative time after step
+(days)
+qmpy
+linear heat generation rate (kW/ft.)
+iq
+index for power shape
+x
+power shape axial locations (in.)
+qf
+LHGR pwr. peak profile
+jst
+pwr. shape # per time step
+ifixedtsurf
+index for axial temp. distribution
+xt
+temp. shape axial locations
+cladt
+temp profile (°F)
+jstsurftemp
+temp prof. # per time step
+Pellet Composition
+
+Modeling Approximations
+nr
+# radial bounds in pellet
+ngasr
+# rings in pellet for gas calc.
+na
+# of axial regions
+nunits
+units flag
+icor
+crud model flag
+im
+number of time steps
+nsp
+system time dep. Index
+jn
+# of axial power shapes
+jnsurftemp
+# of clad temperature shapes
+crdt
+crud accumulation rate (mils/hr)
+Cladding Fabrication
+
+enrch
+imox
+moxtype
+comp
+enrpu39
+enrpu40
+enrpu41
+enrpu42
+fotmtl
+
+roughc
+
+fgpav
+initial fill gas pressure
+idxgas
+fill gas type index
+Cladding Composition
+
+Fill Gas Composition
+
+clad surface mean
+roughness (in.)
+
+Pellet Fabrication
+den
+roughf
+rsntr
+tsint
+
+U-235 enrichment
+fuel type flag
+MOX grade flag
+wt. % of Pu in fuel
+wt. % of Pu-239 of Pu
+wt. % of Pu-240 of Pu
+wt. % of Pu-241 of Pu
+wt. % of Pu-242 of Pu
+atomic ratio of O to U
+
+as fabricated Fuel density
+(% Theoretical Density)
+pellet surface mean roughness (in.)
+expected in reactor
+density increase (kg/m3)
+pellet sintering temperature (°F)
+
+icm
+zr2vintage
+
+cladding type flag
+Zr-2 age flag
+
+There are certain limits built into FRAPCON that restrict how much information can be provided. The
+most significant limitations related to this study are for controlling the number of time steps (im ≤400)
+and the number of temperature and power distributions (≤20). The limitation on the number of axial
+regions (na ≤ 40) restricts the level of refinement possible for specification of the source-terms and
+boundary conditions (jn and insurftemp, respectively). Because the Halden reactor is a HBWR, it is
+
+3
+
+proper in FRAPCON for these particular experiments to provide the clad (oxide) surface temperature
+axially, rather than compute the axial coolant temperature profile and convective heat transfer based on
+the coolant mass flux and inlet temperature.
+
+4
+
+2. IFA-432
+2.1 EXPERIMENTAL BACKGROUND
+The Nuclear Energy Agency (NEA) database includes data for five rods from the IFA-432 experiments.
+4
+Rods 1 and 6 were in the Halden reactor from December 1975 to June 1982 and irradiated to an average
+BU of 34 GWd/MT(UO2) (gigawatt-days per metric tonne of uranium oxide). * Rods 2, 3, and 5 were in
+the reactor from December 1975 to May 1984 to an average BU of 44 GWd/MT (UO2). Online
+temperature measurements were taken via centerline thermocouples in each rod. Plenum pressure data
+was obtained via pressure transducers for the majority of the rod irradiation periods. Additionally, rod
+elongation measurements were also obtained throughout the irradiation. The NEA database did not
+contain the information for Rod 4 with the other rods, so no analysis was done for it.
+The specific data provided in the NEA database for this experiment include (throughout the irradiation)
+rod-average power, clad temperature, and linear heat generation rate (LHGR) at three locations on the
+rods, and the lower thermocouple temperature measurements. For transient analysis, the database contains
+thermocouple data for Rods 1, 3, and 5 after two reactor scrams (rapid shutdown). In addition, the
+database contains several collections of processed data, including (1) the thermocouple measurements as a
+function of BU at given values of LHGR, (2) thermocouple measurements as a function of LHGR at
+given values of BU, and clad elongation for Rods 2, 3, and 6 as a function of (3) power and (4) BU.
+The generic pellet and clad information for the experiments is given in Table 1. Specific experimental
+inputs for each rod are given in Appendix A.
+Table 1. IFA-432 experiment pellet specifications 5
+Rod
+Dimension
+
+1
+
+2
+
+3
+
+5
+
+6
+
+Pellet Density, g/cc
+
+10.42
+
+10.42
+
+10.42
+
+10.09
+
+10.42
+
+Pellet Length, mm
+
+13.00
+
+13.00
+
+13.00
+
+13.00
+
+13.00
+
+Pellet Outer Diameter, mm
+
+10.67
+
+10.52
+
+10.85
+
+10.67
+
+10.67
+
+Clad ID, mm
+
+10.9
+
+10.9
+
+10.9
+
+10.9
+
+10.9
+
+Clad OD, mm
+
+12.78
+
+12.78
+
+12.78
+
+12.78
+
+12.78
+
+Gap Diameter, mm
+Fuel Height, mm
+
+0.23
+
+0.38
+
+0.08
+
+0.23
+
+0.23
+
+577.9
+
+571.0
+
+570.2
+
+578.7
+
+576.2
+
+Note: Pellets 1, 2, and 3 were stable pellets with grain sizes between 2–70 microns. Pellet 5 was a stable
+pellet with grain sizes between 5–20 microns. Pellet 6 was an unstable pellet with a grain size of 2–10 microns.
+Unstable pellet was taken to mean that in some way, via the pellet manufacturing process, the pellet behaves in
+an atypical fashion. This behavior could be in fission gas release, swelling, etc.
+
+2.2 POWER SHAPE PROFILING
+The experimental results contain estimates of the power (in LHGR) at three axial locations (top
+thermocouple, middle, and bottom thermocouple) for each of ~250 time steps, for which thermocouple
+readings were taken. This database of power as a function of time is used to define the source terms in the
+FRAPCON simulation for all ~250 time steps. However (as noted previously), FRAPCON is limited to
+*
+
+𝑀𝑇𝑈 = 238�270 ∗ 𝑀𝑇(𝑈𝑂2 ).
+
+5
+
+specifying no more than 20 axial power shapes during a simulation. Therefore, a fit was required to group
+similar profiles together into 20 approximate shapes such that the ~250 time steps could be assigned to
+one of them. FRAPCON separates the power profile into two data arrays—one containing the average
+LHGR for a given time step and the other containing the axial power peaking factors for a given time
+step. This allows for the ability to group power profiles independent of their magnitude.
+The methodology used in this project to group the datasets into approximate shapes is described
+as follows.
+First, all time steps in which the average LHGR was zero were removed from the database. The power
+peaking factors (PPFs) were calculated at the top, middle, and bottom of the rods based on the provided
+LHGR in the databases, following Equation (1), where “i” is the axial node and ALHGR is the average
+LHGR for the rod. It was found that the middle PPF was 1.000 ± 0.004 for all five rods, thus
+approximately linear, rather than quadratic (as expected from three points).
+𝑃𝑃𝐹𝑖 =
+
+𝐿𝐻𝐺𝑅𝑖
+𝐴𝐿𝐻𝐺𝑅
+
+.
+
+(1)
+
+Figure 1 shows an example plot of the top and bottom PPFs for Rod 1. The PPFs were sorted by the
+value of the bottom PPF, and then by the top PPF. This resulted in two curves that could be given a
+visual fit, as shown in
+Fig. 2. Twenty steps were applied in combination to the top and bottom PPFs, whereby short sections of
+the curve were given a single value for the top PPF and the bottom PPF. The curve was divided based on
+its steepness, where a steeper slope meant a smaller set of points given a single value. The single value
+was assigned as the average value of the set. Once a set of 20 unique profiles was created, the data was resorted by time step, as required for input to FRAPCON.
+
+Fig. 1. Upper and lower region power peaking factors for IFA-432 Rod 1.
+
+6
+
+Fig. 2. Sorted PPFs for fitting IFA-432 Rod 1 power profile.
+
+FRAPCON requires a power profile to be defined with elevations that include each end of the rod;
+therefore, linear interpolation and extrapolation were used to obtain the end-of-rod PPFs. (The
+thermocouple locations were approximately 7 cm from the rod ends.) Because of the linearity of
+power profiles for the IFA-432 experiments, FRAPCON’s interpolation does not produce any unusual
+power shapes.
+2.3 CLAD TEMPERATURE SHAPE PROFILING
+Clad surface temperatures are also provided with the experimental database at the same point locations
+(7 cm from the ends and the middle) as the LHGRs. These values can be input into the FRAPCON model
+for thermal boundary conditions. The same limitation on the number of profiles exists for inputting the
+axial temperature profile, and the same general procedure is used to generate the 20 temperature profiles.
+However, the actual temperatures are used in the temperature profiles.
+Again, a linear temperature profile is assumed, because there is no additional information provided from
+the experiment. This allows the cladding (oxide) outer surface temperature to be extrapolated to each end
+of the fuel rod. As can be seen in Fig. 3, the temperatures at the top portion of the rod are relatively
+accurate but not as well behaved as the power profile. It should be noted that the clad surface
+temperatures have a 10°C range, from 246 to 256°C. The surface temperature data was generated with the
+use of the JENS-LOTTES Correlation.6
+
+7
+
+Fig. 3. Sorted temperature profile with fits.
+2.4 FRAPCON CENTERLINE TEMPERATURE RESULTS
+The following sections detail the outcome of the FRAPCON simulations for Rods 1, 2, 3, 5, and 6 of the
+IFA-432 experiments.
+The experimental setup contained solid UO2 pellets in the rod centers, with annular pellets at each end
+(top and bottom 7 cm) to allow for the insertion of thermocouples. However, FRAPCON limits the user to
+the specification of only one type of fuel pellet—annular or solid. Therefore, four analyses were
+performed on each rod.
+1.
+2.
+3.
+4.
+
+all solid fuel using the power profile, but a fixed (axially) outer clad surface temperature
+all annular fuel using the power profile, but a fixed (axially) outer clad surface temperature
+all solid pellet–filled rod with power and temperature profile specified
+all annular pellet–filled rod with power and temperature profile specified
+
+The results are compiled in Appendix B, which contains the centerline temperature, calculated at the
+elevation of the bottom thermocouple, for each of the 20 cases.
+Table 2 shows the root mean square (RMS) error, defined in Eq. (2), of each case with the experimental
+data. In general, the error was relatively comparable for all four cases of each experiment and the
+prediction is relatively insensitive to the specific choice of geometry and boundary condition
+approximation.
+
+8
+
+∑𝑛 (𝑥 −𝐹𝑖 )2
+
+𝑅𝑀𝑆𝐸 = � 𝑖=1 𝑛𝑖
+
+where
+
+,
+
+(2)
+
+Fi value from experiment
+xi value from FRAPCON.
+Table 2. Comparison of results when modeling annular and solid pellets, and
+specifying a temperature profile
+RMS Error
+PowerOnly
+
+PowerOnly_annular
+
+PowerAndTemp
+
+PowerAndTemp_annular
+
+Rod 1
+
+72.02
+
+65.90
+
+72.32
+
+65.12
+
+Rod 2
+
+126.15
+
+139.89
+
+125.51
+
+137.86
+
+Rod 3
+
+92.35
+
+77.99
+
+96.46
+
+75.71
+
+Rod 5
+
+121.17
+
+126.59
+
+121.02
+
+125.61
+
+Rod 6
+
+61.02
+
+78.67
+
+59.11
+
+75.69
+
+In general, FRAPCON is found to over predict the centerline temperature at the thermocouple elevation.
+This over prediction is generally within 200 K. There were two exceptions; Rod 2 had an average error
+closer to 500 K, while Rod 6 had an average error of 75 K. Rod 2 had a large initial pellet-clad gap (380
+μm), leading to the assumption that the gap conductance model is a weak link in the code. The only
+significant differences between Rods 1 and 6 are the grain size of the pellets and the stability of the
+pellets.
+2.5 FRAPCON AXIAL CLAD ELONGATION
+Rods 2, 3, and 6 had different initial pellet-clad gap distances (380, 50, and 230 μm, respectively), and the
+experimental database contains data for the axial elongation (integrated axial strain times the initial
+length) of each of these rods. This data was compiled as a function of average LHGR at certain intervals
+of BU (rather than time); thus, several interpolations were required to compare the experimental data with
+the FRAPCON results.
+For this analysis, the experimental elongation measurements at various BU intervals are mapped to the
+timescale. For each irradiation step, there is a defined average power (ALHGR) and time-step length (Δt),
+and the BU is an integral of the power over the irradiation history. Therefore, it is straightforward to back
+out the actual time from the BU, when the irradiation history is known. However, as shown in Figs. 4, 5,
+and 6, the experimental data does not cover the entire time range of the irradiation.
+The experimental and simulation elongation results are plotted as a function of LHGR for each of the four
+ranges of BU given in the database. A sixth-order polynomial fit was then performed. This can be
+observed in the plots of Fig. 7. This functionalized the elongation data for LHGR on discrete ranges of
+BU. For a given time step, both ALHGR and BU are now known. Each fit for a particular BU range was
+evaluated at the ALHGR for a value of elongation (Fig. 8). Then, a third-order Legendre fit (least-squares
+fit) was produced from the four elongation data points. This functional fit was then evaluated at the BU
+value of the time step. Because of the nature of the fitting process, the elongation was only evaluated in
+
+9
+
+Elongation (mm)
+
+1
+
+0.9
+
+90
+
+0.7
+
+40
+
+0.8
+0.6
+0.5
+
+-10
+
+0.4
+0.3
+0.2
+0.1
+
+0
+
+0
+
+200
+
+400
+
+Experimental Data Elongation (mm)
+FRAPCON Elongation (PowerTemp run)
+ALHGR
+
+600
+800
+Time (days)
+
+1000
+
+Fig. 4. Axial elongation for Rod 2 of IFA-432.
+
+10
+
+1200
+
+LHGR (kW/m)
+
+the range between the smallest BU in the bottom range and the largest BU in the top range. Therefore, the
+beginning and end of the rod histories are not evaluated for elongation.
+
+-60
+-110
+1400
+
+6
+
+50
+
+4
+
+0
+
+3
+
+-50
+
+2
+
+Experimental Data Elongation (mm)
+
+1
+0
+
+LHGR (kW/m)
+
+Elongation (mm)
+
+5
+
+FRAPCON Elongation (PowerTemp run)
+ALHGR
+0
+
+200
+
+400
+
+600
+800
+Time (days)
+
+1000
+
+1200
+
+-100
+-150
+1400
+
+Fig. 5. Axial elongation for Rod 3 of IFA-432.
+
+0.8
+
+50
+30
+
+0.6
+
+10
+
+0.5
+
+-10
+
+0.4
+0.3
+
+Experimental Data Elongation (mm)
+
+0.2
+
+FRAPCON Elongation (PowerTemp run)
+
+0.1
+
+0
+
+AHLGR
+0
+
+200
+
+400
+600
+Time (Days)
+
+800
+
+Fig. 6. Axial elongation for Rod 6 of IFA-432.
+
+11
+
+-30
+-50
+-70
+-90
+
+-110
+1000
+
+LHGR (kW/m)
+
+Elongation (mm)
+
+0.7
+
+BU = 4.6 – 5.3
+
+BU = 6.1 – 7.9
+
+BU = 14.9 – 15.9
+
+BU = 28.4 – 29.9
+
+Fig. 7. Fits for elongation vs. LHGR for given ranges of BU.
+
+Fig. 8. Fits for elongation as a function of BU given a LHGR value.
+
+12
+
+Table 3 shows the ranges of BU for which elongation data was provided.
+
+Table 3. BU ranges for clad elongation data given in
+experimental database
+BU ranges given [GWd/MT(UO2)]
+Rod 2
+Rod 3
+Rod 6
+
+1
+4.6–4.95
+0.02–0.624
+4.8–5.6
+
+2
+6.1–7.9
+4.7–5.5
+6.3–8.3
+
+3
+14.9–15.9
+10.9–11.4
+15.7–16.8
+
+4
+28.4–29.9
+14.8–16.0
+20.3–21.6
+
+Figures 4, 5, and 6 show the results of the FRAPCON analysis with the experimental data (the
+FRAPCON data is from the solid pellet cases in which both power and temperature were specified). The
+green is an overlay of the power history, which is provided to show what part thermal expansion played in
+rod elongation. The power axis has been scaled to make the overlay clearer.
+In the case of Rod 2, the as-fabricated pellet-clad gap thickness for this rod was relatively large at
+0.38 mm. The early data showed a broad spread of elongation but generally represents the thermal
+expansion of the cladding. After 800 irradiation days, the clad elongates, likely due to pellet-clad
+mechanical contact with a large pellet-clad friction factor. FRAPCON does not appear to capture the
+mechanical contact. Note that for this large initial gap problem, when the pellet-clad interaction (PCI)
+occurs, the experiment shows that there is a significant friction component that causes the swelling fuel to
+pull the clad axially.
+In the case of Rod 3, which had a relatively small as-fabricated pellet-clad gap (0.08 mm), FRAPCON
+predicts pellet-clad mechanical interaction, at the initial power ramp. This contact is predicted to exist
+throughout the irradiation period, such that the clad elongates throughout the experiment as the fuel
+pellets swell. However, the experimental data implies that, though the pellet-clad mechanical interaction
+occurs at the initial power ramp, the contact is limited in duration and the swelling of the fuel does not
+“pull” the cladding and increase the elongation.
+In the case of Rod 6, which had a moderate pellet-clad gap (0.23 mm), FRAPCON shows clad elongation
+that is fairly constant with the indication that PCI might be beginning to occur at the end of the irradiation
+cycle. The experimental data shows some initial contact and relaxation with elongation beginning to
+occurring again at around 500 irradiation days, but this might coincide with the end of the irradiation as
+seen in FRAPCON (see the introduction of this section for transfer of elongation by BU to elongation by
+time issues).
+2.6 IFA-597
+2.6.1
+
+Experimental Background
+
+The IFA-597 experiments include data for three rodlets, labeled Rods 7, 8 and 9, which were all originally
+part of a single full-length fuel rod that was irradiated for approximately 12 years in the Ringhals 1
+BWR.7 The rod was irradiated between 1980 and 1986 to a rod average BU of approximately
+32 GWd/MT(UO2). The rod was then moved to a different bundle and irradiated from 1986 to 1992 to a
+final rod average BU of approximately 59 GWd/MT(UO2). The three rodlets were taken from the center
+of the rod where the average BU was estimated to be approximately 59 GWd/MT(UO2). The pellet rims
+
+13
+
+for these rodlets were estimated to have a BU of 130 GWd/MT(UO2), which leads to the expectation of
+High-Burnup Structure (HBS) formation in the rim. Because of the irradiation of the fuel in multiple
+reactors, the Halden reactor portion of the irradiation is recorded as beginning at approximately the 66th
+time step, depending on the rod.
+The fuel pellets in the top of Rods 8 and 9 were drilled and equipped with a thermocouple and pressure
+transducer. When Rod 7 was being drilled, the bit broke, and the thermocouple insertion was abandoned.
+Instead, the rod was equipped with a clad elongation detector. Though never specifically stated in the
+documentation, it appears that the original cladding was retained, and that end caps were attached straight
+to the old clad to close off the “new” experimental rods. The original fill gas was removed for fission gas
+analysis and replaced with fresh helium fill gas.
+Rods 8 and 9 were loaded into the Halden reactor on July 8, 1995, and put through a few power ramps
+until the 29th, at which time Rod 9 failed and all the rods were removed from the reactor. In January of
+1997, Rods 7 and 8 were placed in the reactor and irradiated until May of that year. They obtained
+approximately 2 GWd/MT(UO2) of further irradiation.
+The experimental database contains the power history as a function of irradiation time for the three rods.
+This information includes BU, clad surface temperature, and LHGR at four points along the length of the
+rods. The database also contains data on temperature vs. power during ramp-ups for Rods 8 and 9, fission
+gas release (FGR) vs. BU for Rod 8, and clad elongation vs. BU for Rod 7. In addition, a post-irradiation
+examination (PIE) was conducted for Rod 8, which resulted in experimental data of the radial distribution
+of BU, porosity, and various fission products.
+Because of the nature of the data provided, and the similar irradiation histories and profiles of the rods,
+Rod 8 is the only rod where a detailed FRAPCON run was conducted. The elongation data for Rod 7 was
+used in comparison with the results for Rod 8.
+Table 4 provides the as-fabricated specifications for Rod 8, which were the same for Rods 7 and 9, except
+in fuel length, which varied by no more than 9 mm. The specific source and boundary condition inputs for
+the FRAPCON simulation of Rod 8 are given in Appendix A.
+The experimental data provided for these experiments contained many properties that were not
+compatible with a FRAPCON analysis. The most important were the number of time steps and unique
+axial power shapes, which (like IFA-432) exceeded the maximum limit set by FRAPCON. The following
+sections describe how these challenges were overcome.
+
+Table 4. IFA-597 pellet and clad
+geometry specifications for Rod 8
+Dimension
+Pellet OD, mm
+10.67
+Pellet Length, mm
+10.9
+Pellet Density, g/cc
+10.47
+Clad ID, mm
+10.65
+Clad OD, mm
+12.25
+Gap diameter, mm
+0.21
+Fuel length, mm
+415.8
+
+14
+
+2.7 POWER SHAPE PROFILING
+The initial step for reducing the number of time steps in the database was to remove any time steps with
+duration of zero, which for this experiment was only the first data point. Secondly, consecutive time steps
+were checked for differences of less than a day. It was determined, that in order to maximize the total
+number of steps to no more than 400 (the FRAPCON limit), the steps that were less than or equal to
+0.01 days would be collapsed together into a single step. This resulted in a total of 386 time steps. The
+collapsed values were found as the average of the values in a given set of collapsing time steps.
+The axial power profile was given for three equal length zones (top, middle, and bottom) and at the
+location of the thermocouple. The LHGR at each of these points was converted into a power peaking
+factor (unit-less). These factors were then weighted by the inverse of the cross-sectional area (because
+some regions included an annulus, which has less fuel), which normalized the peaking factors to the
+volumetric power generation (W/m3). The upper region, which contained the thermocouple, was weighted
+as if the entire region were composed of solid pellets, whereas the thermocouple location was weighted
+by accounting for the thermocouple hole. This was done because the length of the thermocouple hole to
+the total length of the region in which it resides was small.
+Using the volumetric power generation defined at four specific points for each of the time steps, a set of
+20 weighted power peaking factors must be developed and converted back to an un-weighted form.
+Therefore, for each time step, a third-order Legendre polynomial was fit to the four weighted power
+peaking factors. This fit followed the form shown in Eq. (3), where the Pn terms denote nth-order
+Legendre polynomial. The shape terms (a1, a2, a3) were sorted as either positive, negative, or
+approximately zero (<|0.01|), which results in 27 possible categories for the sequences of a1, a2, and a3.
+However, there were many sets (of the 27) that did not have any such power shapes, so more possible
+shapes could be defined. Therefore, the groupings of positive and negative coefficients were further
+sorted into two groups, each based on whether or not a given value was in the top or bottom half of the
+range of the parameter for a given fit sequence (large or small, positive or negative value). This results in
+a net of 108 total possible combinations for a sequence of fits. For example, each coefficient can fall into
+one of five categories (large negative, small negative, approximately zero, small positive, large positive).
+The width of the approximately zero range (<|width|) was adjusted such that the total number of
+combinations of fit parameters that resulted was equal to 20 (width = 0.01). The fits falling in specific
+categories were then averaged together, including the zeroth-order coefficient, resulting in 20 sets of
+𝑎0 , 𝑎1 , 𝑎2 , 𝑎3 .
+𝑦 = 𝑎0 + 𝑎1 𝑃1 + 𝑎2 𝑃2 + 𝑎3 𝑃3 .
+
+(3)
+
+Figure 9 shows examples for the averaging of two sets of coefficients. The left image shows an example
+where the profiles of six time steps were grouped together. The bottom image shows an example where
+only two profiles fit into the sorting categories. In both cases, the line denotes the average value that was
+used for each a1, a2, a3.
+Using the average fit coefficients and the corresponding Legendre polynomials, a function of the axial
+power peaking factors is constructed. This function was evaluated at 18 axial points, including both ends
+of the rod. FRAPCON does a linear interpolation between the given values for the power, but this is a
+minor consideration because of the quantity of data points used in the input deck.
+Figures 5, 6, 7, 8, and 9 show the fits of the axial power peaking at the locations where data was given in
+the database. Also shown are the power profiles generated with the fits.
+
+15
+
+Fig. 4. Example fits of Legendre fit coefficients.
+
+16
+
+1.1
+
+PPF
+
+1.05
+1
+0.95
+
+lower PPF
+
+lower PPF fit
+
+0.9
+0.85
+0.8
+
+0
+
+50
+
+100
+
+150
+
+200
+250
+Time Step
+
+300
+
+350
+
+400
+
+Fig. 5. IFA-597 Rod 8, lower region PPF fit.
+
+1.1
+1.05
+
+PPF
+
+1
+0.95
+
+middle PPF
+
+middle PPF fit
+
+0.9
+0.85
+0.8
+
+0
+
+50
+
+100
+
+150
+
+200
+250
+Time Step
+
+300
+
+350
+
+Fig. 6. IFA-597 Rod 8, middle region PPF fit.
+
+17
+
+400
+
+1.1
+1.05
+
+PPF
+
+1
+0.95
+
+TC PPF
+
+TC PPF fit
+
+0.9
+0.85
+0.8
+
+0
+
+50
+
+100
+
+150
+
+200
+250
+Time Step
+
+300
+
+350
+
+400
+
+Fig. 7. IFA-597 Rod 8, at thermocouple PPF fit.
+
+1.1
+
+PPF
+
+1.05
+1
+0.95
+
+upper PPF
+
+upper PPF fit
+
+0.9
+0.85
+0.8
+
+0
+
+50
+
+100
+
+150
+
+200
+250
+Time Step
+
+300
+
+350
+
+Fig. 8. IFA-597 Rod 8, upper region PPF fit.
+
+18
+
+400
+
+1.1
+
+1
+2
+
+1.05
+
+3
+4
+5
+
+PPF
+
+1
+
+6
+7
+
+0.95
+
+8
+9
+
+0.9
+
+10
+11
+
+0.85
+
+12
+13
+
+0.8
+0.75
+
+14
+0
+
+5
+
+10
+
+15
+
+20
+25
+30
+Axial Location (cm)
+
+35
+
+40
+
+45
+
+15
+16
+17
+
+Fig. 9. IFA-597 Rod 8 axial power peaking profiles.
+
+2.8 CLAD TEMPERATURE SHAPE PROFILING
+The axial clad temperature profile was found in a similar manner as the power profile. Third-order
+Legendre polynomials were fit to the data for each time step and then sorted without regard to the a0 term.
+In the case of the temperature inputs, the magnitude of the temperature is not separate from the shape of
+the temperature profile. However, the temperature was found to be nearly uniform along the length of the
+rod. The variations in temperatures ended up being averaged out for a majority of the rod position, with
+some of the fluctuation being maintained.
+Figures 10, 11, 12, 13, and 14 show the fits of the clad temperature at the four points given in the
+database, as well as the temperature profiles generated with the fits.
+
+19
+
+320
+Temperature (deg. C)
+
+310
+300
+290
+280
+270
+
+lower clad temperature
+
+260
+
+lower clad temperature fit
+
+250
+240
+230
+220
+
+0
+
+50
+
+100
+
+150
+
+200
+Time Step
+
+250
+
+300
+
+350
+
+400
+
+Fig. 10. IFA-597 Rod 8, lower region surface temperature fit.
+
+320
+
+Temperature (deg. C)
+
+310
+300
+290
+280
+270
+
+middle clad temperature
+
+middle clad temperature fit
+
+260
+250
+240
+230
+220
+
+0
+
+50
+
+100
+
+150
+
+200
+Time Step
+
+250
+
+300
+
+Fig. 11. IFA-597 Rod 8, middle region surface temperature fit.
+
+20
+
+350
+
+400
+
+320
+
+Temperature (deg. C)
+
+310
+300
+290
+280
+
+T/C clad temperature
+
+270
+
+T/C clad temperature fit
+
+260
+250
+240
+230
+220
+
+0
+
+50
+
+100
+
+150
+
+200
+Time Step
+
+250
+
+300
+
+350
+
+400
+
+Fig. 12. IFA-597 Rod 8, at thermocouple surface temperature fit.
+
+320
+Temperature (deg. C)
+
+310
+300
+290
+280
+
+upper clad temperature
+
+270
+
+upper clad temperature fit
+
+260
+250
+240
+230
+220
+
+0
+
+50
+
+100
+
+150
+
+200
+Time Step
+
+250
+
+300
+
+Fig. 13. IFA-597 Rod 8, upper region surface temperature fit.
+
+21
+
+350
+
+400
+
+300
+
+Temperature (deg. C)
+
+290
+280
+270
+260
+250
+240
+
+0
+
+5
+
+10
+
+15
+
+20
+25
+30
+Axial Location (cm)
+
+35
+
+40
+
+45
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+
+Fig. 14. IFA-597 Rod 8, axial surface temperature profiles.
+
+2.9 CENTERLINE TEMPERATURE CONSTRUCTION
+Unfortunately, although the experimental database provides a large amount of irradiation data, it neglects
+to give the temperature reading of the thermocouple at each time step. Therefore, the centerline
+temperature data has to be constructed from the tables giving centerline temperature as a function of
+LHGR and as a function of BU (Figure 15) via a similar to the elongation data for IFA-432.
+Using the collapsed time steps, the BU of Rod 8 was calculated with the following Equation (4). The first
+66 time steps in the database give information for the Ringhals portion of the irradiation. It was stated that
+the rod average BU before the Halden irradiation phase of the experiment was ~59 GWd/MT(UO2).
+Therefore, a scaling factor of 1.011 was applied to Eq. (2) to make the BU ~59 at time step 66. It should
+be noted that BU is provided at each time step, but with little detail. By calculating it, more information
+becomes available for the final fit.
+Two data files provide centerline temperature as a function LHGR at the thermocouple at the beginning
+and end of the experiment. This corresponds with BUs of approximately 59 and 61.67 GWd/MT(UO2),
+respectively. The data was highly linear in nature, with R2 values greater than 99% when given a fit.
+
+22
+
+𝐵𝑈𝑖 =
+
+where
+BUi
+Δtstep
+ALHGR
+L
+Mf
+δ
+
+𝛥𝑡𝑠𝑡𝑒𝑝 ∗𝐴𝐿𝐻𝐺𝑅∗𝐿
+𝑀𝑓
+
+∗𝛿,
+
+(4)
+
+is the BU for a particular irradiation step,
+is the duration of the irradiation period,
+is the average linear heat generation rate,
+is the length of the rod,
+is the mass of the fuel in the rod, and
+is an adjustment factor (1.011) used to adjust the BU such that the BU at the
+beginning of irradiation in the Halden reactor was ~59 GWd/MT(UO2).
+
+Fuel Centerline Temperature as a function of LHGR
+900
+
+Fuel Centerline Temperature (°C)
+
+800
+
+700
+
+600
+
+500
+
+400
+Low BU
+High BU
+Linear Fit: Low BU
+Linear Fit: High BU
+
+300
+
+200
+
+0
+
+2
+
+4
+
+6
+
+8
+10
+12
+LHRA (kW/m)
+
+14
+
+16
+
+18
+
+20
+
+Fig. 15. IFA-597 Rod 8 centerline temperature as a function of LHGR and BU.
+
+Given the ALHGR at a time step, the centerline temperature was calculated as if at the beginning of the
+experiment and at the end. A linear interpolation is then conducted based on the actual BU at the given
+time step.
+2.10 FRAPCON CENTERLINE RESULTS
+The data of interest from this experiment is for the time steps after 3000 days of irradiation. The
+experiment put the high BU fuel through multiple power ramps with little to no irradiation occurring
+between those ramp tests. This resulted in an experiment which may not qualify as steady-state “enough”
+for proper FRAPCON analysis.
+Figures 16. and 17 show the irradiation period for Rod 8 between 3000 days and the end of the
+experiment. When FRAPCON is given only the axial power profile, it seems to over predict the centerline
+temperature at the ends of the power ramps. When FRAPCON is also given the clad axial temperature
+profile, it appears to under-predict the centerline temperature at the beginning of the power ramps.
+
+23
+
+It should be reiterated, however, that the “experimental data” (i.e., the centerline temperature) was
+reconstructed by creating curve fits from data that was compiled from the irradiation histories. Therefore,
+an estimate of how exact FRAPCON came in replicating the experiment is indeterminable.
+
+1600
+
+Temp (deg. C)
+
+1400
+1200
+1000
+
+Experimental Upper TC
+
+800
+600
+
+FRAPCON (PowerOnly) CL
+Prediction
+
+400
+200
+
+0
+3100
+
+3150
+
+Time (days)
+
+3200
+
+3250
+
+Fig. 16. IFA-597 Rod 8 centerline temperature comparison with constant surface temperature.
+
+1200
+
+Temp (deg. C)
+
+1000
+
+800
+
+Experimental Upper TC
+
+600
+
+FRAPCON (PowerTemp) CL
+Prediction
+
+400
+200
+
+0
+3100
+
+3150
+
+Time (days)
+
+3200
+
+3250
+
+Fig. 17. IFA-597 Rod 8 centerline temperature comparison with specified surface temperature.
+
+24
+
+2.11 FRAPCON AXIAL CLAD ELONGATION
+Rod 7 was equipped with a clad elongation measurement device. The comparable irradiation histories of
+Rods 7 and 8 result in the ability to attribute the strain in Rod 7 as an approximate strain for Rod 8. The
+difference in the initial length of 8.5 mm between the two rods is not significant in the comparison of the
+elongation. Since the elongation data was given as a function of BU, it was correlated to each time step by
+that step’s BU. This data, therefore, does not account for temperature effects on elongation. Figure 18
+shows the FRAPCON elongation results for the entire irradiation history.
+
+5
+
+4.5
+
+Elongation (mm)
+
+4
+
+Experimental Data Elongation (mm)
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+
+3.5
+
+3
+
+2.5
+
+2
+
+1.5
+
+1
+
+0.5
+
+0
+
+0
+
+500
+
+1000
+
+1500
+2000
+Time (days)
+
+2500
+
+3000
+
+3500
+
+Fig. 18. IFA-597 Rod 8 elongation.
+
+The elongation data for the experiment starts when the rods were under irradiation in the Halden reactor.
+Therefore, the zero point for the elongation measurements probably included the permanent elongation
+from the original 12 years of irradiation.
+If the FRAPCON data is zeroed out using the largest elongation predicted during the original irradiation,
+then the following, shown in Fig. 19, results. The FRAPCON run in which the power and temperature
+distributions were specified seems to follow the general shape of the experimental data. Again, because of
+the large uncertainty in correlating the data, a detailed numerical comparison would yield unreliable
+results.
+
+25
+
+Elongation (mm)
+
+1
+0.5
+0
+-0.5
+-1
+-1.5
+3050
+
+3100
+
+3150
+Time (days)
+
+Experimental Data Elongation (mm)
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+3200
+
+3250
+
+Fig. 19. IFA-597 Rod 8 elongation zeroed for Halden irradiation.
+
+2.12 FRAPCON FISSION GAS RELEASE
+Fission gas release was also tabulated as a function of BU for the experiment. As with the elongation data,
+the FGR data was correlated to a time step based on the BU at that time step. Because of this, no data is
+available preceding day ~3130. As can be seen in Fig. 20, both FRAPCON runs (with power specified
+only and power and temperature both specified) over predict the measured FGR, which is common with
+FRAPCON. The jumps in FGR at approximately days 3140 and 3150 are similar to the experiment in
+percent relative increase.
+
+26
+
+30
+
+% FGR
+
+25
+20
+
+Experimental Data FGR (%)
+
+15
+
+FRAPCON RUN PowerTemp FGR (%)
+FRAPCON RUN PowerOnly FGR (%)
+
+10
+5
+0
+3100
+
+3120
+
+3140
+
+3160
+
+3180
+Time (days)
+
+3200
+
+3220
+
+Fig. 20. IFA-597 Rod 8 percent fission gas release.
+
+27
+
+3240
+
+3. IFA-597MOX
+3.1 EXPERIMENTAL BACKGROUND
+The purpose of the IFA-597mox experiments was to observe the fission gas release and thermal behavior
+of mixed oxide (MOX) fuel.8 Included in this experiment was the exploration of the potential differences
+in behavior as affected by the presence of an annulus in the pellets. Therefore, the database contains data
+for two rods, which were equipped with a thermocouple and pressure bellows transducer. The specific
+information provided included clad temperatures at four axial locations, the centerline temperature at the
+thermocouple, BU, and rod internal pressure, all as a function of irradiation time.
+Rod 1 consisted of solid pellets with several annular pellets at the top of the rod providing space for the
+thermocouple. Rod 2 consisted of all annular pellets. The rods were irradiated in spurts from July 1997 to
+January 2002. The rods were run at a low enough power rating to preclude FGR by placing UO2 rods
+around them. At about 10 GWd/MT (MOX), the power rating was increased for the FGR studies. After an
+additional power uprating at about 22–27 GWd/MT (MOX), additional neighboring UO2 rods were added
+in order to reduce the specific power of the MOX rods.8
+Table 5 provides the as-fabricated information on both rods in the database.
+
+Table 5. IFA-579MOX pellet and
+clad geometry specifications8
+Dimension
+Fuel rod length, mm
+Length of drilled section, mm
+Pellet inner radius, mm
+Pellet outer radius, mm
+Pellet length, mm
+Dishing depth, mm
+Land width, mm
+Chamfer height, mm
+Chamfer width, mm
+Cladding inner radius, mm
+Cladding outer radius, mm
+
+Rod 1
+Rod 2
+224
+220
+~ 43
+220
+0.9/0.0
+0.9
+4.025
+10.50
+0.26
+5.30
+0.15
+0.30
+4.11
+4.75
+
+3.2 POWER AND TEMPERATURE SHAPE PROFILING
+The axial power shape for both rods was relatively flat, with a drop in the upper portion. Therefore, a
+visual fit was applied in the same manner as described for the IFA-432 data. The axial positions given
+were at the end points of the rods, at the thermocouple, and at the midpoint of each rod.
+The axial temperature profile was also relatively constant. This allowed for an easy visual fit following
+the same procedure as used for the IFA-432 rods. The following two plots (Figs. 21 and 22) show the
+power and temperature profiles for Rod 1 sorted and with their fits.
+
+29
+
+1.02
+1.01
+1.00
+
+lower PPF
+
+PPF
+
+0.99
+
+middle PPF
+
+0.98
+
+upper PPF
+TC PPF
+
+0.97
+
+fit low
+
+0.96
+
+fit mid
+fit up
+
+0.95
+
+fit TC
+
+0.94
+0.93
+
+0
+
+50
+
+100
+Index for PPF
+
+150
+
+Fig. 21. IFA-597mox Rod 1 sorted PPFs with fits.
+
+30
+
+256
+
+Clad Temperature (deg. C)
+
+255
+254
+
+lower
+
+253
+
+middle
+upper
+
+252
+
+T/C
+
+fit low
+
+251
+
+fit mid
+fit up
+
+250
+
+fit TC
+
+249
+248
+
+0
+
+50
+100
+Index for Temperature Profile
+
+150
+
+Fig. 22. IFA-597mox sorted temperature profiles with fits.
+
+3.3 FRAPCON CENTERLINE TEMPERATURE RESULTS
+For the FRAPCON input, Rod 2 was modeled as a fully annular rod. Rod 1 was modeled as entirely solid,
+because FRAPCON does not support specifying mixed pellet types. The centerline results are presented
+below.
+For Rod 1, the best prediction of the centerline temperature occurs when only the axial power distribution
+is supplied to FRAPCON. Supplying the temperature distribution results in about a 20 degree increase in
+predicted temperature (Fig. 23).
+For Rod 2, the best prediction for the centerline temperature is found when both axial power and
+temperature profiles are specified. Again, there is about a 20 degree difference in the results when axial
+temperature is not specified (Fig. 24).
+Of particular interest is the closeness to which the FRAPCON data matches the experimental data. For
+MOX fuels, FRAPCON uses one of two models for thermal conductivity. The first is a modified version
+of an expression developed by the Nuclear Fuels Industries for UO2 fuels. Some fitting terms are used to
+adjust the correlation for MOX fuel.3 The origin of the fitting terms is not specified.
+The second model for the MOX thermal conductivity that can be used is one that was derived directly
+from these experiments and, therefore, is not applicable for validation.
+
+31
+
+1440
+
+Temp (deg. C)
+
+1240
+1040
+
+840
+640
+440
+240
+
+0
+
+100
+
+200
+
+300
+400
+Time (days)
+
+500
+
+Experimental Data
+FRAPCON Evaluation
+600
+
+700
+
+Fig. 23. IFA-597mox Rod 1 centerline temperature comparison (PowerOnly).
+
+1400
+
+Temp (deg. C)
+
+1200
+1000
+
+800
+600
+400
+200
+
+0
+
+0
+
+100
+
+200
+
+300
+400
+Time (days)
+
+500
+
+Experimental Data
+FRAPCON Evaluation
+600
+
+Fig. 24. IFA-597mox Rod 2 centerline temperature comparison (PowerTemp).
+
+32
+
+700
+
+Figures 25 and 26 show predicted rod internal pressure compared to the measured data.
+The data follows the same trend as shown from the centerline temperature predictions. For the solid rod,
+the FRAPCON prediction where only the axial power distribution was supplied better follows the
+experimental data, while the reverse case is true for the hollow rod.
+A comparison of these results with the case in which the Halden correlation for MOX thermal
+conductivity was used can be viewed in Appendix C.
+
+450
+
+400
+
+pressure (psi)
+
+350
+300
+250
+200
+150
+100
+
+50
+
+0
+
+0
+
+100
+
+200
+
+300
+400
+Time (days)
+
+Experimental Data
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+500
+
+Fig. 25. IFA-597mox Rod 1 plenum pressure.
+
+33
+
+600
+
+700
+
+400
+
+pressure (psi)
+
+350
+300
+250
+200
+150
+100
+
+50
+
+0
+
+0
+
+100
+
+200
+
+300
+400
+Time (days)
+
+Experimental Data
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+500
+
+Fig. 26. IFA-597mox Rod 2 plenum pressure.
+
+34
+
+600
+
+700
+
+4. CONCLUSIONS
+This report shows that the IFA-432, 597, and 597mox experimental datasets provide a well-rounded set of
+information with regards to nuclear fuel performance code validation. The experiments provide for
+centerline temperature, clad temperature, clad axial elongation, radial BU, fission gas release, and internal
+rod pressure. This data can be reproduced using FRAPCON with various degrees of accuracy depending
+on the experiment.
+For the five rods of the IFA-432 database, FRAPCON predicts centerline temperatures that differ from
+the experimental values on average by, 13, 43, 15, and 6 percent, respectively, when simulated as solid
+with only the power specified. Specifying clad outer temperatures increase the average percent difference
+by approximately 1 percent. The annular pellet simulations resulted in a decrease in the percent
+difference for the rods, from anywhere between 1.4 percent for rod 5 to 10.2 percent for rod 3.
+When rod 8 of the IFA-597 database was modeled with only the power specified, the average percent
+difference between the predicted centerline temperature and the experimental data was about 21 percent.
+When modeled with the clad temperature also specified, the average percent difference became -17
+percent.
+FRAPCON best predicted the mox rods with average percent differences of 1.8 and -5 percent for rods 1
+and 2, respectively. With clad temperature also specified, the average percent difference was 4.2 and -1.4
+percent.
+There are some modeling and validation issues with some of the data provided in the NEA databases. The
+IFA-597 experiment is particularly difficult to model due to the 12-year irradiation time of the rods before
+the Halden experimental irradiation. Additionally, the data varies strongly with time, violating the steadystate assumption of FRAPCON for some time steps. The elongation data for the IFA-432 experiments is
+not provided in a format ideal for a step-by -step comparison. Therefore, only a qualitative analysis of
+elongation behavior can be made between the experimental data and modeling codes.
+One of the goals of the analyses performed is to provide additional information not available in the
+experimental databases, for the purposes of validating advanced fuel performance codes currently under
+development, as well as to provide a reasonable window for which results should be obtained with these
+codes.
+
+35
+
+5. REFERENCES
+1.
+
+2.
+
+3.
+
+4.
+
+5.
+7.
+8.
+
+The Public Domain Database on Nuclear Fuel Performance Experiments for the Purpose of Code
+Development and Validation (September 7, 2009), retrieved December 9, 2011 from OECD-NEA:
+http://www.oecd-nea.org/science/fuel/ifpelst.html.
+Nuclear Energy Agency – Organization for Economic Co-Operation and Development (2009),
+Nuclear Fuel Behavior in Loss-of-coolant Accident (LOCA) Conditions, retrieved December 9,
+2011, from OECD-NEA: www.oecd-nea.org/nsd/reports/2009/nea6846_LOCA.pdf.
+K. J. Geelhood, W. G. Luscher, and C. E. Beyer, FRAPCON-3.4: A Computer Code for the
+Calculation of Steady-State Thermal-Mechanical Behavior of Oxide Fuel Rods for High Burnup,
+Pacific Northwest National Laboratory, Richland (2010).
+F. Owre, Introduction to the Halden Reactor Project. Retrieved June 21, 2012, from US NRC,
+http://www.nrc.gov/public-involve/conference-symposia/ric/past/2009/slides/presentations/thu-8301000-ongoing-research-oecd-halden/presentation-format/owre-slides-01.pdf (March 10–12, 2009).
+J. A. Turnbull, Database for Fuel Performance Modeling, OECD-NEA (1995).
+J. A. Turnbull, Summary for Halden IFA-597, OECD-NEA (2002).
+H. Koike, The MOX Fuel Behaviour Test IFA-597.4/.5/.6/.7; Summary of In-Pile Fuel Temperature
+and Gas Release Data. OECD Halden Reactor Project (2003).
+
+37
+
+APPENDIX A: FRAPCON INPUT PARAMETERS
+Appendix A contains the values assigned to the input variables for the FRAPCON cases.
+
+A-1
+
+IFA-432
+Table A.1. FRAPCON input parameters for IFA-432 Rods 1 and 2
+IFA-432 Rod 1
+
+IFA-432 Rod 2
+
+Variable
+
+Value
+
+Units
+
+Variable
+
+Value
+
+Units
+
+dco
+
+0.5031
+
+inches
+
+dco
+
+0.5031
+
+inches
+
+thkcld
+
+0.0370
+
+inches
+
+thkcld
+
+0.0370
+
+inches
+
+thkgap
+
+0.0045
+
+inches
+
+thkgap
+
+0.0075
+
+inches
+
+totl
+
+1.8960
+
+feet
+
+totl
+
+1.8734
+
+feet
+
+cpl
+
+2.0000
+
+inches
+
+cpl
+
+2.0000
+
+inches
+
+dspg
+
+0.3500
+
+inches
+
+dspg
+
+0.3500
+
+inches
+
+dspgw
+
+0.0300
+
+inches
+
+dspgw
+
+0.0300
+
+inches
+
+vs
+
+5.0000
+
+-
+
+vs
+
+5.0000
+
+-
+
+hplt
+
+0.5118
+
+inches
+
+hplt
+
+0.5118
+
+inches
+
+rc
+
+0.0345
+
+inches
+
+rc
+
+0.0345
+
+inches
+
+enrch
+
+10.0
+
+% u235 of U
+
+enrch
+
+10.0
+
+% u235 of U
+
+den
+
+95.0730
+
+% TD
+
+den
+
+95.0730
+
+% TD
+
+roughf
+
+8.50E-05
+
+inches
+
+roughf
+
+8.50E-05
+
+inches
+
+rsntr
+
+75
+
+kg/m^3
+
+rsntr
+
+75
+
+kg/m^3
+
+tsint
+
+3092
+
+F
+
+tsint
+
+3092
+
+F
+
+icm
+
+2
+
+-
+
+icm
+
+2
+
+-
+
+zr2vintage
+
+0
+
+-
+
+zr2vinage
+
+0
+
+-
+
+roughc
+
+2.50E-05
+
+inches
+
+roughc
+
+2.50E-05
+
+inches
+
+fgpav
+
+14.7
+
+psi
+
+fgpav
+
+14.7
+
+psi
+
+idxgas
+
+1
+
+-
+
+idxgas
+
+1
+
+-
+
+iplant
+
+-4
+
+-
+
+iplant
+
+-4
+
+-
+
+nsp
+
+0
+
+-
+
+nsp
+
+0
+
+-
+
+p2(IT)
+
+500
+
+psi
+
+p2(IT)
+
+500
+
+psi
+
+tw(IT)
+
+464
+
+F
+
+tw(IT)
+
+464
+
+F
+
+go(IT)
+
+0
+
+lb/hr-ft^2
+
+go(IT)
+
+0
+
+lb/hr-ft^2
+
+pitch
+
+0.56
+
+inches
+
+pitch
+
+0.56
+
+inches
+
+icor
+
+2
+
+-
+
+icor
+
+0
+
+-
+
+crdt
+
+0
+
+mils
+
+crdt
+
+0
+
+mils
+
+mils/hr
+
+mils/hr
+
+crdtr
+
+0
+
+flux(J)
+
+5.00E+15
+
+crdtr
+
+0
+
+flux(J)
+
+5.00E+15
+
+im
+
+256
+
+-
+
+im
+
+319
+
+-
+
+nr
+
+25
+
+-
+
+nr
+
+25
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasmod
+
+2
+
+-
+
+ngasmod
+
+2
+
+-
+
+na
+
+18
+
+-
+
+na
+
+18
+
+-
+
+nunits
+
+1
+
+-
+
+nunits
+
+1
+
+-
+
+A-2
+
+Table A.2. FRAPCON input parameters for IFA-432 Rods 3 and 5
+IFA-432 Rod 3
+
+IFA-432 Rod 5
+
+Variable
+
+Value
+
+Units
+
+Variable
+
+Value
+
+Units
+
+dco
+
+0.5031
+
+inches
+
+dco
+
+0.5031
+
+inches
+
+thkcld
+
+0.0370
+
+inches
+
+thkcld
+
+0.0370
+
+inches
+
+thkgap
+
+0.0016
+
+inches
+
+thkgap
+
+0.0045
+
+inches
+
+totl
+
+1.8707
+
+feet
+
+totl
+
+1.8986
+
+feet
+
+cpl
+
+2.0000
+
+inches
+
+cpl
+
+2.0000
+
+inches
+
+dspg
+
+0.3500
+
+inches
+
+dspg
+
+0.3500
+
+inches
+
+dspgw
+
+0.0300
+
+inches
+
+dspgw
+
+0.0300
+
+inches
+
+vs
+
+5.0000
+
+-
+
+vs
+
+5.0000
+
+-
+
+hplt
+
+0.5118
+
+inches
+
+hplt
+
+0.5118
+
+inches
+
+rc
+
+0.0345
+
+inches
+
+rc
+
+0.0345
+
+inches
+
+dishsd
+
+0.2136
+
+inches
+
+dishsd
+
+0.2100
+
+inches
+
+enrch
+
+10.0
+
+% u235 of U
+
+enrch
+
+10.0
+
+% u235 of U
+
+den
+
+95.0730
+
+% TD
+
+den
+
+92.0620
+
+% TD
+
+roughf
+
+8.50E-05
+
+inches
+
+roughf
+
+8.50E-05
+
+inches
+
+rsntr
+
+75
+
+kg/m^3
+
+rsntr
+
+75
+
+kg/m^3
+
+tsint
+
+3092
+
+F
+
+tsint
+
+3092
+
+F
+
+icm
+
+2
+
+-
+
+icm
+
+2
+
+-
+
+zr2vinage
+
+0
+
+-
+
+zr2vinage
+
+0
+
+-
+
+roughc
+
+2.50E-05
+
+inches
+
+roughc
+
+2.50E-05
+
+inches
+
+fgpav
+
+14.7
+
+psi
+
+fgpav
+
+14.7
+
+psi
+
+idxgas
+
+1
+
+-
+
+idxgas
+
+1
+
+-
+
+iplant
+
+-4
+
+-
+
+iplant
+
+-4
+
+-
+
+nsp
+
+0
+
+-
+
+nsp
+
+0
+
+-
+
+p2(IT)
+
+500
+
+psi
+
+p2(IT)
+
+500
+
+psi
+
+tw(IT)
+
+464
+
+F
+
+tw(IT)
+
+464
+
+F
+
+go(IT)
+
+0
+
+lb/hr-ft^2
+
+go(IT)
+
+0
+
+lb/hr-ft^2
+
+pitch
+
+0.56
+
+inches
+
+pitch
+
+0.56
+
+inches
+
+icor
+
+0
+
+-
+
+icor
+
+0
+
+-
+
+crdt
+
+0
+
+mils
+
+crdt
+
+0
+
+mils
+
+crdtr
+
+0
+
+mils/hr
+
+crdtr
+
+0
+
+mils/hr
+
+flux(J)
+
+5.00E+15
+
+flux(J)
+
+5.00E+15
+
+im
+
+349
+
+-
+
+im
+
+334
+
+nr
+
+25
+
+-
+
+nr
+
+25
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasmod
+
+2
+
+-
+
+ngasmod
+
+2
+
+-
+
+na
+
+18
+
+-
+
+na
+
+18
+
+-
+
+nunits
+
+1
+
+-
+
+nunits
+
+1
+
+-
+
+A-3
+
+Table A.3. FRAPCON input parameters for IFA-432 Rod 6
+IFA-432 Rod 6
+Variable
+
+Value
+
+Units
+
+dco
+
+0.5031
+
+inches
+
+thkcld
+
+0.0370
+
+inches
+
+thkgap
+
+0.0045
+
+inches
+
+totl
+
+1.8904
+
+feet
+
+cpl
+
+2.0000
+
+inches
+
+dspg
+
+0.3500
+
+inches
+
+dspgw
+
+0.0300
+
+inches
+
+vs
+
+5.0000
+
+-
+
+hplt
+
+0.5118
+
+inches
+
+rc
+
+0.0345
+
+inches
+
+dishsd
+
+0.2100
+
+inches
+
+enrch
+
+10.0000
+
+% u235 of U
+
+den
+
+95.0730
+
+% TD
+
+roughf
+
+8.50E-05
+
+inches
+
+rsntr
+
+75
+
+kg/m^3
+
+tsint
+
+3092
+
+F
+
+icm
+
+2
+
+-
+
+zr2vinage
+
+0
+
+-
+
+roughc
+
+2.50E-05
+
+inches
+
+fgpav
+
+14.7
+
+psi
+
+idxgas
+
+1
+
+-
+
+iplant
+
+-4
+
+-
+
+nsp
+
+0
+
+-
+
+p2(IT)
+
+500
+
+psi
+
+tw(IT)
+
+464
+
+F
+
+go(IT)
+
+0
+
+lb/hr-ft^2
+
+pitch
+
+0.56
+
+inches
+
+icor
+
+0
+
+-
+
+crdt
+
+0
+
+mils
+
+crdtr
+
+0
+
+mils/hr
+
+flux(J)
+
+5.00E+15
+
+im
+
+244
+
+-
+
+nr
+
+25
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasmod
+
+2
+
+-
+
+na
+
+18
+
+-
+
+nunits
+
+1
+
+-
+
+A-4
+
+IFA-597
+Table A.4. FRAPCON input parameters for IFA-597 Rod 8
+IFA-597 Rod 8
+Variable
+
+Value
+
+Units
+
+dco
+
+0.4823
+
+inches
+
+thkcld
+
+0.0315
+
+inches
+
+thkgap
+
+0.0041
+
+inches
+
+totl
+
+1.3642
+
+feet
+
+cpl
+
+2
+
+inches
+
+dspg
+
+0.4
+
+inches
+
+dspgw
+
+0.003
+
+inches
+
+vs
+
+20
+
+-
+
+hplt
+
+0.4291
+
+inches
+
+rc
+
+0
+
+inches
+
+hdish
+
+0.0039
+
+inches
+
+dishsd
+
+0.2055
+
+inches
+
+enrch
+
+3.347
+
+% u235 of U
+
+den
+
+95.5
+
+% TD
+
+roughf
+
+8.50E-05
+
+inches
+
+rsntr
+
+75
+
+kg/m^3
+
+tsint
+
+3092
+
+F
+
+icm
+
+2
+
+-
+
+zr2vintage
+
+0
+
+-
+
+roughc
+
+4.50E-05
+
+inches
+
+fgpav
+
+14.5038
+
+psi
+
+idxgas
+
+1
+
+-
+
+iplant
+
+-4
+
+-
+
+nsp
+
+1
+
+-
+
+p2(IT)
+tw(IT)
+
+psi
+449.6
+
+go(IT)
+
+F
+lb/hr-ft^2
+
+pitch
+
+0.56
+
+inches
+
+icor
+
+0
+
+-
+
+crdt
+
+0
+
+mils
+
+crdtr
+
+0
+
+mils/hr
+
+flux(J)
+
+1.78E+16
+
+im
+
+386
+
+-
+
+nr
+
+25
+
+-
+
+ngasr
+
+45
+
+-
+
+ngasmod
+
+2
+
+-
+
+na
+
+18
+
+-
+
+nunits
+
+1
+
+-
+
+A-5
+
+Table A.5. FRAPCON input parameters for IFA-597mox Rods 1 and 2
+Variable
+dco
+thkcld
+thkgap
+totl
+cpl
+dspg
+dspgw
+vs
+hplt
+rc
+hdish
+dishsd
+enrch
+imox
+moxtype
+comp
+enrpu39
+enrpu40
+enrpu41
+enrpu42
+fotmtl
+den
+roughf
+rsntr
+tsint
+icm
+cldwks
+roughc
+fgpav
+idxgas
+iplant
+nsp
+p2(IT)
+tw(IT)
+go(IT)
+pitch
+flux(J)
+im
+nr
+ngasr
+na
+nunits
+
+IFA-597mox Rod 1
+Value
+Units
+0.3740
+inches
+0.0252
+inches
+0.0033
+inches
+0.7349
+feet
+1.6154
+inches
+0.3150
+inches
+0.0394
+inches
+17.1613
+0.4134
+inches
+0.0000
+inches
+0.0102
+inches
+0.0541
+inches
+0.2520
+% u235 of U
+1
+1
+7.4240
+wt. %
+65.9474
+wt. %
+23.8951
+wt. %
+6.6311
+wt. %
+3.5265
+wt. %
+1.9990
+95.5
+% TD
+5.51E-05
+inches
+48.772
+kg/m^3
+3092
+F
+4
+0.5
+5.91E-06
+inches
+72.5189
+psi
+1
+-4
+0
+487.3268
+psi
+464
+F
+0
+lb/hr-ft^2
+0.56
+inches
+1.50E+15
+163
+25
+45
+18
+1
+-
+
+Variable
+dco
+thkcld
+thkgap
+totl
+cpl
+dspg
+dspgw
+vs
+hplt
+rc
+hdish
+dishsd
+enrch
+imox
+moxtype
+comp
+enrpu39
+enrpu40
+enrpu41
+enrpu42
+fotmtl
+den
+roughf
+rsntr
+tsint
+icm
+cldwks
+roughc
+fgpav
+idxgas
+iplant
+nsp
+p2(IT)
+tw(IT)
+go(IT)
+pitch
+flux(J)
+im
+nr
+ngasr
+na
+nunits
+
+A-6
+
+IFA-597mox Rod 2
+Value
+Units
+0.3740
+inches
+0.0252
+inches
+0.0033
+inches
+0.7218
+feet
+1.6154
+inches
+0.3150
+inches
+0.0394
+inches
+25.1921
+0.4134
+inches
+0.0354
+inches
+0.0102
+inches
+0.0541
+inches
+0.2520
+% u235 of U
+1
+1
+7.4240
+wt. %
+65.9474
+wt. %
+23.8951
+wt. %
+6.6311
+wt. %
+3.5265
+wt. %
+1.9990
+95.5
+% TD
+5.51E-05
+inches
+48.772
+kg/m^3
+3092
+F
+4
+0.5
+5.91E-06
+inches
+72.5189
+psi
+1
+-4
+0
+487.3268
+psi
+464
+F
+0
+lb/hr-ft^2
+0.56
+inches
+1.50E+15
+163
+25
+45
+18
+1
+-
+
+APPENDIX B: FRAPCON RESULTS FOR IFA-432
+NEA
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+Lower Centerline Temperature (K)
+
+2000
+1800
+1600
+1400
+1200
+1000
+800
+600
+400
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+800
+
+Time (Days)
+
+Fig. B.1. IFA-432 Rod 1 FRAPCON centerline temperature results.
+
+Lower Centerline Temperature (K)
+
+350
+300
+250
+200
+150
+100
+50
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+0
+-50
+-100
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+Time (Days)
+
+Fig. B.2. IFA-432 Rod 1 FRAPCON centerline temperature error.
+B-1
+
+800
+
+900
+
+NEA
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+2400
+Lower Centerline Temperature (K)
+
+2200
+2000
+1800
+1600
+1400
+1200
+1000
+800
+600
+400
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+1200
+
+Time (Days)
+
+Fig. B.3. IFA-432 Rod 2 FRAPCON centerline temperature results.
+
+1400
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+Lower Centerline Temperature (K)
+
+1200
+1000
+800
+600
+400
+200
+0
+-200
+0
+
+200
+
+400
+
+600
+Time (Days)
+
+800
+
+1000
+
+Fig. B.4. IFA-432 Rod 2 FRAPCON centerline temperature error.
+
+B-2
+
+1200
+
+NEA
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+Lower Centerline Temperature (K)
+
+1800
+1600
+1400
+1200
+1000
+800
+600
+400
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+1200
+
+Time (Days)
+
+Fig. B.5. IFA-432 Rod 3 FRAPCON centerline temperature results.
+
+Lower Centerline Temperature (K)
+
+700
+
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+600
+500
+400
+300
+200
+100
+0
+-100
+0
+
+200
+
+400
+
+600
+Time (Days)
+
+800
+
+1000
+
+Fig. B.6. IFA-432 Rod 3 FRAPCON centerline temperature error.
+
+B-3
+
+1200
+
+NEA
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+Lower Centerline Temperature (K)
+
+2000
+1800
+1600
+1400
+1200
+1000
+800
+600
+400
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+1200
+
+Time (Days)
+
+Fig. B.7. IFA-432 Rod 5 FRAPCON centerline temperature results.
+
+Lower Centerline Temperature (K)
+
+1600
+
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+1400
+1200
+1000
+800
+600
+400
+200
+0
+-200
+0
+
+200
+
+400
+
+600
+
+800
+
+1000
+
+Time (Days)
+
+Fig. B.8. IFA-432 Rod 5 FRAPCON centerline temperature error.
+
+B-4
+
+1200
+
+NEA
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+Lower Centerline Temperature (K)
+
+2000
+1800
+1600
+1400
+1200
+1000
+800
+600
+400
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+800
+
+900
+
+Time (Days)
+
+Fig. B.9. IFA-432 Rod 6 FRAPCON centerline temperature results.
+
+Lower Centerline Temperature (K)
+
+1400
+PowerOnly
+PowerOnly_hollow
+PowerTemp
+PowerTemp_hollow
+
+1200
+1000
+800
+600
+400
+200
+0
+-200
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+800
+
+Time (Days)
+
+Fig. B.10. IFA-432 Rod 6 FRAPCON centerline temperature results.
+
+B-5
+
+900
+
+APPENDIX C: FRAPCON RESULTS FOR IFA-597mox
+
+1440
+
+Temp (deg. C)
+
+1240
+1040
+840
+640
+440
+
+Experimental Data
+FRAPCON Evaluation
+
+240
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+Time (days)
+
+Fig. C.1. IFA-597mox Rod 1 centerline temperature comparison using Halden correlation
+(PowerOnly).
+
+1400
+1200
+
+Temp (deg. C)
+
+1000
+800
+600
+400
+Experimental Data
+FRAPCON Evaluation
+
+200
+0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+Time (days)
+
+Fig. C.2. IFA-597mox Rod 2 centerline temperature comparison using Halden correlation
+(PowerTemp).
+
+C-1
+
+450
+400
+350
+
+pressure (psi)
+
+300
+250
+200
+150
+100
+Experimental Data
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+
+50
+0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+Time (days)
+
+Fig. C.3. IFA-597mox Rod 1 plenum pressure comparison using Halden correlation.
+
+400
+350
+
+pressure (psi)
+
+300
+250
+200
+150
+100
+Experimental Data
+FRAPCON RUN PowerTemp
+FRAPCON RUN PowerOnly
+
+50
+0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+Time (days)
+
+Fig. C.4. IFA-597mox Rod 2 plenum pressure comparison using Halden correlation.
+C-2
+
+700
+
+150.0
+
+100.0
+
+Difference (deg. C)
+
+50.0
+
+0.0
+
+-50.0
+
+NFI model Rod 1
+NFI model Rod 2
+Halden Correlation Rod 1
+Halden Correlation Rod 2
+
+-100.0
+
+-150.0
+0
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+Time (dys)
+
+Fig. C.5. Differences between experimental and predicted centerline temperatures for
+IFA-597mox, Rods 1 and 2, given two different conductivity models.
+
+C-3
+
+700
+
+

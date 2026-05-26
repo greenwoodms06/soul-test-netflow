@@ -1,0 +1,23 @@
+[
+  {
+    "n_pin": 324,
+    "n_axial": 30,
+    "pin_nodes": 9720,
+    "ok": true,
+    "wall_s": 454.03105031999803
+  },
+  {
+    "n_pin": 400,
+    "n_axial": 30,
+    "pin_nodes": 12000,
+    "ok": true,
+    "wall_s": 644.9695688579995
+  },
+  {
+    "n_pin": 484,
+    "n_axial": 30,
+    "pin_nodes": 14520,
+    "ok": false,
+    "wall_s": 265.5257579989993
+  }
+]

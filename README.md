@@ -113,14 +113,15 @@ below: the script that produces each headline number.
 
 | Headline | Script |
 |---|---|
-| netflow 1204.75 K pin centerline baseline | [`python/netflow/bench/remeasure.py`](python/netflow/bench/) (or `bench/remeasure_netflow.py` in this folder) |
-| netflow ~190 s @ 380k nodes | [`python/netflow/bench/`](python/netflow/) — VERA codecompare |
-| MTK 25 mK match + slice ladder | [`julia-mtk/bench/`](julia-mtk/bench/), [`julia-mtk/test/`](julia-mtk/test/) |
-| MTK `mtkcompile` N^1.6 wall | [`julia-mtk/bench/scaling_*.jl`](julia-mtk/bench/) |
+| netflow VERA P6/P7 code-comparison + sub-channel figure | [`python/netflow/bench/vera_codecompare.py`](python/netflow/bench/vera_codecompare.py) |
+| netflow scaling to 380k nodes | [`python/netflow/bench/full_physics_ladder.py`](python/netflow/bench/full_physics_ladder.py), [`python/netflow/bench/resistor_mesh.py`](python/netflow/bench/resistor_mesh.py) |
+| netflow re-measured 1204.75 K baseline | [`modelica/bench/remeasure_netflow.py`](modelica/bench/remeasure_netflow.py) and [`julia-mtk/bench/remeasure_netflow.py`](julia-mtk/bench/remeasure_netflow.py) — both legs use the same Python netflow API to re-measure the baseline before comparison |
+| MTK 25 mK match + slice ladder | [`julia-mtk/test/`](julia-mtk/test/) (slice_*.jl) |
+| MTK `mtkcompile` N^1.6 wall (MTK-F4/F9) | [`julia-mtk/bench/scaling_mtk.jl`](julia-mtk/bench/scaling_mtk.jl), [`julia-mtk/bench/scaling_assembly.jl`](julia-mtk/bench/scaling_assembly.jl) |
 | Dymola 397 s @ 17×17×30 | [`modelica/bench/stress_assembly_17x17.py`](modelica/bench/stress_assembly_17x17.py) |
 | Sparse-rescues-init-wall + physics-breadth ladder | [`modelica/bench/advanced_flag_sweep_part2.py`](modelica/bench/advanced_flag_sweep_part2.py), [`modelica/bench/physics_breadth_ladder.py`](modelica/bench/physics_breadth_ladder.py) |
 | Dymola cc1 RAM ceiling | [`modelica/bench/stress_assembly_25x25.py`](modelica/bench/stress_assembly_25x25.py) |
-| VERA P6 code-comparison (Modelica side) | [`modelica/bench/vera_p6_codecompare.py`](modelica/bench/vera_p6_codecompare.py) |
+| Dymola VERA P6 code-comparison | [`modelica/bench/vera_p6_codecompare.py`](modelica/bench/vera_p6_codecompare.py) |
 
 Tooling required:
 - **python/**: Python 3.12+, scipy, CoolProp, numpy, matplotlib.
